@@ -31,6 +31,7 @@
             --font-body: 'Inter', sans-serif;
             --font-pixel: 'Press Start 2P', monospace;
             --transition-smooth: cubic-bezier(0.23, 1, 0.32, 1);
+            --transition-fast: cubic-bezier(0.19, 1, 0.22, 1);
         }
 
         /* Light mode */
@@ -85,6 +86,11 @@
             transition: background 0.4s, color 0.4s;
             cursor: none;
             line-height: 1.6;
+            opacity: 0;
+            animation: bodyFadeIn 0.6s var(--transition-fast) forwards;
+        }
+        @keyframes bodyFadeIn {
+            to { opacity: 1; }
         }
         a { text-decoration: none; color: inherit; }
         img { display: block; max-width: 100%; }
@@ -92,105 +98,6 @@
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: var(--bg-primary); }
         ::-webkit-scrollbar-thumb { background: var(--neon-pink); border-radius: 10px; box-shadow: 0 0 20px rgba(255, 45, 149, 0.3); }
-
-        /* ============================================================
-           LOADER — Y2K Boot Sequence
-           ============================================================ */
-        #loader {
-            position: fixed;
-            inset: 0;
-            z-index: 99999;
-            background: #0a0a0f;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--font-pixel);
-            color: var(--neon-cyan);
-            text-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
-            transition: opacity 0.8s ease, visibility 0.8s ease;
-            opacity: 1;
-            visibility: visible;
-            pointer-events: none;
-        }
-        #loader.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-        .loader-scanline {
-            position: absolute;
-            inset: 0;
-            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.1) 2px, rgba(0, 0, 0, 0.1) 4px);
-            pointer-events: none;
-        }
-        .loader-content {
-            text-align: center;
-            padding: 20px;
-            border: 2px solid rgba(255, 45, 149, 0.15);
-            padding: 40px 60px;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(4px);
-            position: relative;
-            overflow: hidden;
-        }
-        .loader-content::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(90deg, transparent, rgba(255, 45, 149, 0.05), transparent);
-            animation: loaderSweep 1.8s linear infinite;
-        }
-        @keyframes loaderSweep {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-        .loader-logo {
-            font-family: var(--font-display);
-            font-size: 3rem;
-            font-weight: 900;
-            background: var(--gradient-cyber);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 16px;
-            display: block;
-        }
-        .loader-text {
-            font-size: 0.7rem;
-            letter-spacing: 0.2em;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .loader-text .blink {
-            animation: blink 0.8s step-end infinite;
-            color: var(--neon-pink);
-        }
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-        .loader-progress {
-            margin-top: 20px;
-            width: 200px;
-            height: 2px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 4px;
-            overflow: hidden;
-            position: relative;
-        }
-        .loader-progress-bar {
-            width: 0%;
-            height: 100%;
-            background: var(--gradient-cyber);
-            border-radius: 4px;
-            animation: loadProgress 2s ease-in-out forwards;
-            box-shadow: 0 0 20px rgba(255, 45, 149, 0.2);
-        }
-        @keyframes loadProgress {
-            0% { width: 0%; }
-            100% { width: 100%; }
-        }
 
         /* ============================================================
            CYBER GRID & SPOTLIGHT
@@ -218,7 +125,6 @@
             background: radial-gradient(ellipse at 30% 40%, rgba(255, 45, 149, 0.04), transparent 60%),
                 radial-gradient(ellipse at 70% 60%, rgba(0, 240, 255, 0.04), transparent 50%);
         }
-        /* Spotlight — follows mouse */
         .spotlight {
             position: fixed;
             inset: 0;
@@ -309,7 +215,7 @@
             pointer-events: none;
             z-index: 10000;
             transform: translate(-50%, -50%);
-            transition: width 0.25s ease, height 0.25s ease, background 0.25s ease;
+            transition: width 0.2s ease, height 0.2s ease, background 0.2s ease;
             mix-blend-mode: screen;
             box-shadow: 0 0 30px rgba(255,45,149,0.5), 0 0 60px rgba(255,45,149,0.2);
         }
@@ -321,7 +227,7 @@
             pointer-events: none;
             z-index: 9999;
             transform: translate(-50%, -50%);
-            transition: width 0.4s cubic-bezier(0.23,1,0.32,1), height 0.4s cubic-bezier(0.23,1,0.32,1), border-color 0.3s, opacity 0.3s;
+            transition: width 0.35s cubic-bezier(0.23,1,0.32,1), height 0.35s cubic-bezier(0.23,1,0.32,1), border-color 0.25s, opacity 0.25s;
             will-change: transform;
             box-shadow: 0 0 20px rgba(0,240,255,0.1);
         }
@@ -439,6 +345,8 @@
             background: rgba(0, 240, 255, 0.03);
             backdrop-filter: blur(4px);
             box-shadow: 0 0 30px rgba(0,240,255,0.04);
+            opacity: 0;
+            animation: fadeUp 0.7s var(--transition-fast) 0.2s forwards;
         }
         .hero-badge .pulse {
             display: inline-block;
@@ -451,6 +359,9 @@
         @keyframes pulseDot {
             0%,100% { opacity: 1; transform: scale(1); }
             50% { opacity: 0.2; transform: scale(0.4); }
+        }
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
         }
         .hero-title {
             font-family: var(--font-display);
@@ -469,8 +380,8 @@
         .hero-title .char {
             display: inline-block;
             opacity: 0;
-            transform: translateY(40px) rotate(3deg) scale(0.95);
-            animation: charReveal 0.7s var(--transition-smooth) forwards;
+            transform: translateY(30px) rotate(2deg) scale(0.96);
+            animation: charReveal 0.5s var(--transition-fast) forwards;
         }
         @keyframes charReveal {
             to { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
@@ -484,6 +395,8 @@
             line-height: 1.8;
             border-left: 2px solid var(--neon-pink);
             padding-left: 20px;
+            opacity: 0;
+            animation: fadeUp 0.6s var(--transition-fast) 0.4s forwards;
         }
         .hero-sub strong {
             color: var(--text-primary);
@@ -496,6 +409,8 @@
             display: flex;
             gap: 48px;
             margin-top: 40px;
+            opacity: 0;
+            animation: fadeUp 0.6s var(--transition-fast) 0.55s forwards;
         }
         .stat-item .stat-number {
             font-family: var(--font-display);
@@ -518,6 +433,8 @@
             gap: 14px;
             margin-top: 44px;
             flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeUp 0.6s var(--transition-fast) 0.7s forwards;
         }
         .btn-primary {
             display: inline-flex;
@@ -558,6 +475,8 @@
         .hero-right {
             position: relative; z-index: 2;
             display: flex; justify-content: center; align-items: center;
+            opacity: 0;
+            animation: fadeUp 0.8s var(--transition-fast) 0.3s forwards;
         }
         .hero-photo-wrap {
             position: relative;
@@ -567,7 +486,6 @@
             overflow: hidden;
             box-shadow: 0 20px 80px rgba(0,0,0,0.6), 0 0 0 2px rgba(255,45,149,0.15);
             background: var(--bg-secondary);
-            /* Moving border glitch */
             animation: borderGlitch 4s ease-in-out infinite;
         }
         @keyframes borderGlitch {
@@ -787,14 +705,16 @@
             background: rgba(255,255,255,0.04);
             overflow: hidden;
             border: 1px solid rgba(255,45,149,0.05);
+            position: relative;
         }
         .skill-fill {
             height: 100%;
             border-radius: 4px;
             background: var(--gradient-cyber);
             width: 0%;
-            transition: width 1.4s var(--transition-smooth);
+            transition: width 1s var(--transition-smooth);
             box-shadow: 0 0 30px rgba(255,45,149,0.15);
+            position: relative;
         }
         .skill-fill::after {
             content: '';
@@ -853,7 +773,7 @@
             border-radius: var(--radius-card);
             border: 1px solid rgba(255,45,149,0.06);
             overflow: hidden;
-            transition: transform 0.5s var(--transition-smooth), box-shadow 0.5s, border-color 0.5s;
+            transition: transform 0.4s var(--transition-smooth), box-shadow 0.4s, border-color 0.4s;
             box-shadow: 0 10px 50px rgba(0,0,0,0.3);
             cursor: none;
             will-change: transform;
@@ -876,7 +796,7 @@
             width: 100%; height: 100%;
             border: 0;
             object-fit: cover;
-            transition: transform 0.7s var(--transition-smooth), filter 0.5s;
+            transition: transform 0.5s var(--transition-smooth), filter 0.4s;
         }
         .work-card:hover .work-card-media img { transform: scale(1.06); filter: brightness(1.08) saturate(1.02); }
         .work-card:hover .work-card-media iframe { transform: scale(1.02); }
@@ -884,7 +804,7 @@
             position: absolute; inset: 0;
             background: linear-gradient(to top, rgba(10,10,15,0.85) 0%, transparent 50%);
             opacity: 0;
-            transition: opacity 0.4s;
+            transition: opacity 0.35s;
             pointer-events: none;
         }
         .work-card:hover .work-card-overlay { opacity: 1; }
@@ -1157,12 +1077,12 @@
         }
 
         /* ============================================================
-           REVEAL — SKEW + FADE (Unique)
+           REVEAL — SKEW + FADE (faster)
            ============================================================ */
         .reveal {
             opacity: 0;
-            transform: skewX(-12deg) translateY(40px) scale(0.96);
-            transition: opacity 0.9s var(--transition-smooth), transform 0.9s var(--transition-smooth);
+            transform: skewX(-10deg) translateY(30px) scale(0.97);
+            transition: opacity 0.6s var(--transition-smooth), transform 0.6s var(--transition-smooth);
         }
         .reveal.visible {
             opacity: 1;
@@ -1170,8 +1090,8 @@
         }
         .reveal-left {
             opacity: 0;
-            transform: skewX(8deg) translateX(-60px);
-            transition: opacity 0.9s var(--transition-smooth), transform 0.9s var(--transition-smooth);
+            transform: skewX(6deg) translateX(-50px);
+            transition: opacity 0.6s var(--transition-smooth), transform 0.6s var(--transition-smooth);
         }
         .reveal-left.visible {
             opacity: 1;
@@ -1179,18 +1099,18 @@
         }
         .reveal-right {
             opacity: 0;
-            transform: skewX(-8deg) translateX(60px);
-            transition: opacity 0.9s var(--transition-smooth), transform 0.9s var(--transition-smooth);
+            transform: skewX(-6deg) translateX(50px);
+            transition: opacity 0.6s var(--transition-smooth), transform 0.6s var(--transition-smooth);
         }
         .reveal-right.visible {
             opacity: 1;
             transform: skewX(0) translateX(0);
         }
-        .d1 { transition-delay: 0.06s; }
-        .d2 { transition-delay: 0.12s; }
-        .d3 { transition-delay: 0.18s; }
-        .d4 { transition-delay: 0.24s; }
-        .d5 { transition-delay: 0.30s; }
+        .d1 { transition-delay: 0.04s; }
+        .d2 { transition-delay: 0.08s; }
+        .d3 { transition-delay: 0.12s; }
+        .d4 { transition-delay: 0.16s; }
+        .d5 { transition-delay: 0.20s; }
 
         /* ============================================================
            GLITCH TEXT
@@ -1276,23 +1196,6 @@
     </style>
 </head>
 <body>
-
-    <!-- ====== LOADER ====== -->
-    <div id="loader">
-        <div class="loader-scanline"></div>
-        <div class="loader-content">
-            <span class="loader-logo">&lt;EC/&gt;</span>
-            <div class="loader-text">
-                <span class="blink">_</span> BOOTING SYSTEM <span class="blink">_</span>
-            </div>
-            <div class="loader-progress">
-                <div class="loader-progress-bar"></div>
-            </div>
-            <div class="loader-text" style="margin-top:12px; font-size:0.5rem; color:var(--text-muted);">
-                <span id="loader-percent">0%</span>
-            </div>
-        </div>
-    </div>
 
     <!-- ====== GRAIN ====== -->
     <div class="grain"></div>
@@ -1581,81 +1484,81 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- AI Videos -->
-<div class="cat-header reveal">
-    <div class="cat-icon"><i class="fas fa-robot"></i></div>
-    <h3>AI VIDEOS</h3>
-    <div class="cat-line"></div>
-</div>
-
-<div class="work-grid">
-
-    <div class="work-card reveal d1">
-        <div class="work-card-media">
-            <iframe src="https://drive.google.com/file/d/1bCdkBkmaEFEPemiGVRJRGbBFBtqw2jJV/preview" allow="autoplay"></iframe>
-            <div class="work-card-overlay"></div>
-            <div class="work-card-index">01</div>
+        <div class="cat-header reveal">
+            <div class="cat-icon"><i class="fas fa-robot"></i></div>
+            <h3>AI VIDEOS</h3>
+            <div class="cat-line"></div>
         </div>
-        <div class="work-card-info">
-            <h4>AI Commercial</h4>
-            <p>AI-generated cinematic advertising content.</p>
-            <div class="work-tags">
-                <span class="work-tag">AI</span>
-                <span class="work-tag">Commercial</span>
+
+        <div class="work-grid">
+
+            <div class="work-card reveal d1">
+                <div class="work-card-media">
+                    <iframe src="https://drive.google.com/file/d/1bCdkBkmaEFEPemiGVRJRGbBFBtqw2jJV/preview" allow="autoplay"></iframe>
+                    <div class="work-card-overlay"></div>
+                    <div class="work-card-index">01</div>
+                </div>
+                <div class="work-card-info">
+                    <h4>AI Commercial</h4>
+                    <p>AI-generated cinematic advertising content.</p>
+                    <div class="work-tags">
+                        <span class="work-tag">AI</span>
+                        <span class="work-tag">Commercial</span>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
 
-    <div class="work-card reveal d2">
-        <div class="work-card-media">
-            <iframe src="https://drive.google.com/file/d/1v5LuC985jrt2fG05JP3JhPf19UlnN8NJ/preview" allow="autoplay"></iframe>
-            <div class="work-card-overlay"></div>
-            <div class="work-card-index">02</div>
-        </div>
-        <div class="work-card-info">
-            <h4>AI Product Video</h4>
-            <p>AI-powered product showcase with realistic visuals.</p>
-            <div class="work-tags">
-                <span class="work-tag">AI</span>
-                <span class="work-tag">Product</span>
+            <div class="work-card reveal d2">
+                <div class="work-card-media">
+                    <iframe src="https://drive.google.com/file/d/1v5LuC985jrt2fG05JP3JhPf19UlnN8NJ/preview" allow="autoplay"></iframe>
+                    <div class="work-card-overlay"></div>
+                    <div class="work-card-index">02</div>
+                </div>
+                <div class="work-card-info">
+                    <h4>AI Product Video</h4>
+                    <p>AI-powered product showcase with realistic visuals.</p>
+                    <div class="work-tags">
+                        <span class="work-tag">AI</span>
+                        <span class="work-tag">Product</span>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
 
-    <div class="work-card reveal d3">
-        <div class="work-card-media">
-            <iframe src="https://drive.google.com/file/d/1y4WRa5hiXmTQm5wb9QurOuGJjBa29IdS/preview" allow="autoplay"></iframe>
-            <div class="work-card-overlay"></div>
-            <div class="work-card-index">03</div>
-        </div>
-        <div class="work-card-info">
-            <h4>AI Marketing Video</h4>
-            <p>Realistic AI-generated promotional video for brands.</p>
-            <div class="work-tags">
-                <span class="work-tag">AI</span>
-                <span class="work-tag">Marketing</span>
+            <div class="work-card reveal d3">
+                <div class="work-card-media">
+                    <iframe src="https://drive.google.com/file/d/1y4WRa5hiXmTQm5wb9QurOuGJjBa29IdS/preview" allow="autoplay"></iframe>
+                    <div class="work-card-overlay"></div>
+                    <div class="work-card-index">03</div>
+                </div>
+                <div class="work-card-info">
+                    <h4>AI Marketing Video</h4>
+                    <p>Realistic AI-generated promotional video for brands.</p>
+                    <div class="work-tags">
+                        <span class="work-tag">AI</span>
+                        <span class="work-tag">Marketing</span>
+                    </div>
+                </div>
             </div>
+
         </div>
-    </div>
+        <!-- ===================== UGC VIDEOS ===================== -->
+        <div class="cat-header reveal">
+            <div class="cat-icon">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <h3>UGC VIDEOS</h3>
+            <div class="cat-line"></div>
+        </div>
 
-</div>
-<!-- ===================== UGC VIDEOS ===================== -->
-<div class="cat-header reveal">
-    <div class="cat-icon">
-        <i class="fas fa-user-circle"></i>
-    </div>
-    <h3>UGC VIDEOS</h3>
-    <div class="cat-line"></div>
-</div>
+        <div class="work-grid">
 
-<div class="work-grid">
-
-    <!-- UGC Video 01 -->
-    <div class="work-card reveal d1">
-        <div class="work-card-media">
-            <iframe
-                src="https://drive.google.com/file/d/1K0-_hmS6bL6GH-RIRwCGa1D2NCC0lqio/preview"
+            <!-- UGC Video 01 -->
+            <div class="work-card reveal d1">
+                <div class="work-card-media">
+                    <iframe
+                    src="https://drive.google.com/file/d/1K0-_hmS6bL6GH-RIRwCGa1D2NCC0lqio/preview"
                 allow="autoplay">
             </iframe>
             <div class="work-card-overlay"></div>
@@ -1678,459 +1581,443 @@
     <div class="work-card reveal d2">
         <div class="work-card-media">
             <iframe
-                src="https://drive.google.com/file/d/1Rdw6Vxuepi7iUgpjj5HqTAnE4lmKXpuX/preview"
-                allow="autoplay">
-            </iframe>
-            <div class="work-card-overlay"></div>
-            <div class="work-card-index">02</div>
-        </div>
+            src="https://drive.google.com/file/d/1Rdw6Vxuepi7iUgpjj5HqTAnE4lmKXpuX/preview"
+        allow="autoplay">
+    </iframe>
+    <div class="work-card-overlay"></div>
+    <div class="work-card-index">02</div>
+</div>
 
-        <div class="work-card-info">
-            <h4>UGC Lifestyle Ad</h4>
-            <p>High-converting lifestyle video created with a natural, engaging, and authentic UGC style.</p>
+<div class="work-card-info">
+    <h4>UGC Lifestyle Ad</h4>
+    <p>High-converting lifestyle video created with a natural, engaging, and authentic UGC style.</p>
 
-            <div class="work-tags">
-                <span class="work-tag">UGC</span>
-                <span class="work-tag">Lifestyle</span>
-                <span class="work-tag">Advertising</span>
-            </div>
-        </div>
+    <div class="work-tags">
+        <span class="work-tag">UGC</span>
+        <span class="work-tag">Lifestyle</span>
+        <span class="work-tag">Advertising</span>
     </div>
+</div>
+</div>
 
 </div>
 
-        <!-- Graphic Design -->
-        <div class="cat-header reveal">
-            <div class="cat-icon"><i class="fas fa-pen-nib"></i></div>
-            <h3>GRAPHIC DESIGN</h3>
-            <div class="cat-line"></div>
+<!-- Graphic Design -->
+<div class="cat-header reveal">
+    <div class="cat-icon"><i class="fas fa-pen-nib"></i></div>
+    <h3>GRAPHIC DESIGN</h3>
+    <div class="cat-line"></div>
+</div>
+<div class="work-grid">
+    <div class="work-card reveal d1">
+        <div class="work-card-media">
+            <img src="https://drive.google.com/thumbnail?id=1bXxpjA84lxj-Jf1xk-NMD1K9yxYdnmz-&sz=w800" alt="Brand Identity" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Brand+Identity'">
+            <div class="work-card-overlay"></div>
+            <div class="work-card-index">01</div>
         </div>
-        <div class="work-grid">
-            <div class="work-card reveal d1">
-                <div class="work-card-media">
-                    <img src="https://drive.google.com/thumbnail?id=1bXxpjA84lxj-Jf1xk-NMD1K9yxYdnmz-&sz=w800" alt="Brand Identity" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Brand+Identity'">
-                    <div class="work-card-overlay"></div>
-                    <div class="work-card-index">01</div>
-                </div>
-                <div class="work-card-info">
-                    <h4>Brand Identity System</h4>
-                    <div class="work-tags"><span class="work-tag">Branding</span></div>
-                    <a href="https://drive.google.com/file/d/1bXxpjA84lxj-Jf1xk-NMD1K9yxYdnmz-/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">Open full <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-            <div class="work-card reveal d2">
-                <div class="work-card-media">
-                    <img src="https://drive.google.com/thumbnail?id=15HT_fC4OR39Q-S6K27aAy1iomfd00nGo&sz=w800" alt="Social Pack" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Social+Pack'">
-                    <div class="work-card-overlay"></div>
-                    <div class="work-card-index">02</div>
-                </div>
-                <div class="work-card-info">
-                    <h4>Social Media Graphics Pack</h4>
-                    <div class="work-tags"><span class="work-tag">Social Media</span></div>
-                    <a href="https://drive.google.com/file/d/15HT_fC4OR39Q-S6K27aAy1iomfd00nGo/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">Preview high-res <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-            <div class="work-card reveal d3">
-                <div class="work-card-media">
-                    <img src="https://drive.google.com/thumbnail?id=1TUPkeouiDH3QwQzfRK5Ioxk_XTyG6a5X&sz=w800" alt="Poster" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Event+Poster'">
-                    <div class="work-card-overlay"></div>
-                    <div class="work-card-index">03</div>
-                </div>
-                <div class="work-card-info">
-                    <h4>Event Poster &amp; Flyer</h4>
-                    <div class="work-tags"><span class="work-tag">Print Design</span></div>
-                    <a href="https://drive.google.com/file/d/1TUPkeouiDH3QwQzfRK5Ioxk_XTyG6a5X/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">View poster <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-            <div class="work-card reveal d1">
-                <div class="work-card-media">
-                    <img src="https://drive.google.com/thumbnail?id=11GARLM8u5MCI9vWv3YXhpfL_WvzMjVqK&sz=w800" alt="Stationery" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Stationery'">
-                    <div class="work-card-overlay"></div>
-                    <div class="work-card-index">04</div>
-                </div>
-                <div class="work-card-info">
-                    <h4>Corporate Stationery</h4>
-                    <div class="work-tags"><span class="work-tag">Corporate ID</span></div>
-                    <a href="https://drive.google.com/file/d/11GARLM8u5MCI9vWv3YXhpfL_WvzMjVqK/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">Open design <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-            <div class="work-card reveal d2">
-                <div class="work-card-media">
-                    <img src="https://drive.google.com/thumbnail?id=11Ms5yhZTyaZR6j8oF4QND5RlDV2OG57_&sz=w800" alt="Illustration" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Illustration'">
-                    <div class="work-card-overlay"></div>
-                    <div class="work-card-index">05</div>
-                </div>
-                <div class="work-card-info">
-                    <h4>Character Illustration</h4>
-                    <div class="work-tags"><span class="work-tag">Illustration</span></div>
-                    <a href="https://drive.google.com/file/d/11Ms5yhZTyaZR6j8oF4QND5RlDV2OG57_/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">Full resolution <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-            <div class="work-card reveal d3">
-                <div class="work-card-media">
-                    <img src="https://drive.google.com/thumbnail?id=1GXqpUHplLsxmER_OmefhuGU5OvuDlm9H&sz=w800" alt="Ads" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Digital+Ads'">
-                    <div class="work-card-overlay"></div>
-                    <div class="work-card-index">06</div>
-                </div>
-                <div class="work-card-info">
-                    <h4>Digital Ads &amp; Banners</h4>
-                    <div class="work-tags"><span class="work-tag">Ad Design</span></div>
-                    <a href="https://drive.google.com/file/d/1GXqpUHplLsxmER_OmefhuGU5OvuDlm9H/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">Explore asset <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
+        <div class="work-card-info">
+            <h4>Brand Identity System</h4>
+            <div class="work-tags"><span class="work-tag">Branding</span></div>
+            <a href="https://drive.google.com/file/d/1bXxpjA84lxj-Jf1xk-NMD1K9yxYdnmz-/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">Open full <i class="fas fa-arrow-right"></i></a>
         </div>
-        
-
-        <!-- Thumbnails -->
-        <div class="cat-header reveal">
-            <div class="cat-icon"><i class="fas fa-image"></i></div>
-            <h3>THUMBNAIL &amp; COVER ART</h3>
-            <div class="cat-line"></div>
+    </div>
+    <div class="work-card reveal d2">
+        <div class="work-card-media">
+            <img src="https://drive.google.com/thumbnail?id=15HT_fC4OR39Q-S6K27aAy1iomfd00nGo&sz=w800" alt="Social Pack" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Social+Pack'">
+            <div class="work-card-overlay"></div>
+            <div class="work-card-index">02</div>
         </div>
-        <div class="work-grid">
-            <div class="work-card reveal d1">
-                <div class="work-card-media">
-                    <img src="https://drive.google.com/thumbnail?id=15OmmZJV6RHlnvLG5mTsULbrV5CcZc1Cg&sz=w800" alt="thumb1" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Thumbnail+01'">
-                    <div class="work-card-overlay"></div>
-                    <div class="work-card-index">01</div>
-                </div>
-                <div class="work-card-info">
-                    <h4>Viral Thumbnail Concept</h4>
-                    <div class="work-tags"><span class="work-tag">Thumbnail Art</span></div>
-                    <a href="https://drive.google.com/file/d/15OmmZJV6RHlnvLG5mTsULbrV5CcZc1Cg/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">View Full <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-            <div class="work-card reveal d2">
-                <div class="work-card-media">
-                    <img src="https://drive.google.com/thumbnail?id=1e8RRvnFf3A4pfIyqTXMe1nmL8HgbgSl_&sz=w800" alt="thumb2" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Thumbnail+02'">
-                    <div class="work-card-overlay"></div>
-                    <div class="work-card-index">02</div>
-                </div>
-                <div class="work-card-info">
-                    <h4>Gaming Thumbnail Master</h4>
-                    <div class="work-tags"><span class="work-tag">Gaming</span></div>
-                    <a href="https://drive.google.com/file/d/1e8RRvnFf3A4pfIyqTXMe1nmL8HgbgSl_/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">Open Asset <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-            <div class="work-card reveal d3">
-                <div class="work-card-media">
-                    <img src="https://drive.google.com/thumbnail?id=1eiVwAs3S_8pePiDAPPF1g3Z4dr4gC_hl&sz=w800" alt="thumb3" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Thumbnail+03'">
-                    <div class="work-card-overlay"></div>
-                    <div class="work-card-index">03</div>
-                </div>
-                <div class="work-card-info">
-                    <h4>Tech Review Thumb</h4>
-                    <div class="work-tags"><span class="work-tag">Tech</span></div>
-                    <a href="https://drive.google.com/file/d/1eiVwAs3S_8pePiDAPPF1g3Z4dr4gC_hl/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">High-res <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-            <div class="work-card reveal d1">
-                <div class="work-card-media">
-                    <img src="https://drive.google.com/thumbnail?id=141csDpj5Rl_VS05aGHcKHyu9P3C4s9AT&sz=w800" alt="thumb4" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Thumbnail+04'">
-                    <div class="work-card-overlay"></div>
-                    <div class="work-card-index">04</div>
-                </div>
-                <div class="work-card-info">
-                    <h4>Podcast / Interview Cover</h4>
-                    <div class="work-tags"><span class="work-tag">Podcast</span></div>
-                    <a href="https://drive.google.com/file/d/141csDpj5Rl_VS05aGHcKHyu9P3C4s9AT/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">Open file <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-            <div class="work-card reveal d2">
-                <div class="work-card-media">
-                    <img src="https://drive.google.com/thumbnail?id=1_TMnqCjbmwrLlik9LpHntjxvAVw7Cxa9&sz=w800" alt="thumb5" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Thumbnail+05'">
-                    <div class="work-card-overlay"></div>
-                    <div class="work-card-index">05</div>
-                </div>
-                <div class="work-card-info">
-                    <h4>Educational Thumbnail</h4>
-                    <div class="work-tags"><span class="work-tag">Education</span></div>
-                    <a href="https://drive.google.com/file/d/1_TMnqCjbmwrLlik9LpHntjxvAVw7Cxa9/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">View design <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-            <div class="work-card reveal d3">
-                <div class="work-card-media">
-                    <img src="https://drive.google.com/thumbnail?id=1B9c3p51uMy8FYxglnHLT6ufGOl-0j24O&sz=w800" alt="thumb6" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Thumbnail+06'">
-                    <div class="work-card-overlay"></div>
-                    <div class="work-card-index">06</div>
-                </div>
-                <div class="work-card-info">
-                    <h4>Story-Driven Thumbnail</h4>
-                    <div class="work-tags"><span class="work-tag">Vlog</span></div>
-                    <a href="https://drive.google.com/file/d/1B9c3p51uMy8FYxglnHLT6ufGOl-0j24O/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">Full res <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
+        <div class="work-card-info">
+            <h4>Social Media Graphics Pack</h4>
+            <div class="work-tags"><span class="work-tag">Social Media</span></div>
+            <a href="https://drive.google.com/file/d/15HT_fC4OR39Q-S6K27aAy1iomfd00nGo/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">Preview high-res <i class="fas fa-arrow-right"></i></a>
         </div>
-    </section>
-
-    
-
-    <!-- ====== CONTACT ====== -->
-    <section class="contact-section" id="contact">
-        <div class="section-label reveal" style="justify-content:center;">Get in touch</div>
-        <div class="section-title reveal" style="margin-bottom:6px;">LET'S<br><span class="outline">COLLABORATE</span></div>
-        <p class="contact-desc reveal">Got a project that needs a fresh pair of eyes and skilled hands? Let's talk.</p>
-        <a href="mailto:emmanignite@gmail.com" class="contact-email reveal">emmanignite@gmail.com</a>
-        <div class="contact-links reveal">
-            <a href="https://drive.google.com/drive/u/1/folders/1gvRNrVgDMX5TmhCLMa4n809fgGb077l-" target="_blank" class="contact-link"><i class="fas fa-video"></i> Video Portfolio</a>
-            <a href="https://drive.google.com/drive/folders/1LDfdUOtE6TAwq5FK-qYyU86ArclzggF5?usp=drive_link" target="_blank" class="contact-link"><i class="fas fa-palette"></i> Design Archive</a>
-            <a href="mailto:emmanignite@gmail.com" class="contact-link"><i class="fas fa-envelope"></i> Email Me</a>
+    </div>
+    <div class="work-card reveal d3">
+        <div class="work-card-media">
+            <img src="https://drive.google.com/thumbnail?id=1TUPkeouiDH3QwQzfRK5Ioxk_XTyG6a5X&sz=w800" alt="Poster" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Event+Poster'">
+            <div class="work-card-overlay"></div>
+            <div class="work-card-index">03</div>
         </div>
-    </section>
+        <div class="work-card-info">
+            <h4>Event Poster &amp; Flyer</h4>
+            <div class="work-tags"><span class="work-tag">Print Design</span></div>
+            <a href="https://drive.google.com/file/d/1TUPkeouiDH3QwQzfRK5Ioxk_XTyG6a5X/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">View poster <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+    <div class="work-card reveal d1">
+        <div class="work-card-media">
+            <img src="https://drive.google.com/thumbnail?id=11GARLM8u5MCI9vWv3YXhpfL_WvzMjVqK&sz=w800" alt="Stationery" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Stationery'">
+            <div class="work-card-overlay"></div>
+            <div class="work-card-index">04</div>
+        </div>
+        <div class="work-card-info">
+            <h4>Corporate Stationery</h4>
+            <div class="work-tags"><span class="work-tag">Corporate ID</span></div>
+            <a href="https://drive.google.com/file/d/11GARLM8u5MCI9vWv3YXhpfL_WvzMjVqK/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">Open design <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+    <div class="work-card reveal d2">
+        <div class="work-card-media">
+            <img src="https://drive.google.com/thumbnail?id=11Ms5yhZTyaZR6j8oF4QND5RlDV2OG57_&sz=w800" alt="Illustration" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Illustration'">
+            <div class="work-card-overlay"></div>
+            <div class="work-card-index">05</div>
+        </div>
+        <div class="work-card-info">
+            <h4>Character Illustration</h4>
+            <div class="work-tags"><span class="work-tag">Illustration</span></div>
+            <a href="https://drive.google.com/file/d/11Ms5yhZTyaZR6j8oF4QND5RlDV2OG57_/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">Full resolution <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+    <div class="work-card reveal d3">
+        <div class="work-card-media">
+            <img src="https://drive.google.com/thumbnail?id=1GXqpUHplLsxmER_OmefhuGU5OvuDlm9H&sz=w800" alt="Ads" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Digital+Ads'">
+            <div class="work-card-overlay"></div>
+            <div class="work-card-index">06</div>
+        </div>
+        <div class="work-card-info">
+            <h4>Digital Ads &amp; Banners</h4>
+            <div class="work-tags"><span class="work-tag">Ad Design</span></div>
+            <a href="https://drive.google.com/file/d/1GXqpUHplLsxmER_OmefhuGU5OvuDlm9H/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">Explore asset <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+</div>
 
-    <!-- ====== FOOTER ====== -->
-    <footer>
-        <p>© 2025 Emmanuel Cacho — Y2K · Video stories that convert</p>
-        <div class="badge-y2k"><i class="fas fa-bolt"></i> Available for Hire</div>
-    </footer>
 
-    <!-- ============================================================
-    JAVASCRIPT
-    ============================================================ -->
-    <script>
-        (function() {
-            'use strict';
+<!-- Thumbnails -->
+<div class="cat-header reveal">
+    <div class="cat-icon"><i class="fas fa-image"></i></div>
+    <h3>THUMBNAIL &amp; COVER ART</h3>
+    <div class="cat-line"></div>
+</div>
+<div class="work-grid">
+    <div class="work-card reveal d1">
+        <div class="work-card-media">
+            <img src="https://drive.google.com/thumbnail?id=15OmmZJV6RHlnvLG5mTsULbrV5CcZc1Cg&sz=w800" alt="thumb1" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Thumbnail+01'">
+            <div class="work-card-overlay"></div>
+            <div class="work-card-index">01</div>
+        </div>
+        <div class="work-card-info">
+            <h4>Viral Thumbnail Concept</h4>
+            <div class="work-tags"><span class="work-tag">Thumbnail Art</span></div>
+            <a href="https://drive.google.com/file/d/15OmmZJV6RHlnvLG5mTsULbrV5CcZc1Cg/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">View Full <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+    <div class="work-card reveal d2">
+        <div class="work-card-media">
+            <img src="https://drive.google.com/thumbnail?id=1e8RRvnFf3A4pfIyqTXMe1nmL8HgbgSl_&sz=w800" alt="thumb2" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Thumbnail+02'">
+            <div class="work-card-overlay"></div>
+            <div class="work-card-index">02</div>
+        </div>
+        <div class="work-card-info">
+            <h4>Gaming Thumbnail Master</h4>
+            <div class="work-tags"><span class="work-tag">Gaming</span></div>
+            <a href="https://drive.google.com/file/d/1e8RRvnFf3A4pfIyqTXMe1nmL8HgbgSl_/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">Open Asset <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+    <div class="work-card reveal d3">
+        <div class="work-card-media">
+            <img src="https://drive.google.com/thumbnail?id=1eiVwAs3S_8pePiDAPPF1g3Z4dr4gC_hl&sz=w800" alt="thumb3" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Thumbnail+03'">
+            <div class="work-card-overlay"></div>
+            <div class="work-card-index">03</div>
+        </div>
+        <div class="work-card-info">
+            <h4>Tech Review Thumb</h4>
+            <div class="work-tags"><span class="work-tag">Tech</span></div>
+            <a href="https://drive.google.com/file/d/1eiVwAs3S_8pePiDAPPF1g3Z4dr4gC_hl/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">High-res <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+    <div class="work-card reveal d1">
+        <div class="work-card-media">
+            <img src="https://drive.google.com/thumbnail?id=141csDpj5Rl_VS05aGHcKHyu9P3C4s9AT&sz=w800" alt="thumb4" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Thumbnail+04'">
+            <div class="work-card-overlay"></div>
+            <div class="work-card-index">04</div>
+        </div>
+        <div class="work-card-info">
+            <h4>Podcast / Interview Cover</h4>
+            <div class="work-tags"><span class="work-tag">Podcast</span></div>
+            <a href="https://drive.google.com/file/d/141csDpj5Rl_VS05aGHcKHyu9P3C4s9AT/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">Open file <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+    <div class="work-card reveal d2">
+        <div class="work-card-media">
+            <img src="https://drive.google.com/thumbnail?id=1_TMnqCjbmwrLlik9LpHntjxvAVw7Cxa9&sz=w800" alt="thumb5" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Thumbnail+05'">
+            <div class="work-card-overlay"></div>
+            <div class="work-card-index">05</div>
+        </div>
+        <div class="work-card-info">
+            <h4>Educational Thumbnail</h4>
+            <div class="work-tags"><span class="work-tag">Education</span></div>
+            <a href="https://drive.google.com/file/d/1_TMnqCjbmwrLlik9LpHntjxvAVw7Cxa9/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">View design <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+    <div class="work-card reveal d3">
+        <div class="work-card-media">
+            <img src="https://drive.google.com/thumbnail?id=1B9c3p51uMy8FYxglnHLT6ufGOl-0j24O&sz=w800" alt="thumb6" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Thumbnail+06'">
+            <div class="work-card-overlay"></div>
+            <div class="work-card-index">06</div>
+        </div>
+        <div class="work-card-info">
+            <h4>Story-Driven Thumbnail</h4>
+            <div class="work-tags"><span class="work-tag">Vlog</span></div>
+            <a href="https://drive.google.com/file/d/1B9c3p51uMy8FYxglnHLT6ufGOl-0j24O/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">Full res <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+</div>
+</section>
 
-            // ---------- LOADER ----------
-            let progress = 0;
-            const loader = document.getElementById('loader');
-            const percentSpan = document.getElementById('loader-percent');
-            const interval = setInterval(() => {
-                progress += Math.floor(Math.random() * 8) + 2;
-                if (progress >= 100) {
-                    progress = 100;
-                    clearInterval(interval);
-                    setTimeout(() => {
-                        loader.classList.add('hidden');
-                    }, 400);
-                }
-                if (percentSpan) percentSpan.textContent = progress + '%';
-            }, 120);
 
-            // ---------- CURSOR ----------
-            const dot = document.getElementById('cursorDot');
-            const ring = document.getElementById('cursorRing');
-            let mx = 0,
-                my = 0;
-            let rx = 0,
-                ry = 0;
-            document.addEventListener('mousemove', function(e) {
-                mx = e.clientX;
-                my = e.clientY;
-                dot.style.left = mx + 'px';
-                dot.style.top = my + 'px';
-                // Spotlight
-                const spot = document.getElementById('spotlight');
-                if (spot) {
-                    spot.style.setProperty('--mx', mx + 'px');
-                    spot.style.setProperty('--my', my + 'px');
-                }
+
+<!-- ====== CONTACT ====== -->
+<section class="contact-section" id="contact">
+    <div class="section-label reveal" style="justify-content:center;">Get in touch</div>
+    <div class="section-title reveal" style="margin-bottom:6px;">LET'S<br><span class="outline">COLLABORATE</span></div>
+    <p class="contact-desc reveal">Got a project that needs a fresh pair of eyes and skilled hands? Let's talk.</p>
+    <a href="mailto:emmanignite@gmail.com" class="contact-email reveal">emmanignite@gmail.com</a>
+    <div class="contact-links reveal">
+        <a href="https://drive.google.com/drive/u/1/folders/1gvRNrVgDMX5TmhCLMa4n809fgGb077l-" target="_blank" class="contact-link"><i class="fas fa-video"></i> Video Portfolio</a>
+        <a href="https://drive.google.com/drive/folders/1LDfdUOtE6TAwq5FK-qYyU86ArclzggF5?usp=drive_link" target="_blank" class="contact-link"><i class="fas fa-palette"></i> Design Archive</a>
+        <a href="mailto:emmanignite@gmail.com" class="contact-link"><i class="fas fa-envelope"></i> Email Me</a>
+    </div>
+</section>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+    <p>© 2025 Emmanuel Cacho — Y2K · Video stories that convert</p>
+    <div class="badge-y2k"><i class="fas fa-bolt"></i> Available for Hire</div>
+</footer>
+
+<!-- ============================================================
+JAVASCRIPT
+============================================================ -->
+<script>
+    (function() {
+        'use strict';
+
+        // ---------- CURSOR ----------
+        const dot = document.getElementById('cursorDot');
+        const ring = document.getElementById('cursorRing');
+        let mx = 0,
+            my = 0;
+        let rx = 0,
+            ry = 0;
+        document.addEventListener('mousemove', function(e) {
+            mx = e.clientX;
+            my = e.clientY;
+            dot.style.left = mx + 'px';
+            dot.style.top = my + 'px';
+            const spot = document.getElementById('spotlight');
+            if (spot) {
+                spot.style.setProperty('--mx', mx + 'px');
+                spot.style.setProperty('--my', my + 'px');
+            }
+        });
+
+        function ringLoop() {
+            rx += (mx - rx) * 0.10;
+            ry += (my - ry) * 0.10;
+            ring.style.left = rx + 'px';
+            ring.style.top = ry + 'px';
+            requestAnimationFrame(ringLoop);
+        }
+        ringLoop();
+
+        document.querySelectorAll('a, button, .work-card, .tool-chip, .contact-link, .btn-primary, .btn-secondary, .nav-link')
+            .forEach(function(el) {
+                el.addEventListener('mouseenter', function() {
+                    dot.style.width = '14px';
+                    dot.style.height = '14px';
+                    dot.style.background = '#00f0ff';
+                    dot.style.boxShadow = '0 0 40px rgba(0,240,255,0.5), 0 0 80px rgba(0,240,255,0.2)';
+                    ring.classList.add('is-hover');
+                });
+                el.addEventListener('mouseleave', function() {
+                    dot.style.width = '10px';
+                    dot.style.height = '10px';
+                    dot.style.background = '#ff2d95';
+                    dot.style.boxShadow = '0 0 30px rgba(255,45,149,0.5), 0 0 60px rgba(255,45,149,0.2)';
+                    ring.classList.remove('is-hover');
+                });
             });
 
-            function ringLoop() {
-                rx += (mx - rx) * 0.10;
-                ry += (my - ry) * 0.10;
-                ring.style.left = rx + 'px';
-                ring.style.top = ry + 'px';
-                requestAnimationFrame(ringLoop);
-            }
-            ringLoop();
+        // ---------- SMOOTH SCROLL ----------
+        document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+            a.addEventListener('click', function(e) {
+                var target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    window.scrollTo({ top: target.offsetTop - 70, behavior: 'smooth' });
+                }
+            });
+        });
 
-            document.querySelectorAll('a, button, .work-card, .tool-chip, .contact-link, .btn-primary, .btn-secondary, .nav-link')
-                .forEach(function(el) {
-                    el.addEventListener('mouseenter', function() {
-                        dot.style.width = '14px';
-                        dot.style.height = '14px';
-                        dot.style.background = '#00f0ff';
-                        dot.style.boxShadow = '0 0 40px rgba(0,240,255,0.5), 0 0 80px rgba(0,240,255,0.2)';
-                        ring.classList.add('is-hover');
+        // ---------- REVEAL (Skew) OBSERVER ----------
+        var revealObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.10, rootMargin: '0px 0px -20px 0px' });
+
+        document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(function(el) {
+            revealObserver.observe(el);
+        });
+
+        // ---------- SKILL BARS ----------
+        var skillObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.querySelectorAll('.skill-fill').forEach(function(fill) {
+                        var w = fill.getAttribute('data-width');
+                        if (w) fill.style.width = w + '%';
                     });
-                    el.addEventListener('mouseleave', function() {
-                        dot.style.width = '10px';
-                        dot.style.height = '10px';
-                        dot.style.background = '#ff2d95';
-                        dot.style.boxShadow = '0 0 30px rgba(255,45,149,0.5), 0 0 60px rgba(255,45,149,0.2)';
-                        ring.classList.remove('is-hover');
-                    });
-                });
-
-            // ---------- SMOOTH SCROLL ----------
-            document.querySelectorAll('a[href^="#"]').forEach(function(a) {
-                a.addEventListener('click', function(e) {
-                    var target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        e.preventDefault();
-                        window.scrollTo({ top: target.offsetTop - 70, behavior: 'smooth' });
-                    }
-                });
-            });
-
-            // ---------- REVEAL (Skew) OBSERVER ----------
-            var revealObserver = new IntersectionObserver(function(entries) {
-                entries.forEach(function(entry) {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.10, rootMargin: '0px 0px -30px 0px' });
-
-            document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(function(el) {
-                revealObserver.observe(el);
-            });
-
-            // ---------- SKILL BARS ----------
-            var skillObserver = new IntersectionObserver(function(entries) {
-                entries.forEach(function(entry) {
-                    if (entry.isIntersecting) {
-                        entry.target.querySelectorAll('.skill-fill').forEach(function(fill) {
-                            var w = fill.getAttribute('data-width');
-                            if (w) fill.style.width = w + '%';
-                        });
-                        skillObserver.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.3 });
-            var skillContainer = document.querySelector('.skill-bars');
-            if (skillContainer) skillObserver.observe(skillContainer);
-
-            // ---------- DARK / LIGHT TOGGLE ----------
-            var toggle = document.getElementById('darkToggle');
-            if (toggle) {
-                toggle.addEventListener('click', function() {
-                    document.body.classList.toggle('light');
-                    var icon = this.querySelector('i');
-                    if (document.body.classList.contains('light')) {
-                        icon.className = 'fas fa-moon';
-                    } else {
-                        icon.className = 'fas fa-adjust';
-                    }
-                });
-            }
-
-            // ---------- 3D TILT CARDS ----------
-            document.querySelectorAll('.work-card').forEach(function(card) {
-                card.addEventListener('mousemove', function(e) {
-                    var rect = this.getBoundingClientRect();
-                    var x = e.clientX - rect.left;
-                    var y = e.clientY - rect.top;
-                    var rx = -((y - rect.height / 2) / rect.height) * 12;
-                    var ry = ((x - rect.width / 2) / rect.width) * 12;
-                    this.style.transform =
-                        'perspective(1200px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) translateY(-8px) scale(1.01)';
-                });
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = '';
-                });
-            });
-
-            // ---------- PARALLAX HERO ----------
-            var ticking = false;
-            window.addEventListener('scroll', function() {
-                if (!ticking) {
-                    requestAnimationFrame(function() {
-                        var sc = window.scrollY;
-                        var left = document.querySelector('.hero-left');
-                        var right = document.querySelector('.hero-right');
-                        if (left) left.style.transform = 'translateY(' + (sc * 0.08) + 'px)';
-                        if (right) right.style.transform = 'translateY(' + (sc * 0.05) + 'px)';
-                        ticking = false;
-                    });
-                    ticking = true;
+                    skillObserver.unobserve(entry.target);
                 }
             });
+        }, { threshold: 0.3 });
+        var skillContainer = document.querySelector('.skill-bars');
+        if (skillContainer) skillObserver.observe(skillContainer);
 
-            // ---------- CHAR ANIMATION HERO ----------
-            var title = document.querySelector('.hero-title');
-            if (title) {
-                var text = title.textContent;
-                var chars = text.split('');
-                var html = '';
-                chars.forEach(function(ch) {
-                    if (ch === ' ') {
-                        html += ' ';
-                    } else {
-                        var delay = (Math.random() * 0.35 + 0.05).toFixed(2);
-                        html += '<span class="char" style="animation-delay:' + delay + 's">' + ch + '</span>';
-                    }
-                });
-                title.innerHTML = html;
-            }
-
-            // ---------- GLITCH TEXT INIT ----------
-            document.querySelectorAll('.glitch-text').forEach(function(el) {
-                el.setAttribute('data-text', el.textContent.trim());
+        // ---------- DARK / LIGHT TOGGLE ----------
+        var toggle = document.getElementById('darkToggle');
+        if (toggle) {
+            toggle.addEventListener('click', function() {
+                document.body.classList.toggle('light');
+                var icon = this.querySelector('i');
+                if (document.body.classList.contains('light')) {
+                    icon.className = 'fas fa-moon';
+                } else {
+                    icon.className = 'fas fa-adjust';
+                }
             });
+        }
 
-            // ---------- PARTICLES (Canvas) ----------
-            const canvas = document.getElementById('particles-canvas');
-            const ctx = canvas.getContext('2d');
-            let width, height;
-            let particles = [];
-
-            function resizeCanvas() {
-                width = canvas.width = window.innerWidth;
-                height = canvas.height = window.innerHeight;
-            }
-            window.addEventListener('resize', resizeCanvas);
-            resizeCanvas();
-
-            class Particle {
-                constructor() { this.reset(); }
-                reset() {
-                    this.x = Math.random() * width;
-                    this.y = Math.random() * height;
-                    this.size = Math.random() * 2.5 + 0.5;
-                    this.speedX = (Math.random() - 0.5) * 0.3;
-                    this.speedY = (Math.random() - 0.5) * 0.3;
-                    this.opacity = Math.random() * 0.4 + 0.1;
-                }
-                update() {
-                    this.x += this.speedX;
-                    this.y += this.speedY;
-                    if (this.x < 0 || this.x > width) this.reset();
-                    if (this.y < 0 || this.y > height) this.reset();
-                }
-                draw() {
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(255, 45, 149, ${this.opacity})`;
-                    ctx.fill();
-                    // glow
-                    ctx.shadowColor = 'rgba(255, 45, 149, 0.2)';
-                    ctx.shadowBlur = 10;
-                    ctx.fill();
-                    ctx.shadowBlur = 0;
-                }
-            }
-
-            for (let i = 0; i < 180; i++) {
-                particles.push(new Particle());
-            }
-
-            function animateParticles() {
-                ctx.clearRect(0, 0, width, height);
-                particles.forEach(p => {
-                    p.update();
-                    p.draw();
-                });
-                requestAnimationFrame(animateParticles);
-            }
-            animateParticles();
-
-            // ---------- MAGNETIC BUTTONS (subtle) ----------
-            document.querySelectorAll('.btn-primary, .btn-secondary').forEach(btn => {
-                btn.addEventListener('mousemove', function(e) {
-                    const rect = this.getBoundingClientRect();
-                    const x = e.clientX - rect.left - rect.width / 2;
-                    const y = e.clientY - rect.top - rect.height / 2;
-                    this.style.transform = `translate(${x * 0.08}px, ${y * 0.08}px)`;
-                });
-                btn.addEventListener('mouseleave', function() {
-                    this.style.transform = '';
-                });
+        // ---------- 3D TILT CARDS ----------
+        document.querySelectorAll('.work-card').forEach(function(card) {
+            card.addEventListener('mousemove', function(e) {
+                var rect = this.getBoundingClientRect();
+                var x = e.clientX - rect.left;
+                var y = e.clientY - rect.top;
+                var rx = -((y - rect.height / 2) / rect.height) * 12;
+                var ry = ((x - rect.width / 2) / rect.width) * 12;
+                this.style.transform =
+                    'perspective(1200px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) translateY(-8px) scale(1.01)';
             });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = '';
+            });
+        });
 
-        })();
-    </script>
+        // ---------- PARALLAX HERO ----------
+        var ticking = false;
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                requestAnimationFrame(function() {
+                    var sc = window.scrollY;
+                    var left = document.querySelector('.hero-left');
+                    var right = document.querySelector('.hero-right');
+                    if (left) left.style.transform = 'translateY(' + (sc * 0.08) + 'px)';
+                    if (right) right.style.transform = 'translateY(' + (sc * 0.05) + 'px)';
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        // ---------- CHAR ANIMATION HERO ----------
+        var title = document.querySelector('.hero-title');
+        if (title) {
+            var text = title.textContent;
+            var chars = text.split('');
+            var html = '';
+            chars.forEach(function(ch) {
+                if (ch === ' ') {
+                    html += ' ';
+                } else {
+                    var delay = (Math.random() * 0.25 + 0.02).toFixed(2);
+                    html += '<span class="char" style="animation-delay:' + delay + 's">' + ch + '</span>';
+                }
+            });
+            title.innerHTML = html;
+        }
+
+        // ---------- GLITCH TEXT INIT ----------
+        document.querySelectorAll('.glitch-text').forEach(function(el) {
+            el.setAttribute('data-text', el.textContent.trim());
+        });
+
+        // ---------- PARTICLES (Canvas) ----------
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+
+        function resizeCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 2.5 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.3;
+                this.speedY = (Math.random() - 0.5) * 0.3;
+                this.opacity = Math.random() * 0.4 + 0.1;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > width) this.reset();
+                if (this.y < 0 || this.y > height) this.reset();
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 45, 149, ${this.opacity})`;
+                ctx.fill();
+                ctx.shadowColor = 'rgba(255, 45, 149, 0.2)';
+                ctx.shadowBlur = 10;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            }
+        }
+
+        for (let i = 0; i < 180; i++) {
+            particles.push(new Particle());
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // ---------- MAGNETIC BUTTONS ----------
+        document.querySelectorAll('.btn-primary, .btn-secondary').forEach(btn => {
+            btn.addEventListener('mousemove', function(e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                this.style.transform = `translate(${x * 0.08}px, ${y * 0.08}px)`;
+            });
+            btn.addEventListener('mouseleave', function() {
+                this.style.transform = '';
+            });
+        });
+
+        // ---------- NO LOADER: BODY ALREADY FADES IN VIA CSS ----------
+
+    })();
+</script>
 </body>
 </html>
