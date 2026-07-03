@@ -3,205 +3,98 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Emmanuel Cacho · Y2K Edit</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Press+Start+2P&display=swap" rel="stylesheet" />
+    <title>Emmanuel Cacho · Director & Editor</title>
+    
+    <!-- Professional Typography: Outfit for headers, Inter for ultra-clean body copy -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;500;700;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    
     <style>
         /* ============================================================
-           ROOT — Y2K Cyber Aesthetic
+           ROOT — CINEMATIC STUDIO THEME
            ============================================================ */
         :root {
-            --bg-primary: #0a0a0f;
-            --bg-secondary: #12121a;
-            --bg-card: rgba(20, 18, 40, 0.85);
-            --text-primary: #f0eef8;
-            --text-secondary: #a8a4c8;
-            --text-muted: #6a6690;
-            --neon-pink: #ff2d95;
-            --neon-cyan: #00f0ff;
-            --neon-purple: #b44aff;
-            --neon-yellow: #ffea00;
-            --neon-green: #00ff41;
-            --gradient-main: linear-gradient(135deg, #ff2d95, #b44aff);
-            --gradient-cyber: linear-gradient(135deg, #00f0ff, #ff2d95);
-            --shadow-glow: 0 0 40px rgba(255, 45, 149, 0.15), 0 0 80px rgba(0, 240, 255, 0.05);
-            --border-neon: 1px solid rgba(255, 45, 149, 0.25);
-            --radius-card: 12px;
-            --font-display: 'Orbitron', monospace;
+            --bg-main: #030303;
+            --bg-surface: #0a0a0a;
+            --bg-elevated: #141414;
+            --border-color: #222;
+            
+            --text-primary: #ffffff;
+            --text-secondary: #888888;
+            --accent: #E50914; /* Cinematic Red */
+            
+            --font-display: 'Outfit', sans-serif;
             --font-body: 'Inter', sans-serif;
-            --font-pixel: 'Press Start 2P', monospace;
-            --transition-smooth: cubic-bezier(0.23, 1, 0.32, 1);
-            --transition-fast: cubic-bezier(0.19, 1, 0.22, 1);
+            
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
         }
 
-        /* Light mode */
-        body.light {
-            --bg-primary: #f5f0ff;
-            --bg-secondary: #ffffff;
-            --bg-card: rgba(255, 255, 255, 0.88);
-            --text-primary: #0a0a1a;
-            --text-secondary: #3a3a5a;
-            --text-muted: #8a8aaa;
-            --shadow-glow: 0 0 40px rgba(255, 45, 149, 0.08), 0 0 80px rgba(0, 240, 255, 0.04);
-            --border-neon: 1px solid rgba(255, 45, 149, 0.15);
+        /* Light Mode - High Contrast Brutalist */
+        body.light-mode {
+            --bg-main: #ffffff;
+            --bg-surface: #f4f4f5;
+            --bg-elevated: #e4e4e7;
+            --border-color: #d4d4d8;
+            --text-primary: #000000;
+            --text-secondary: #555555;
+            --accent: #D32F2F;
         }
-        body.light .cyber-grid { opacity: 0.06; }
-        body.light .navbar { background: rgba(245, 240, 255, 0.92); border-bottom-color: rgba(255, 45, 149, 0.15); }
-        body.light .nav-link { color: #1a1a2e; }
-        body.light .nav-link:hover { color: var(--neon-pink); }
-        body.light .glitch-text::before { color: var(--neon-cyan); }
-        body.light .glitch-text::after { color: var(--neon-pink); }
-        body.light .work-card { background: #ffffff; border-color: rgba(0, 0, 0, 0.06); }
-        body.light .work-card:hover { border-color: var(--neon-pink); }
-        body.light .tool-chip { border-color: rgba(255, 45, 149, 0.25); color: #1a1a2e; }
-        body.light .tool-chip:hover { background: rgba(255, 45, 149, 0.06); }
-        body.light .skill-track { background: rgba(0, 0, 0, 0.06); }
-        body.light .contact-link { border-color: rgba(0, 0, 0, 0.08); color: #3a3a5a; }
-        body.light .contact-link:hover { border-color: var(--neon-pink); color: var(--neon-pink); }
-        body.light footer { border-top-color: rgba(0, 0, 0, 0.06); }
-        body.light .badge-y2k { border-color: rgba(255, 45, 149, 0.2); color: var(--neon-pink); }
-        body.light .hero-stats .stat-number { background: linear-gradient(135deg, #0a0a1a, #3a3a5a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        body.light .folder-strip { background: rgba(255, 45, 149, 0.03); border-color: rgba(255, 45, 149, 0.12); }
-        body.light .glow-orb { opacity: 0.08; }
-        body.light .tl-dot { background: var(--neon-pink); box-shadow: 0 0 30px rgba(255, 45, 149, 0.3); }
-        body.light .cat-icon { border-color: rgba(255, 45, 149, 0.2); color: var(--neon-pink); }
-        body.light .spotlight { opacity: 0.2 !important; }
 
         /* ============================================================
            RESET & BASE
            ============================================================ */
-        *,
-        *::before,
-        *::after {
+        *, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        html { scroll-behavior: smooth; }
+        
+        html {
+            scroll-behavior: smooth;
+            background: var(--bg-main);
+        }
+        
         body {
             font-family: var(--font-body);
-            background: var(--bg-primary);
+            background: var(--bg-main);
             color: var(--text-primary);
             overflow-x: hidden;
-            transition: background 0.4s, color 0.4s;
-            cursor: none;
+            -webkit-font-smoothing: antialiased;
+            transition: background 0.6s var(--ease-out-expo), color 0.6s var(--ease-out-expo);
+            cursor: none; /* Custom cursor */
             line-height: 1.6;
-            opacity: 0;
-            animation: bodyFadeIn 0.6s var(--transition-fast) forwards;
-        }
-        @keyframes bodyFadeIn {
-            to { opacity: 1; }
-        }
-        a { text-decoration: none; color: inherit; }
-        img { display: block; max-width: 100%; }
-        ::selection { background: var(--neon-pink); color: #fff; }
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: var(--bg-primary); }
-        ::-webkit-scrollbar-thumb { background: var(--neon-pink); border-radius: 10px; box-shadow: 0 0 20px rgba(255, 45, 149, 0.3); }
-
-        /* ============================================================
-           CYBER GRID & SPOTLIGHT
-           ============================================================ */
-        .cyber-grid {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 0;
-            background-image:
-                linear-gradient(rgba(0, 240, 255, 0.025) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 240, 255, 0.025) 1px, transparent 1px);
-            background-size: 60px 60px;
-            animation: gridScroll 20s linear infinite;
-        }
-        @keyframes gridScroll {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(60px, 60px); }
-        }
-        .cyber-grid-overlay {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 0;
-            background: radial-gradient(ellipse at 30% 40%, rgba(255, 45, 149, 0.04), transparent 60%),
-                radial-gradient(ellipse at 70% 60%, rgba(0, 240, 255, 0.04), transparent 50%);
-        }
-        .spotlight {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 0;
-            background: radial-gradient(circle 400px at var(--mx, 50%) var(--my, 50%), rgba(255, 45, 149, 0.04), transparent 70%);
-            transition: background 0.15s ease;
-            mix-blend-mode: screen;
-            will-change: background;
         }
 
-        /* ============================================================
-           GRAIN
-           ============================================================ */
-        .grain {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 9998;
-            opacity: 0.015;
-            mix-blend-mode: overlay;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-            background-size: 256px 256px;
-            animation: grainShift 0.2s steps(1) infinite;
-        }
-        @keyframes grainShift {
-            0% { transform: translate(0,0); }
-            25% { transform: translate(-3px,2px); }
-            50% { transform: translate(3px,-2px); }
-            75% { transform: translate(-1px,-3px); }
-            100% { transform: translate(0,0); }
+        a, button {
+            text-decoration: none;
+            color: inherit;
+            cursor: none;
+            background: none;
+            border: none;
+            outline: none;
         }
 
-        /* ============================================================
-           GLOW ORBS
-           ============================================================ */
-        .glow-orb {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(120px);
-            pointer-events: none;
-            z-index: 0;
-            animation: orbFloat 14s ease-in-out infinite alternate;
-        }
-        .glow-orb--1 {
-            width: 500px; height: 500px;
-            top: -10%; left: -10%;
-            background: radial-gradient(circle, rgba(255, 45, 149, 0.10), transparent 70%);
-            animation-duration: 16s;
-        }
-        .glow-orb--2 {
-            width: 400px; height: 400px;
-            bottom: -5%; right: -5%;
-            background: radial-gradient(circle, rgba(0, 240, 255, 0.08), transparent 70%);
-            animation-duration: 20s; animation-delay: -5s;
-        }
-        .glow-orb--3 {
-            width: 350px; height: 350px;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            background: radial-gradient(circle, rgba(180, 74, 255, 0.06), transparent 70%);
-            animation-duration: 18s; animation-delay: -10s;
-        }
-        @keyframes orbFloat {
-            0% { transform: translate(0,0) scale(1); }
-            100% { transform: translate(80px,-60px) scale(1.2); }
+        img, iframe {
+            display: block;
+            width: 100%;
         }
 
-        /* ============================================================
-           PARTICLES (Canvas)
-           ============================================================ */
-        #particles-canvas {
+        ::selection {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        /* Background Grid Pattern */
+        .bg-grid {
             position: fixed;
             inset: 0;
+            z-index: -1;
+            background-size: 100px 100px;
+            background-image: linear-gradient(to right, var(--border-color) 1px, transparent 1px),
+                              linear-gradient(to bottom, var(--border-color) 1px, transparent 1px);
+            opacity: 0.15;
             pointer-events: none;
-            z-index: 1;
-            opacity: 0.5;
         }
 
         /* ============================================================
@@ -209,1838 +102,1155 @@
            ============================================================ */
         .cursor-dot {
             position: fixed;
-            width: 10px; height: 10px;
-            background: var(--neon-pink);
+            top: 0;
+            left: 0;
+            width: 12px;
+            height: 12px;
+            background: #fff;
             border-radius: 50%;
             pointer-events: none;
             z-index: 10000;
             transform: translate(-50%, -50%);
-            transition: width 0.2s ease, height 0.2s ease, background 0.2s ease;
-            mix-blend-mode: screen;
-            box-shadow: 0 0 30px rgba(255,45,149,0.5), 0 0 60px rgba(255,45,149,0.2);
+            mix-blend-mode: difference;
+            transition: width 0.3s var(--ease-out-expo), height 0.3s var(--ease-out-expo);
+            will-change: transform, width, height;
         }
-        .cursor-ring {
-            position: fixed;
-            width: 44px; height: 44px;
-            border: 2px solid rgba(0, 240, 255, 0.3);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            transition: width 0.35s cubic-bezier(0.23,1,0.32,1), height 0.35s cubic-bezier(0.23,1,0.32,1), border-color 0.25s, opacity 0.25s;
-            will-change: transform;
-            box-shadow: 0 0 20px rgba(0,240,255,0.1);
-        }
-        .cursor-ring.is-hover {
-            width: 72px; height: 72px;
-            border-color: var(--neon-pink);
-            border-width: 2.5px;
-            box-shadow: 0 0 40px rgba(255,45,149,0.2);
+        .cursor-dot.hover-active {
+            width: 60px;
+            height: 60px;
         }
 
         /* ============================================================
-           NAVBAR
+           NAVIGATION
            ============================================================ */
         .navbar {
             position: fixed;
-            top: 0; left: 0; right: 0;
-            z-index: 1000;
+            top: 0;
+            width: 100%;
+            padding: 24px 60px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 48px;
-            height: 74px;
-            background: rgba(10, 10, 15, 0.88);
-            backdrop-filter: blur(24px) saturate(1.6);
-            border-bottom: 1px solid rgba(255, 45, 149, 0.12);
-            transition: background 0.4s;
+            z-index: 1000;
+            mix-blend-mode: difference;
+            color: #fff;
         }
+        
         .logo {
             font-family: var(--font-display);
-            font-size: 1.5rem; font-weight: 800;
-            letter-spacing: 0.04em;
-            background: var(--gradient-cyber);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            position: relative;
-            cursor: none;
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
         }
-        .logo .bracket { -webkit-text-fill-color: var(--neon-cyan); opacity: 0.6; }
-        .logo::after {
-            content: '';
-            position: absolute;
-            bottom: -2px; left: 0;
-            width: 100%; height: 2px;
-            background: var(--gradient-cyber);
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.4s var(--transition-smooth);
-            -webkit-text-fill-color: transparent;
-        }
-        .logo:hover::after { transform: scaleX(1); transform-origin: left; }
+        .logo span { color: var(--accent); }
+
         .nav-links {
             display: flex;
+            gap: 40px;
             align-items: center;
-            gap: 36px;
         }
+        
         .nav-link {
-            font-family: var(--font-display);
-            font-size: 0.55rem; font-weight: 600;
-            letter-spacing: 0.2em;
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
-            color: var(--text-secondary);
-            transition: color 0.25s, text-shadow 0.25s;
             position: relative;
-            cursor: none;
+            overflow: hidden;
         }
         .nav-link::after {
             content: '';
             position: absolute;
-            bottom: -4px; left: 0;
-            width: 0; height: 2px;
-            background: var(--neon-pink);
-            box-shadow: 0 0 20px rgba(255,45,149,0.4);
-            transition: width 0.35s var(--transition-smooth);
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: #fff;
+            transform: translateX(-100%);
+            transition: transform 0.4s var(--ease-out-expo);
         }
-        .nav-link:hover { color: var(--text-primary); text-shadow: 0 0 20px rgba(255,45,149,0.15); }
-        .nav-link:hover::after { width: 100%; }
-        #darkToggle {
-            background: none; border: none;
-            color: var(--text-secondary);
-            font-size: 1rem;
-            cursor: none;
-            transition: color 0.25s, transform 0.3s;
-            padding: 4px;
+        .nav-link:hover::after {
+            transform: translateX(0);
         }
-        #darkToggle:hover { color: var(--neon-pink); transform: rotate(30deg) scale(1.1); }
 
         /* ============================================================
-           HERO
+           HERO SECTION
            ============================================================ */
         .hero {
-            min-height: 100vh;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: center;
-            padding: 80px 60px 60px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 60px;
             position: relative;
-            z-index: 1;
-            gap: 60px;
-            overflow: hidden;
         }
-        .hero-left { position: relative; z-index: 2; }
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 6px 20px 6px 14px;
-            border: 1px solid rgba(0, 240, 255, 0.2);
-            border-radius: 100px;
-            font-family: var(--font-display);
-            font-size: 0.5rem; font-weight: 600;
-            letter-spacing: 0.18em;
+
+        .hero-label {
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
-            color: var(--neon-cyan);
-            margin-bottom: 28px;
-            background: rgba(0, 240, 255, 0.03);
-            backdrop-filter: blur(4px);
-            box-shadow: 0 0 30px rgba(0,240,255,0.04);
-            opacity: 0;
-            animation: fadeUp 0.7s var(--transition-fast) 0.2s forwards;
+            color: var(--accent);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
-        .hero-badge .pulse {
-            display: inline-block;
-            width: 6px; height: 6px;
-            border-radius: 50%;
-            background: var(--neon-cyan);
-            animation: pulseDot 1.6s ease-in-out infinite;
-            box-shadow: 0 0 20px rgba(0,240,255,0.4);
+        .hero-label::before {
+            content: '';
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
         }
-        @keyframes pulseDot {
-            0%,100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.2; transform: scale(0.4); }
-        }
-        @keyframes fadeUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
+
         .hero-title {
             font-family: var(--font-display);
-            font-size: clamp(2.4rem, 5vw, 4rem);
+            font-size: clamp(4rem, 10vw, 10rem);
             font-weight: 900;
-            line-height: 0.92;
-            letter-spacing: -0.02em;
-            color: var(--text-primary);
+            line-height: 0.85;
+            letter-spacing: -0.04em;
+            text-transform: uppercase;
+            margin-left: -0.04em; 
         }
-        .hero-title .stroke { -webkit-text-stroke: 2px var(--text-primary); color: transparent; }
-        .hero-title .accent {
-            background: var(--gradient-cyber);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+
+        .hero-title .outline {
+            -webkit-text-stroke: 2px var(--text-primary);
+            color: transparent;
         }
-        .hero-title .char {
-            display: inline-block;
-            opacity: 0;
-            transform: translateY(30px) rotate(2deg) scale(0.96);
-            animation: charReveal 0.5s var(--transition-fast) forwards;
+
+        .hero-bottom {
+            position: absolute;
+            bottom: 60px;
+            left: 60px;
+            right: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-top: 1px solid var(--border-color);
+            padding-top: 24px;
         }
-        @keyframes charReveal {
-            to { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
-        }
-        .hero-sub {
-            font-size: 1.05rem;
-            font-weight: 400;
+
+        .hero-desc {
+            max-width: 400px;
+            font-size: 1rem;
             color: var(--text-secondary);
-            margin-top: 20px;
-            max-width: 480px;
-            line-height: 1.8;
-            border-left: 2px solid var(--neon-pink);
-            padding-left: 20px;
-            opacity: 0;
-            animation: fadeUp 0.6s var(--transition-fast) 0.4s forwards;
+            font-weight: 400;
         }
-        .hero-sub strong {
-            color: var(--text-primary);
-            font-weight: 600;
-            background: linear-gradient(135deg, var(--neon-pink), var(--neon-cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+
         .hero-stats {
             display: flex;
-            gap: 48px;
-            margin-top: 40px;
-            opacity: 0;
-            animation: fadeUp 0.6s var(--transition-fast) 0.55s forwards;
+            gap: 60px;
+            text-align: right;
         }
-        .stat-item .stat-number {
+        
+        .stat-num {
             font-family: var(--font-display);
-            font-size: 2.8rem; font-weight: 800;
-            background: var(--gradient-cyber);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
             line-height: 1;
         }
-        .stat-item .stat-label {
-            font-family: var(--font-display);
-            font-size: 0.5rem; font-weight: 600;
-            letter-spacing: 0.15em;
+        .stat-label {
+            font-size: 0.65rem;
             text-transform: uppercase;
-            color: var(--text-muted);
-            margin-top: 4px;
-        }
-        .hero-cta {
-            display: flex;
-            gap: 14px;
-            margin-top: 44px;
-            flex-wrap: wrap;
-            opacity: 0;
-            animation: fadeUp 0.6s var(--transition-fast) 0.7s forwards;
-        }
-        .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 38px;
-            background: var(--gradient-cyber);
-            color: #0a0a0f;
-            font-family: var(--font-display);
-            font-weight: 700; font-size: 0.7rem;
-            letter-spacing: 0.08em;
-            border-radius: 60px;
-            border: none;
-            transition: transform 0.3s var(--transition-smooth), box-shadow 0.3s;
-            cursor: none;
-            box-shadow: 0 4px 40px rgba(255,45,149,0.25), 0 0 60px rgba(0,240,255,0.1);
-            text-transform: uppercase;
-        }
-        .btn-primary:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 8px 60px rgba(255,45,149,0.35), 0 0 80px rgba(0,240,255,0.15); }
-        .btn-secondary {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 34px;
-            border: 2px solid rgba(255, 45, 149, 0.25);
-            border-radius: 60px;
-            color: var(--text-primary);
-            font-family: var(--font-display);
-            font-weight: 600; font-size: 0.7rem;
-            letter-spacing: 0.08em;
-            transition: border-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
-            cursor: none;
-            background: transparent;
-            text-transform: uppercase;
-        }
-        .btn-secondary:hover { border-color: var(--neon-pink); color: var(--neon-pink); transform: translateY(-4px); box-shadow: 0 0 40px rgba(255,45,149,0.08); }
-
-        .hero-right {
-            position: relative; z-index: 2;
-            display: flex; justify-content: center; align-items: center;
-            opacity: 0;
-            animation: fadeUp 0.8s var(--transition-fast) 0.3s forwards;
-        }
-        .hero-photo-wrap {
-            position: relative;
-            width: 460px; max-width: 100%;
-            aspect-ratio: 3/4;
-            border-radius: var(--radius-card);
-            overflow: hidden;
-            box-shadow: 0 20px 80px rgba(0,0,0,0.6), 0 0 0 2px rgba(255,45,149,0.15);
-            background: var(--bg-secondary);
-            animation: borderGlitch 4s ease-in-out infinite;
-        }
-        @keyframes borderGlitch {
-            0%, 100% { box-shadow: 0 20px 80px rgba(0,0,0,0.6), 0 0 0 2px rgba(255,45,149,0.15), 0 0 40px rgba(255,45,149,0.05); }
-            25% { box-shadow: 0 20px 80px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,240,255,0.3), 0 0 60px rgba(0,240,255,0.1); }
-            50% { box-shadow: 0 20px 80px rgba(0,0,0,0.6), 0 0 0 2px rgba(180,74,255,0.3), 0 0 60px rgba(180,74,255,0.1); }
-            75% { box-shadow: 0 20px 80px rgba(0,0,0,0.6), 0 0 0 2px rgba(255,45,149,0.15), 0 0 40px rgba(255,45,149,0.05); }
-        }
-        .hero-photo {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            object-position: top center;
-            display: block;
-            transition: transform 0.6s var(--transition-smooth), filter 0.5s;
-            filter: grayscale(0.1) contrast(1.05) saturate(0.9);
-        }
-        .hero-photo-wrap:hover .hero-photo { transform: scale(1.04); filter: grayscale(0) contrast(1.1) saturate(1); }
-        .photo-label {
-            position: absolute;
-            bottom: 20px; left: 50%;
-            transform: translateX(-50%);
-            font-family: var(--font-display);
-            font-size: 0.45rem; font-weight: 700;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            background: rgba(10,10,15,0.7);
-            backdrop-filter: blur(12px);
-            padding: 6px 20px;
-            border-radius: 60px;
-            border: 1px solid rgba(255,45,149,0.12);
-            z-index: 4;
-            white-space: nowrap;
-        }
-        .photo-label span { color: var(--neon-pink); margin: 0 6px; }
-        .photo-floating-badge {
-            position: absolute;
-            top: 20px; right: 20px;
-            z-index: 4;
-            background: rgba(10,10,15,0.75);
-            backdrop-filter: blur(14px);
-            border: 1px solid rgba(0,240,255,0.15);
-            border-radius: 10px;
-            padding: 10px 16px;
-            font-family: var(--font-display);
-            font-size: 0.5rem; font-weight: 700;
-            letter-spacing: 0.08em;
-            color: var(--neon-cyan);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 8px 40px rgba(0,0,0,0.3);
-            text-transform: uppercase;
-        }
-        .photo-floating-badge i { font-size: 0.7rem; color: var(--neon-pink); }
-        .scanline-overlay {
-            position: absolute; inset: 0;
-            pointer-events: none; z-index: 2;
-            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
-            opacity: 0.3;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            margin-top: 8px;
         }
 
         /* ============================================================
-           TICKER
+           MARQUEE TICKER
            ============================================================ */
         .ticker {
-            width: 100%;
-            background: var(--bg-secondary);
-            border-top: 1px solid rgba(255,45,149,0.08);
-            border-bottom: 1px solid rgba(255,45,149,0.08);
-            padding: 10px 0;
+            background: var(--accent);
+            color: #fff;
+            padding: 20px 0;
             overflow: hidden;
-            position: relative;
-            z-index: 1;
+            display: flex;
+            white-space: nowrap;
         }
         .ticker-inner {
             display: flex;
-            white-space: nowrap;
-            animation: tickerScroll 22s linear infinite;
+            animation: tickerScroll 20s linear infinite;
         }
-        .ticker-inner span {
+        .ticker-item {
             font-family: var(--font-display);
-            font-size: 0.7rem; font-weight: 600;
-            letter-spacing: 0.12em;
-            color: var(--text-muted);
-            padding: 0 28px;
+            font-size: 2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            padding: 0 40px;
             display: flex;
             align-items: center;
-            gap: 14px;
-            text-transform: uppercase;
+            gap: 40px;
         }
-        .ticker-inner span i { font-size: 0.3rem; color: var(--neon-pink); opacity: 0.6; }
+        .ticker-item i { font-size: 0.8rem; }
+        
         @keyframes tickerScroll {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
 
         /* ============================================================
-           SECTIONS
+           SECTIONS & LAYOUT
            ============================================================ */
         .section {
-            padding: 100px 60px;
-            max-width: 1360px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
+            padding: 140px 60px;
         }
-        .section-label {
-            font-family: var(--font-display);
-            font-size: 0.5rem; font-weight: 700;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color: var(--neon-pink);
+        
+        .section-header {
             display: flex;
-            align-items: center;
-            gap: 14px;
-            margin-bottom: 12px;
+            align-items: flex-end;
+            justify-content: space-between;
+            margin-bottom: 80px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--border-color);
         }
-        .section-label::before {
-            content: '';
-            width: 32px; height: 2px;
-            background: var(--neon-pink);
-            box-shadow: 0 0 20px rgba(255,45,149,0.3);
-            opacity: 0.6;
-        }
+
         .section-title {
             font-family: var(--font-display);
-            font-size: clamp(2.6rem, 5vw, 4.4rem);
-            font-weight: 800;
-            line-height: 1.0;
+            font-size: clamp(3rem, 6vw, 6rem);
+            font-weight: 900;
+            line-height: 0.9;
+            text-transform: uppercase;
             letter-spacing: -0.02em;
-            margin-bottom: 56px;
-            color: var(--text-primary);
         }
-        .section-title .outline { -webkit-text-stroke: 1.5px rgba(255,255,255,0.08); color: transparent; }
-        .section-title .highlight {
-            background: var(--gradient-cyber);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* ============================================================
-           ABOUT
-           ============================================================ */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 70px;
-            align-items: start;
-        }
-        .about-text p {
-            font-size: 0.95rem;
-            line-height: 1.9;
-            color: var(--text-secondary);
-            margin-bottom: 18px;
-        }
-        .about-text p strong {
-            color: var(--text-primary);
+        
+        .section-subtitle {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent);
             font-weight: 600;
-            background: linear-gradient(135deg, var(--neon-pink), var(--neon-cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .tools-cloud {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 28px;
-        }
-        .tool-chip {
-            font-family: var(--font-display);
-            font-size: 0.5rem; font-weight: 600;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            padding: 7px 20px;
-            border: 1px solid rgba(255,45,149,0.2);
-            border-radius: 60px;
-            color: var(--neon-pink);
-            transition: background 0.25s, border-color 0.25s, transform 0.25s, box-shadow 0.25s;
-            background: rgba(255,45,149,0.02);
-            cursor: none;
-        }
-        .tool-chip:hover {
-            background: rgba(255,45,149,0.06);
-            border-color: var(--neon-pink);
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 0 30px rgba(255,45,149,0.06);
-        }
-
-        .skill-bars {
-            display: flex;
-            flex-direction: column;
-            gap: 22px;
-        }
-        .skill-row {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-        .skill-row-header {
-            display: flex;
-            justify-content: space-between;
-            font-family: var(--font-display);
-            font-size: 0.6rem; font-weight: 600;
-            letter-spacing: 0.06em;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-        }
-        .skill-row-header .pct {
-            color: var(--neon-cyan);
-            font-weight: 700;
-            text-shadow: 0 0 20px rgba(0,240,255,0.2);
-        }
-        .skill-track {
-            height: 4px;
-            border-radius: 4px;
-            background: rgba(255,255,255,0.04);
-            overflow: hidden;
-            border: 1px solid rgba(255,45,149,0.05);
-            position: relative;
-        }
-        .skill-fill {
-            height: 100%;
-            border-radius: 4px;
-            background: var(--gradient-cyber);
-            width: 0%;
-            transition: width 1s var(--transition-smooth);
-            box-shadow: 0 0 30px rgba(255,45,149,0.15);
-            position: relative;
-        }
-        .skill-fill::after {
-            content: '';
-            position: absolute;
-            right: 0; top: 50%;
-            transform: translate(50%, -50%);
-            width: 10px; height: 10px;
-            border-radius: 50%;
-            background: var(--neon-pink);
-            box-shadow: 0 0 30px rgba(255,45,149,0.5);
-            opacity: 0.7;
         }
 
         /* ============================================================
-           PORTFOLIO
+           PORTFOLIO GRID
            ============================================================ */
-        .cat-header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin: 64px 0 28px;
+        .work-category {
+            margin-bottom: 120px;
         }
-        .cat-header .cat-icon {
-            width: 40px; height: 40px;
-            border-radius: 10px;
-            background: rgba(255,45,149,0.04);
-            border: 1px solid rgba(255,45,149,0.12);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--neon-pink);
-            font-size: 1rem;
-            flex-shrink: 0;
-        }
-        .cat-header h3 {
+
+        .cat-title {
             font-family: var(--font-display);
-            font-size: 1.4rem; font-weight: 700;
-            letter-spacing: -0.02em;
-            color: var(--text-primary);
+            font-size: 2rem;
+            font-weight: 700;
             text-transform: uppercase;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
-        .cat-header .cat-line {
-            flex: 1;
+        .cat-title::after {
+            content: '';
+            flex-grow: 1;
             height: 1px;
-            background: linear-gradient(90deg, rgba(255,45,149,0.12), transparent);
+            background: var(--border-color);
         }
 
         .work-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 40px;
         }
-        .work-card {
-            background: var(--bg-card);
-            backdrop-filter: blur(16px);
-            border-radius: var(--radius-card);
-            border: 1px solid rgba(255,45,149,0.06);
-            overflow: hidden;
-            transition: transform 0.4s var(--transition-smooth), box-shadow 0.4s, border-color 0.4s;
-            box-shadow: 0 10px 50px rgba(0,0,0,0.3);
-            cursor: none;
-            will-change: transform;
-        }
-        .work-card:hover {
-            transform: translateY(-10px) scale(1.01);
-            border-color: rgba(255,45,149,0.2);
-            box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 60px rgba(255,45,149,0.04);
-        }
-        .work-card-media {
-            position: relative;
-            padding-top: 56.25%;
-            background: var(--bg-secondary);
-            overflow: hidden;
-        }
-        .work-card-media iframe,
-        .work-card-media img {
-            position: absolute;
-            inset: 0;
-            width: 100%; height: 100%;
-            border: 0;
-            object-fit: cover;
-            transition: transform 0.5s var(--transition-smooth), filter 0.4s;
-        }
-        .work-card:hover .work-card-media img { transform: scale(1.06); filter: brightness(1.08) saturate(1.02); }
-        .work-card:hover .work-card-media iframe { transform: scale(1.02); }
-        .work-card-overlay {
-            position: absolute; inset: 0;
-            background: linear-gradient(to top, rgba(10,10,15,0.85) 0%, transparent 50%);
-            opacity: 0;
-            transition: opacity 0.35s;
-            pointer-events: none;
-        }
-        .work-card:hover .work-card-overlay { opacity: 1; }
-        .work-card-index {
-            position: absolute;
-            top: 14px; left: 14px;
-            font-family: var(--font-display);
-            font-size: 0.5rem; font-weight: 700;
-            letter-spacing: 0.1em;
-            color: rgba(255,255,255,0.3);
-            background: rgba(10,10,15,0.7);
-            backdrop-filter: blur(6px);
-            padding: 4px 14px;
-            border-radius: 60px;
-            border: 1px solid rgba(255,45,149,0.06);
-            z-index: 2;
-        }
-        .work-card-info {
-            padding: 18px 20px 20px;
-        }
-        .work-card-info h4 {
-            font-family: var(--font-display);
-            font-size: 1rem; font-weight: 700;
-            letter-spacing: -0.01em;
-            margin-bottom: 2px;
-            color: var(--text-primary);
-        }
-        .work-card-info p {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            margin-bottom: 12px;
-        }
-        .work-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
-        .work-tag {
-            font-family: var(--font-display);
-            font-size: 0.4rem; font-weight: 600;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            padding: 3px 14px;
-            border-radius: 60px;
-            background: rgba(255,45,149,0.04);
-            border: 1px solid rgba(255,45,149,0.08);
-            color: var(--neon-pink);
-        }
-        .folder-strip {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 16px 24px;
-            padding: 18px 24px;
-            background: rgba(255,45,149,0.02);
-            border: 1px solid rgba(255,45,149,0.06);
-            border-radius: 12px;
-            margin-top: 24px;
-        }
-        .folder-strip-icon { font-size: 1.2rem; color: var(--neon-pink); opacity: 0.7; }
-        .folder-strip-text {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            flex: 1;
-        }
-        .folder-strip-text strong { color: var(--text-primary); }
-        .folder-strip-link {
-            font-family: var(--font-display);
-            font-size: 0.55rem; font-weight: 700;
-            letter-spacing: 0.08em;
-            color: var(--neon-cyan);
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            border-bottom: 2px solid rgba(0,240,255,0.15);
-            transition: border-color 0.25s, color 0.25s;
-            padding-bottom: 2px;
-            text-transform: uppercase;
-        }
-        .folder-strip-link:hover { border-color: var(--neon-cyan); color: var(--neon-cyan); text-shadow: 0 0 30px rgba(0,240,255,0.1); }
 
-        /* ============================================================
-           TIMELINE
-           ============================================================ */
-        .timeline-section {
-            padding: 80px 60px;
-            max-width: 1360px;
-            margin: 0 auto;
+        .work-card {
             position: relative;
-            z-index: 1;
-        }
-        .timeline-line {
-            position: absolute;
-            left: 50%;
-            top: 140px;
-            bottom: 80px;
-            width: 2px;
-            background: linear-gradient(to bottom, var(--neon-pink), transparent);
-            transform: translateX(-50%);
-            opacity: 0.2;
-        }
-        .timeline-items {
             display: flex;
             flex-direction: column;
-            gap: 56px;
-            margin-top: 32px;
+            gap: 16px;
         }
-        .timeline-item {
-            display: grid;
-            grid-template-columns: 1fr 60px 1fr;
-            align-items: center;
-            gap: 0;
-        }
-        .timeline-item:nth-child(even) .tl-content { order: 3; text-align: left; }
-        .timeline-item:nth-child(even) .tl-content-right { order: 1; text-align: right; }
-        .tl-dot {
-            width: 16px; height: 16px;
-            background: var(--neon-pink);
-            border-radius: 50%;
-            box-shadow: 0 0 50px rgba(255,45,149,0.3);
-            margin: 0 auto;
+
+        .work-media {
             position: relative;
-            flex-shrink: 0;
-            border: 2px solid var(--bg-primary);
+            aspect-ratio: 16/9;
+            background: var(--bg-surface);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
         }
-        .tl-dot::before {
-            content: '';
+
+        .work-media iframe, .work-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(1.1);
+            transition: filter 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo);
+            border: none;
+        }
+
+        .work-card:hover .work-media iframe,
+        .work-card:hover .work-media img {
+            filter: grayscale(0%) contrast(1);
+            transform: scale(1.03);
+        }
+
+        /* Play Overlay for Videos */
+        .play-overlay {
             position: absolute;
-            inset: -8px;
-            border: 1px solid rgba(255,45,149,0.1);
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            transition: opacity 0.4s;
+            z-index: 2;
+        }
+        .work-card:hover .play-overlay {
+            opacity: 0;
+        }
+        .play-btn {
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            color: #fff;
             border-radius: 50%;
-            animation: dotPulse 2.8s ease-in-out infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
         }
-        @keyframes dotPulse {
-            0%,100% { transform: scale(1); opacity: 0.6; }
-            50% { transform: scale(1.6); opacity: 0.1; }
+
+        .work-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
         }
-        .tl-content { padding-right: 40px; text-align: right; }
-        .tl-content-right { padding-left: 40px; }
-        .tl-year {
+
+        .work-title {
             font-family: var(--font-display);
-            font-size: 0.7rem; font-weight: 700;
-            letter-spacing: 0.12em;
-            color: var(--neon-cyan);
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
         }
-        .tl-title {
-            font-family: var(--font-display);
-            font-size: 1.2rem; font-weight: 700;
-            letter-spacing: -0.01em;
-            margin-bottom: 4px;
-            color: var(--text-primary);
-        }
-        .tl-desc {
-            font-size: 0.82rem;
+
+        .work-tags {
+            font-size: 0.65rem;
             color: var(--text-secondary);
-            line-height: 1.7;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 4px;
+        }
+
+        .work-index {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--border-color);
+            font-weight: 600;
+        }
+
+        .work-link {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s;
+        }
+        .work-link:hover {
+            border-bottom-color: var(--accent);
         }
 
         /* ============================================================
-           CONTACT
+           ABOUT SECTION
+           ============================================================ */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+        }
+        
+        .about-text {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+        .about-text strong {
+            color: var(--text-primary);
+        }
+
+        .skills-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .skill-item {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 16px;
+        }
+        
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .skill-tools {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 8px;
+        }
+
+        /* ============================================================
+           CONTACT SECTION
            ============================================================ */
         .contact-section {
-            padding: 100px 60px 80px;
-            max-width: 820px;
-            margin: 0 auto;
+            padding: 200px 60px;
             text-align: center;
-            position: relative;
-            z-index: 1;
+            background: var(--bg-surface);
+            border-top: 1px solid var(--border-color);
         }
-        .contact-email {
+
+        .contact-title {
             font-family: var(--font-display);
-            font-size: clamp(1.6rem, 4vw, 3rem);
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            color: var(--text-primary);
-            display: inline-block;
-            transition: color 0.3s, transform 0.3s, text-shadow 0.3s;
-            margin: 20px 0 12px;
-            position: relative;
+            font-size: clamp(3rem, 8vw, 8rem);
+            font-weight: 900;
+            line-height: 1;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            transition: color 0.4s;
         }
-        .contact-email:hover {
-            color: var(--neon-pink);
-            transform: scale(1.02);
-            text-shadow: 0 0 60px rgba(255,45,149,0.1);
+        
+        .contact-title:hover {
+            color: var(--accent);
         }
-        .contact-email::after {
-            content: '';
-            position: absolute;
-            bottom: -4px; left: 0;
-            width: 100%; height: 2px;
-            background: var(--gradient-cyber);
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.4s var(--transition-smooth);
-        }
-        .contact-email:hover::after { transform: scaleX(1); transform-origin: left; }
-        .contact-desc {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            max-width: 480px;
-            margin: 0 auto 8px;
-        }
+
         .contact-links {
             display: flex;
             justify-content: center;
-            gap: 16px;
+            gap: 40px;
             flex-wrap: wrap;
-            margin-top: 40px;
         }
-        .contact-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 28px;
-            border: 1px solid var(--border-neon);
-            border-radius: 60px;
-            font-family: var(--font-display);
-            font-size: 0.55rem; font-weight: 600;
-            letter-spacing: 0.08em;
-            color: var(--text-secondary);
-            transition: border-color 0.3s, color 0.3s, transform 0.3s, background 0.3s, box-shadow 0.3s;
-            background: var(--bg-glass);
-            backdrop-filter: blur(4px);
+
+        .btn-outline {
+            padding: 16px 40px;
+            border: 1px solid var(--border-color);
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 600;
             text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.4s var(--ease-out-expo);
+            color: var(--text-primary);
         }
-        .contact-link:hover {
-            border-color: var(--neon-pink);
-            color: var(--neon-pink);
-            transform: translateY(-4px);
-            background: rgba(255,45,149,0.02);
-            box-shadow: 0 0 40px rgba(255,45,149,0.04);
+        .btn-outline:hover {
+            background: var(--text-primary);
+            color: var(--bg-main);
         }
 
         /* ============================================================
            FOOTER
            ============================================================ */
         footer {
-            border-top: 1px solid rgba(255,45,149,0.06);
-            padding: 28px 60px;
+            padding: 40px 60px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 16px;
-            position: relative;
-            z-index: 1;
-        }
-        footer p {
-            font-family: var(--font-display);
-            font-size: 0.5rem; font-weight: 500;
-            letter-spacing: 0.15em;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.75rem;
             text-transform: uppercase;
-            color: var(--text-muted);
-        }
-        .badge-y2k {
-            font-family: var(--font-display);
-            font-size: 0.5rem; font-weight: 700;
             letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--neon-pink);
-            border: 1px solid rgba(255,45,149,0.15);
-            padding: 6px 20px;
-            border-radius: 60px;
-            animation: badgePulse 2.8s ease-in-out infinite;
-            background: rgba(255,45,149,0.02);
-        }
-        @keyframes badgePulse {
-            0%,100% { box-shadow: 0 0 0 rgba(255,45,149,0); }
-            50% { box-shadow: 0 0 30px rgba(255,45,149,0.06); }
+            color: var(--text-secondary);
         }
 
         /* ============================================================
-           REVEAL — SKEW + FADE (faster)
+           ANIMATIONS & UTILITIES
            ============================================================ */
         .reveal {
             opacity: 0;
-            transform: skewX(-10deg) translateY(30px) scale(0.97);
-            transition: opacity 0.6s var(--transition-smooth), transform 0.6s var(--transition-smooth);
+            transform: translateY(60px);
+            transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
         }
         .reveal.visible {
             opacity: 1;
-            transform: skewX(0) translateY(0) scale(1);
-        }
-        .reveal-left {
-            opacity: 0;
-            transform: skewX(6deg) translateX(-50px);
-            transition: opacity 0.6s var(--transition-smooth), transform 0.6s var(--transition-smooth);
-        }
-        .reveal-left.visible {
-            opacity: 1;
-            transform: skewX(0) translateX(0);
-        }
-        .reveal-right {
-            opacity: 0;
-            transform: skewX(-6deg) translateX(50px);
-            transition: opacity 0.6s var(--transition-smooth), transform 0.6s var(--transition-smooth);
-        }
-        .reveal-right.visible {
-            opacity: 1;
-            transform: skewX(0) translateX(0);
-        }
-        .d1 { transition-delay: 0.04s; }
-        .d2 { transition-delay: 0.08s; }
-        .d3 { transition-delay: 0.12s; }
-        .d4 { transition-delay: 0.16s; }
-        .d5 { transition-delay: 0.20s; }
-
-        /* ============================================================
-           GLITCH TEXT
-           ============================================================ */
-        .glitch-text {
-            position: relative;
-            display: inline-block;
-        }
-        .glitch-text::before,
-        .glitch-text::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            opacity: 0;
-        }
-        .glitch-text:hover::before {
-            opacity: 0.6;
-            color: var(--neon-cyan);
-            transform: translate(-2px, -1px);
-            animation: glitchShift 0.15s steps(1) infinite;
-        }
-        .glitch-text:hover::after {
-            opacity: 0.6;
-            color: var(--neon-pink);
-            transform: translate(2px, 1px);
-            animation: glitchShift 0.15s steps(1) infinite reverse;
-        }
-        @keyframes glitchShift {
-            0% { transform: translate(-2px, -1px); }
-            25% { transform: translate(2px, 1px); }
-            50% { transform: translate(-1px, 2px); }
-            75% { transform: translate(1px, -2px); }
-            100% { transform: translate(-2px, -1px); }
+            transform: translateY(0);
         }
 
         /* ============================================================
            RESPONSIVE
            ============================================================ */
         @media (max-width: 1024px) {
-            .hero { grid-template-columns: 1fr; padding: 100px 40px 60px; gap: 40px; }
-            .hero-right { display: none; }
-            .about-grid { grid-template-columns: 1fr; gap: 50px; }
-            .timeline-line { display: none; }
-            .timeline-item { grid-template-columns: 1fr; text-align: left !important; gap: 12px; }
-            .tl-content { padding-right: 0 !important; text-align: left !important; order: 1 !important; }
-            .tl-content-right { padding-left: 0 !important; order: 2 !important; text-align: left !important; }
-            .tl-dot { display: none; }
-            .section { padding: 70px 40px; }
-            .timeline-section { padding: 60px 40px; }
-            .contact-section { padding: 70px 40px; }
+            .about-grid { grid-template-columns: 1fr; gap: 60px; }
+            .hero-bottom { flex-direction: column; align-items: flex-start; gap: 40px; }
+            .hero-stats { justify-content: space-between; width: 100%; text-align: left; }
+            .work-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
         }
         @media (max-width: 768px) {
-            .navbar { padding: 0 20px; height: 64px; }
-            .nav-links { gap: 18px; }
-            .nav-link { font-size: 0.45rem; letter-spacing: 0.12em; }
-            .hero { padding: 80px 20px 50px; }
-            .hero-stats { gap: 28px; }
-            .hero-title { font-size: clamp(2.4rem, 12vw, 3.6rem); }
-            .section { padding: 50px 20px; }
-            .timeline-section { padding: 40px 20px; }
-            .contact-section { padding: 50px 20px; }
+            .navbar { padding: 20px; }
+            .nav-links { display: none; } 
+            .hero, .section { padding-left: 20px; padding-right: 20px; }
+            .hero-bottom { left: 20px; right: 20px; bottom: 40px; }
+            .section-header { flex-direction: column; align-items: flex-start; gap: 20px; }
             .work-grid { grid-template-columns: 1fr; }
-            .section-title { font-size: clamp(1.8rem, 8vw, 2.6rem); }
-            .hero-photo-wrap { width: 100%; max-width: 340px; }
-            .photo-floating-badge { display: none; }
-            footer { flex-direction: column; text-align: center; padding: 20px; }
-            .folder-strip { flex-direction: column; align-items: flex-start; }
-            .stat-item .stat-number { font-size: 2rem; }
-            .contact-links { flex-direction: column; align-items: center; }
-            .contact-link { width: 100%; justify-content: center; }
-            .nav-links .nav-link:not(:last-child) { display: none; }
-        }
-        @media (max-width: 480px) {
-            .hero-cta .btn-primary,
-            .hero-cta .btn-secondary { width: 100%; justify-content: center; }
-            .hero-stats { flex-wrap: wrap; gap: 20px; }
-            .tools-cloud { gap: 6px; }
-            .tool-chip { font-size: 0.4rem; padding: 5px 12px; }
-            .cat-header h3 { font-size: 1rem; }
+            .contact-section { padding: 120px 20px; }
+            footer { flex-direction: column; gap: 20px; text-align: center; }
+            .hero-title { padding-top: 100px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ====== GRAIN ====== -->
-    <div class="grain"></div>
+    <!-- Background -->
+    <div class="bg-grid"></div>
 
-    <!-- ====== CYBER GRID & SPOTLIGHT ====== -->
-    <div class="cyber-grid"></div>
-    <div class="cyber-grid-overlay"></div>
-    <div class="spotlight" id="spotlight"></div>
-
-    <!-- ====== GLOW ORBS ====== -->
-    <div class="glow-orb glow-orb--1"></div>
-    <div class="glow-orb glow-orb--2"></div>
-    <div class="glow-orb glow-orb--3"></div>
-
-    <!-- ====== PARTICLES CANVAS ====== -->
-    <canvas id="particles-canvas"></canvas>
-
-    <!-- ====== CUSTOM CURSOR ====== -->
+    <!-- Cursor -->
     <div class="cursor-dot" id="cursorDot"></div>
-    <div class="cursor-ring" id="cursorRing"></div>
 
-    <!-- ====== NAVBAR ====== -->
+    <!-- Navigation -->
     <nav class="navbar">
-        <div class="logo"><span class="bracket">&lt;</span>EC<span class="bracket">/&gt;</span></div>
+        <div class="logo">
+            EC<span>.</span>
+        </div>
         <div class="nav-links">
-            <a href="#home" class="nav-link">Home</a>
+            <a href="#work" class="nav-link">Work</a>
             <a href="#about" class="nav-link">About</a>
-            <a href="#portfolio" class="nav-link">Work</a>
+            <button id="themeToggle" class="nav-link" style="background:none;border:none;">Theme</button>
             <a href="#contact" class="nav-link">Contact</a>
-            <button id="darkToggle" aria-label="Toggle theme"><i class="fas fa-adjust"></i></button>
         </div>
     </nav>
 
-    <!-- ====== HERO ====== -->
+    <!-- Hero -->
     <section class="hero" id="home">
-        <div class="hero-left">
-            <div class="hero-badge">
-                <span class="pulse"></span>
-                <span class="glitch-text" data-text="✦ ONLINE">✦ ONLINE</span> · 2025
-            </div>
+        <div class="hero-content reveal visible">
+            <div class="hero-label">Director & Editor</div>
             <h1 class="hero-title">
-                <span class="stroke">EMMAN</span><br>
-                <span class="accent">CACHO</span>
+                EMMANUEL<br>
+                <span class="outline">CACHO</span>
             </h1>
-            <p class="hero-sub">
-                <strong>Video Editor</strong> &amp; <strong>Graphic Designer</strong> —<br>
-                cutting through the noise with <strong>Y2K</strong> precision.
+        </div>
+        
+        <div class="hero-bottom reveal visible" style="transition-delay: 0.2s;">
+            <p class="hero-desc">
+                Crafting visual stories that cut through the noise. Specializing in high-retention editing, kinetic typography, and premium brand aesthetics.
             </p>
             <div class="hero-stats">
-                <div class="stat-item">
-                    <div class="stat-number">3+</div>
-                    <div class="stat-label">Years Experience</div>
+                <div class="stat">
+                    <div class="stat-num">3+</div>
+                    <div class="stat-label">Years Exp</div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number">50+</div>
-                    <div class="stat-label">Projects Delivered</div>
+                <div class="stat">
+                    <div class="stat-num">50+</div>
+                    <div class="stat-label">Projects</div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number">∞</div>
-                    <div class="stat-label">Creative Drive</div>
-                </div>
-            </div>
-            <div class="hero-cta">
-                <a href="#portfolio" class="btn-primary"><i class="fas fa-play"></i> View Work</a>
-                <a href="mailto:emmanignite@gmail.com" class="btn-secondary"><i class="fas fa-envelope"></i> Hire Me</a>
-            </div>
-        </div>
-        <div class="hero-right">
-            <div class="hero-photo-wrap">
-                <div class="scanline-overlay"></div>
-                <img class="hero-photo"
-                src="https://drive.google.com/thumbnail?id=1lF55g_plaGjkN3j854jXT_OzbVPtckGQ&sz=w800"
-                alt="Emmanuel Cacho"
-                onerror="this.src='https://placehold.co/480x640/0a0a0f/ff2d95?text=EC'">
-                <div class="photo-floating-badge">
-                    <i class="fas fa-bolt"></i> 4K · Y2K
-                </div>
-                <div class="photo-label">Emmanuel <span>·</span> Cacho <span>·</span> 2025</div>
             </div>
         </div>
     </section>
 
-    <!-- ====== TICKER ====== -->
-    <div class="ticker" aria-hidden="true">
+    <!-- Ticker -->
+    <div class="ticker">
         <div class="ticker-inner">
-            <span>VIDEO EDITING <i class="fas fa-circle"></i></span>
-            <span>PREMIERE PRO <i class="fas fa-circle"></i></span>
-            <span>AFTER EFFECTS <i class="fas fa-circle"></i></span>
-            <span>MOTION GRAPHICS <i class="fas fa-circle"></i></span>
-            <span>COLOR GRADING <i class="fas fa-circle"></i></span>
-            <span>GRAPHIC DESIGN <i class="fas fa-circle"></i></span>
-            <span>BRAND IDENTITY <i class="fas fa-circle"></i></span>
-            <span>THUMBNAIL ART <i class="fas fa-circle"></i></span>
-            <span>SOCIAL MEDIA <i class="fas fa-circle"></i></span>
-            <span>PHOTOSHOP <i class="fas fa-circle"></i></span>
-            <span>ILLUSTRATOR <i class="fas fa-circle"></i></span>
-            <span>DAVINCI <i class="fas fa-circle"></i></span>
-            <span>FIGMA <i class="fas fa-circle"></i></span>
-            <span>✦ Y2K <i class="fas fa-circle"></i></span>
-            <!-- duplicate -->
-            <span>VIDEO EDITING <i class="fas fa-circle"></i></span>
-            <span>PREMIERE PRO <i class="fas fa-circle"></i></span>
-            <span>AFTER EFFECTS <i class="fas fa-circle"></i></span>
-            <span>MOTION GRAPHICS <i class="fas fa-circle"></i></span>
-            <span>COLOR GRADING <i class="fas fa-circle"></i></span>
-            <span>GRAPHIC DESIGN <i class="fas fa-circle"></i></span>
-            <span>BRAND IDENTITY <i class="fas fa-circle"></i></span>
-            <span>THUMBNAIL ART <i class="fas fa-circle"></i></span>
-            <span>SOCIAL MEDIA <i class="fas fa-circle"></i></span>
-            <span>PHOTOSHOP <i class="fas fa-circle"></i></span>
-            <span>ILLUSTRATOR <i class="fas fa-circle"></i></span>
-            <span>DAVINCI <i class="fas fa-circle"></i></span>
-            <span>FIGMA <i class="fas fa-circle"></i></span>
-            <span>✦ Y2K <i class="fas fa-circle"></i></span>
+            <div class="ticker-item">Video Editing <i class="fas fa-asterisk"></i></div>
+            <div class="ticker-item">Motion Graphics <i class="fas fa-asterisk"></i></div>
+            <div class="ticker-item">Color Grading <i class="fas fa-asterisk"></i></div>
+            <div class="ticker-item">Brand Identity <i class="fas fa-asterisk"></i></div>
+            <div class="ticker-item">Thumbnail Art <i class="fas fa-asterisk"></i></div>
+            <div class="ticker-item">Creative Direction <i class="fas fa-asterisk"></i></div>
+            <div class="ticker-item">Video Editing <i class="fas fa-asterisk"></i></div>
+            <div class="ticker-item">Motion Graphics <i class="fas fa-asterisk"></i></div>
+            <div class="ticker-item">Color Grading <i class="fas fa-asterisk"></i></div>
+            <div class="ticker-item">Brand Identity <i class="fas fa-asterisk"></i></div>
+            <div class="ticker-item">Thumbnail Art <i class="fas fa-asterisk"></i></div>
+            <div class="ticker-item">Creative Direction <i class="fas fa-asterisk"></i></div>
         </div>
     </div>
 
-    <!-- ====== ABOUT ====== -->
-    <section class="section" id="about">
-        <div class="section-label reveal">About Me</div>
-        <div class="section-title reveal">
-            THE EDITOR<br><span class="outline">BEHIND THE CUT</span>
+    <!-- Portfolio Section -->
+    <section class="section" id="work">
+        <div class="section-header reveal">
+            <h2 class="section-title">Selected<br>Works</h2>
+            <div class="section-subtitle">Archive 2023–2025</div>
         </div>
-        <div class="about-grid">
-            <div class="about-text">
-                <p class="reveal d1">I'm <strong>Emmanuel Cacho</strong> — a Filipino video editor and graphic designer with <strong>3+ years</strong> of professional experience. My work lives at the intersection of storytelling, rhythm, and visual psychology.</p>
-                <p class="reveal d2">I've partnered with ad agencies, independent creators, and brands across niches — from <strong>e-commerce</strong> to <strong>documentary storytelling</strong> — delivering edits that look great and <strong>drive measurable results</strong>.</p>
-                <p class="reveal d3">Every frame is intentional. Every cut has a purpose. Whether it's a 6-second hook or a 20-minute long-form piece, I bring the same obsessive attention to pacing, emotion, and clarity.</p>
-                <div class="tools-cloud reveal d4">
-                    <span class="tool-chip">Premiere Pro</span>
-                    <span class="tool-chip">After Effects</span>
-                    <span class="tool-chip">Photoshop</span>
-                    <span class="tool-chip">Illustrator</span>
-                    <span class="tool-chip">DaVinci</span>
-                    <span class="tool-chip">Figma</span>
-                    <span class="tool-chip">Capcut</span>
+
+        <!-- ==========================================
+             CATEGORY: VIDEO EDITING (11 Items)
+             ========================================== -->
+        <div class="work-category">
+            <h3 class="cat-title reveal">Video Editing</h3>
+            <div class="work-grid">
+                
+                <!-- Project 01 -->
+                <div class="work-card reveal">
+                    <div class="work-media">
+                        <iframe src="https://drive.google.com/file/d/1DoEBhQeQ-BWg3Dfcpah0tJi_HW6XFLxH/preview" allow="autoplay"></iframe>
+                        <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-title">Social Hook Edit</div>
+                            <div class="work-tags">Premiere Pro · Short-form</div>
+                        </div>
+                        <div class="work-index">01</div>
+                    </div>
                 </div>
+
+                <!-- Project 02 -->
+                <div class="work-card reveal">
+                    <div class="work-media">
+                        <iframe src="https://drive.google.com/file/d/1u4KHLD5HyQNFBHZQNzGIiPuS4rylc8IV/preview" allow="autoplay"></iframe>
+                        <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-title">YouTube Storytelling</div>
+                            <div class="work-tags">After Effects · Narrative</div>
+                        </div>
+                        <div class="work-index">02</div>
+                    </div>
+                </div>
+
+                <!-- Project 03 -->
+                <div class="work-card reveal">
+                    <div class="work-media">
+                        <iframe src="https://drive.google.com/file/d/1PDSd5TR_QYd0nc8B_t6hrbdL8NLVsIlS/preview" allow="autoplay"></iframe>
+                        <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-title">Brand Promo Video</div>
+                            <div class="work-tags">Motion Graphics · Promo</div>
+                        </div>
+                        <div class="work-index">03</div>
+                    </div>
+                </div>
+
+                <!-- Project 04 -->
+                <div class="work-card reveal">
+                    <div class="work-media">
+                        <iframe src="https://drive.google.com/file/d/1aRSwVC6wy_fFh8RxgjcA0b1r8iOvRwII/preview" allow="autoplay"></iframe>
+                        <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-title">Creative Visual Edit</div>
+                            <div class="work-tags">VFX · Creative</div>
+                        </div>
+                        <div class="work-index">04</div>
+                    </div>
+                </div>
+
+                <!-- Project 05 -->
+                <div class="work-card reveal">
+                    <div class="work-media">
+                        <iframe src="https://drive.google.com/file/d/16-ACoD1OOd2XdGNdjbcbngRbjwbPvDJZ/preview" allow="autoplay"></iframe>
+                        <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-title">Cinematic Montage</div>
+                            <div class="work-tags">Cinematic · Montage</div>
+                        </div>
+                        <div class="work-index">05</div>
+                    </div>
+                </div>
+
+                <!-- Project 06 -->
+                <div class="work-card reveal">
+                    <div class="work-media">
+                        <iframe src="https://drive.google.com/file/d/1iLQz4COWU8Q1yRMcMhTAwz1jlpGIe498/preview" allow="autoplay"></iframe>
+                        <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-title">Product Showreel</div>
+                            <div class="work-tags">Product Film · Commercial</div>
+                        </div>
+                        <div class="work-index">06</div>
+                    </div>
+                </div>
+
+                <!-- Project 07 -->
+                <div class="work-card reveal">
+                    <div class="work-media">
+                        <iframe src="https://drive.google.com/file/d/1dkfD8JY5AwAR0lsFRd6iYly-7cAv_s5U/preview" allow="autoplay"></iframe>
+                        <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-title">Music Video / Rhythm</div>
+                            <div class="work-tags">Music Edit · VFX</div>
+                        </div>
+                        <div class="work-index">07</div>
+                    </div>
+                </div>
+
+                <!-- Project 08 -->
+                <div class="work-card reveal">
+                    <div class="work-media">
+                        <iframe src="https://drive.google.com/file/d/1B-Rrf_Xcu2eb9dUX8dYkIdH2EAH6TBjf/preview" allow="autoplay"></iframe>
+                        <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-title">Social Media Ad Set</div>
+                            <div class="work-tags">Facebook Ads · Retention</div>
+                        </div>
+                        <div class="work-index">08</div>
+                    </div>
+                </div>
+
+                <!-- Project 09 -->
+                <div class="work-card reveal">
+                    <div class="work-media">
+                        <iframe src="https://drive.google.com/file/d/1PuTO-CeBcgcG1oU4jGwlDNBl-t5bbJRP/preview" allow="autoplay"></iframe>
+                        <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-title">Short Documentary</div>
+                            <div class="work-tags">Documentary · Story Driven</div>
+                        </div>
+                        <div class="work-index">09</div>
+                    </div>
+                </div>
+
+                <!-- Project 10 -->
+                <div class="work-card reveal">
+                    <div class="work-media">
+                        <iframe src="https://drive.google.com/file/d/1p7AA-NGdckjSEKX15D1lyd7bLULkkfBK/preview" allow="autoplay"></iframe>
+                        <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-title">Old School – AI First</div>
+                            <div class="work-tags">AI · Retro · Creative</div>
+                        </div>
+                        <div class="work-index">10</div>
+                    </div>
+                </div>
+
+                <!-- Project 11 -->
+                <div class="work-card reveal">
+                    <div class="work-media">
+                        <iframe src="https://drive.google.com/file/d/1B4nD6DZtR4D7j00Vw5RUsah-eHVEjAYb/preview" allow="autoplay"></iframe>
+                        <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-title">Dynamic Showreel</div>
+                            <div class="work-tags">Montage · Showreel · Dynamic</div>
+                        </div>
+                        <div class="work-index">11</div>
+                    </div>
+                </div>
+
             </div>
-            <div class="skill-bars reveal-right">
-                <div class="skill-row">
-                    <div class="skill-row-header"><span>Video Editing</span><span class="pct">95%</span></div>
-                    <div class="skill-track"><div class="skill-fill" data-width="95"></div></div>
+        </div>
+
+        <!-- ==========================================
+             CATEGORY: AI VIDEOS (4 Items)
+             ========================================== -->
+        <div class="work-category">
+            <h3 class="cat-title reveal">AI Videos</h3>
+            <div class="work-grid">
+                
+                <!-- AI 01 -->
+                <div class="work-card reveal">
+                    <div class="work-media">
+                        <iframe src="https://drive.google.com/file/d/1bCdkBkmaEFEPemiGVRJRGbBFBtqw2jJV/preview" allow="autoplay"></iframe>
+                        <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-title">AI Commercial</div>
+                            <div class="work-tags">AI · Commercial</div>
+                        </div>
+                        <div class="work-index">01</div>
+                    </div>
                 </div>
-                <div class="skill-row">
-                    <div class="skill-row-header"><span>Graphic Design</span><span class="pct">92%</span></div>
-                    <div class="skill-track"><div class="skill-fill" data-width="92"></div></div>
+
+                <!-- AI 02 -->
+                <div class="work-card reveal">
+                    <div class="work-media">
+                        <iframe src="https://drive.google.com/file/d/1v5LuC985jrt2fG05JP3JhPf19UlnN8NJ/preview" allow="autoplay"></iframe>
+                        <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-title">AI Product Video</div>
+                            <div class="work-tags">AI · Product</div>
+                        </div>
+                        <div class="work-index">02</div>
+                    </div>
                 </div>
-                <div class="skill-row">
-                    <div class="skill-row-header"><span>Motion Graphics</span><span class="pct">85%</span></div>
-                    <div class="skill-track"><div class="skill-fill" data-width="85"></div></div>
+
+                <!-- AI 03 -->
+                <div class="work-card reveal">
+                    <div class="work-media">
+                        <iframe src="https://drive.google.com/file/d/1y4WRa5hiXmTQm5wb9QurOuGJjBa29IdS/preview" allow="autoplay"></iframe>
+                        <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-title">AI Marketing Video</div>
+                            <div class="work-tags">AI · Marketing</div>
+                        </div>
+                        <div class="work-index">03</div>
+                    </div>
                 </div>
-                <div class="skill-row">
-                    <div class="skill-row-header"><span>Color Grading</span><span class="pct">88%</span></div>
-                    <div class="skill-track"><div class="skill-fill" data-width="88"></div></div>
+
+                <!-- AI 04 -->
+                <div class="work-card reveal">
+                    <div class="work-media">
+                        <iframe src="https://drive.google.com/file/d/1hYTtmwU4Nsiks7rblkV47mloZseHEgnK/preview" allow="autoplay"></iframe>
+                        <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-title">AI Creative Showcase</div>
+                            <div class="work-tags">AI · Creative · Cinematic</div>
+                        </div>
+                        <div class="work-index">04</div>
+                    </div>
                 </div>
-                <div class="skill-row">
-                    <div class="skill-row-header"><span>Photo Editing</span><span class="pct">88%</span></div>
-                    <div class="skill-track"><div class="skill-fill" data-width="88"></div></div>
+
+            </div>
+        </div>
+
+        <!-- ==========================================
+             CATEGORY: UGC VIDEOS (2 Items)
+             ========================================== -->
+        <div class="work-category">
+            <h3 class="cat-title reveal">UGC Videos</h3>
+            <div class="work-grid">
+                
+                <!-- UGC 01 -->
+                <div class="work-card reveal">
+                    <div class="work-media">
+                        <iframe src="https://drive.google.com/file/d/1K0-_hmS6bL6GH-RIRwCGa1D2NCC0lqio/preview" allow="autoplay"></iframe>
+                        <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-title">UGC Product Review</div>
+                            <div class="work-tags">UGC · Product Review · Short Form</div>
+                        </div>
+                        <div class="work-index">01</div>
+                    </div>
                 </div>
-                <div class="skill-row">
-                    <div class="skill-row-header"><span>Web Development</span><span class="pct">78%</span></div>
-                    <div class="skill-track"><div class="skill-fill" data-width="78"></div></div>
+
+                <!-- UGC 02 -->
+                <div class="work-card reveal">
+                    <div class="work-media">
+                        <iframe src="https://drive.google.com/file/d/1Rdw6Vxuepi7iUgpjj5HqTAnE4lmKXpuX/preview" allow="autoplay"></iframe>
+                        <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-title">UGC Lifestyle Ad</div>
+                            <div class="work-tags">UGC · Lifestyle · Advertising</div>
+                        </div>
+                        <div class="work-index">02</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ==========================================
+             CATEGORY: GRAPHIC DESIGN (6 Items)
+             ========================================== -->
+        <div class="work-category">
+            <h3 class="cat-title reveal">Graphic Design</h3>
+            <div class="work-grid">
+                
+                <!-- Graphic 01 -->
+                <div class="work-card reveal">
+                    <div class="work-media">
+                        <img src="https://drive.google.com/thumbnail?id=1bXxpjA84lxj-Jf1xk-NMD1K9yxYdnmz-&sz=w800" alt="Brand Identity System" onerror="this.src='https://placehold.co/800x450/111/333?text=Brand+Identity'">
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-title">Brand Identity System</div>
+                            <div class="work-tags">Branding</div>
+                            <a href="https://drive.google.com/file/d/1bXxpjA84lxj-Jf1xk-NMD1K9yxYdnmz-/view?usp=drive_link" target="_blank" class="work-link">Open Full <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="work-index">01</div>
+                    </div>
+                </div>
+
+                <!-- Graphic 02 -->
+                <div class="work-card reveal">
+                    <div class="work-media">
+                        <img src="https://drive.google.com/thumbnail?id=15HT_fC4OR39Q-S6K27aAy1iomfd00nGo&sz=w800" alt="Social Media Graphics Pack" onerror="this.src='https://placehold.co/800x450/111/333?text=Social+Pack'">
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-title">Social Media Graphics Pack</div>
+                            <div class="work-tags">Social Media</div>
+                            <a href="https://drive.google.com/file/d/15HT_fC4OR39Q-S6K27aAy1iomfd00nGo/view?usp=drive_link" target="_blank" class="work-link">Preview High-Res <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="work-index">02</div>
+                    </div>
+                </div>
+
+                <!-- Graphic 03 -->
+                <div class="work-card reveal">
+                    <div class="work-media">
+                        <img src="https://drive.google.com/thumbnail?id=1TUPkeouiDH3QwQzfRK5Ioxk_XTyG6a5X&sz=w800" alt="Event Poster & Flyer" onerror="this.src='https://placehold.co/800x450/111/333?text=Event+Poster'">
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-title">Event Poster & Flyer</div>
+                            <div class="work-tags">Print Design</div>
+                            <a href="https://drive.google.com/file/d/1TUPkeouiDH3QwQzfRK5Ioxk_XTyG6a5X/view?usp=drive_link" target="_blank" class="work-link">View Poster <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="work-index">03</div>
+                    </div>
+                </div>
+
+                <!-- Graphic 04 -->
+                <div class="work-card reveal">
+                    <div class="work-media">
+                        <img src="https://drive.google.com/thumbnail?id=11GARLM8u5MCI9vWv3YXhpfL_WvzMjVqK&sz=w800" alt="Corporate Stationery" onerror="this.src='https://placehold.co/800x450/111/333?text=Stationery'">
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-title">Corporate Stationery</div>
+                            <div class="work-tags">Corporate ID</div>
+                            <a href="https://drive.google.com/file/d/11GARLM8u5MCI9vWv3YXhpfL_WvzMjVqK/view?usp=drive_link" target="_blank" class="work-link">Open Design <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="work-index">04</div>
+                    </div>
+                </div>
+
+                <!-- Graphic 05 -->
+                <div class="work-card reveal">
+                    <div class="work-media">
+                        <img src="https://drive.google.com/thumbnail?id=11Ms5yhZTyaZR6j8oF4QND5RlDV2OG57_&sz=w800" alt="Character Illustration" onerror="this.src='https://placehold.co/800x450/111/333?text=Illustration'">
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-title">Character Illustration</div>
+                            <div class="work-tags">Illustration</div>
+                            <a href="https://drive.google.com/file/d/11Ms5yhZTyaZR6j8oF4QND5RlDV2OG57_/view?usp=drive_link" target="_blank" class="work-link">Full Resolution <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="work-index">05</div>
+                    </div>
+                </div>
+
+                <!-- Graphic 06 -->
+                <div class="work-card reveal">
+                    <div class="work-media">
+                        <img src="https://drive.google.com/thumbnail?id=1GXqpUHplLsxmER_OmefhuGU5OvuDlm9H&sz=w800" alt="Digital Ads & Banners" onerror="this.src='https://placehold.co/800x450/111/333?text=Digital+Ads'">
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-title">Digital Ads & Banners</div>
+                            <div class="work-tags">Ad Design</div>
+                            <a href="https://drive.google.com/file/d/1GXqpUHplLsxmER_OmefhuGU5OvuDlm9H/view?usp=drive_link" target="_blank" class="work-link">Explore Asset <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="work-index">06</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ==========================================
+             CATEGORY: THUMBNAIL & COVER ART (6 Items)
+             ========================================== -->
+        <div class="work-category">
+            <h3 class="cat-title reveal">Thumbnail & Cover Art</h3>
+            <div class="work-grid">
+                
+                <!-- Thumb 01 -->
+                <div class="work-card reveal">
+                    <div class="work-media">
+                        <img src="https://drive.google.com/thumbnail?id=15OmmZJV6RHlnvLG5mTsULbrV5CcZc1Cg&sz=w800" alt="Viral Thumbnail Concept" onerror="this.src='https://placehold.co/800x450/111/333?text=Thumbnail+01'">
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-title">Viral Thumbnail Concept</div>
+                            <div class="work-tags">Thumbnail Art</div>
+                            <a href="https://drive.google.com/file/d/15OmmZJV6RHlnvLG5mTsULbrV5CcZc1Cg/view?usp=drive_link" target="_blank" class="work-link">View Full <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="work-index">01</div>
+                    </div>
+                </div>
+
+                <!-- Thumb 02 -->
+                <div class="work-card reveal">
+                    <div class="work-media">
+                        <img src="https://drive.google.com/thumbnail?id=1e8RRvnFf3A4pfIyqTXMe1nmL8HgbgSl_&sz=w800" alt="Gaming Thumbnail Master" onerror="this.src='https://placehold.co/800x450/111/333?text=Thumbnail+02'">
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-title">Gaming Thumbnail Master</div>
+                            <div class="work-tags">Gaming</div>
+                            <a href="https://drive.google.com/file/d/1e8RRvnFf3A4pfIyqTXMe1nmL8HgbgSl_/view?usp=drive_link" target="_blank" class="work-link">Open Asset <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="work-index">02</div>
+                    </div>
+                </div>
+
+                <!-- Thumb 03 -->
+                <div class="work-card reveal">
+                    <div class="work-media">
+                        <img src="https://drive.google.com/thumbnail?id=1eiVwAs3S_8pePiDAPPF1g3Z4dr4gC_hl&sz=w800" alt="Tech Review Thumb" onerror="this.src='https://placehold.co/800x450/111/333?text=Thumbnail+03'">
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-title">Tech Review Thumb</div>
+                            <div class="work-tags">Tech</div>
+                            <a href="https://drive.google.com/file/d/1eiVwAs3S_8pePiDAPPF1g3Z4dr4gC_hl/view?usp=drive_link" target="_blank" class="work-link">High-Res <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="work-index">03</div>
+                    </div>
+                </div>
+
+                <!-- Thumb 04 -->
+                <div class="work-card reveal">
+                    <div class="work-media">
+                        <img src="https://drive.google.com/thumbnail?id=141csDpj5Rl_VS05aGHcKHyu9P3C4s9AT&sz=w800" alt="Podcast / Interview Cover" onerror="this.src='https://placehold.co/800x450/111/333?text=Thumbnail+04'">
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-title">Podcast / Interview Cover</div>
+                            <div class="work-tags">Podcast</div>
+                            <a href="https://drive.google.com/file/d/141csDpj5Rl_VS05aGHcKHyu9P3C4s9AT/view?usp=drive_link" target="_blank" class="work-link">Open File <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="work-index">04</div>
+                    </div>
+                </div>
+
+                <!-- Thumb 05 -->
+                <div class="work-card reveal">
+                    <div class="work-media">
+                        <img src="https://drive.google.com/thumbnail?id=1_TMnqCjbmwrLlik9LpHntjxvAVw7Cxa9&sz=w800" alt="Educational Thumbnail" onerror="this.src='https://placehold.co/800x450/111/333?text=Thumbnail+05'">
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-title">Educational Thumbnail</div>
+                            <div class="work-tags">Education</div>
+                            <a href="https://drive.google.com/file/d/1_TMnqCjbmwrLlik9LpHntjxvAVw7Cxa9/view?usp=drive_link" target="_blank" class="work-link">View Design <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="work-index">05</div>
+                    </div>
+                </div>
+
+                <!-- Thumb 06 -->
+                <div class="work-card reveal">
+                    <div class="work-media">
+                        <img src="https://drive.google.com/thumbnail?id=1B9c3p51uMy8FYxglnHLT6ufGOl-0j24O&sz=w800" alt="Story-Driven Thumbnail" onerror="this.src='https://placehold.co/800x450/111/333?text=Thumbnail+06'">
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-title">Story-Driven Thumbnail</div>
+                            <div class="work-tags">Vlog</div>
+                            <a href="https://drive.google.com/file/d/1B9c3p51uMy8FYxglnHLT6ufGOl-0j24O/view?usp=drive_link" target="_blank" class="work-link">Full Res <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="work-index">06</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="section-header reveal">
+            <h2 class="section-title">The<br>Director</h2>
+            <div class="section-subtitle">Profile</div>
+        </div>
+        
+        <div class="about-grid">
+            <div class="about-text reveal">
+                <p>I operate at the intersection of rhythm, visual psychology, and bold aesthetics. With a background heavily rooted in modern digital culture, I build narratives that don't just look cinematic—they perform.</p>
+                <br>
+                <p>From <strong>high-converting commercial cuts</strong> to <strong>immersive documentary storytelling</strong>, my approach is structurally aggressive and meticulously polished. Every frame is intentional. Every cut has a purpose.</p>
+            </div>
+            
+            <div class="skills-container reveal">
+                <div class="skill-item">
+                    <div class="skill-header"><span>Post-Production</span></div>
+                    <div class="skill-tools">Premiere Pro, DaVinci Resolve, Color Grading, Pacing</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header"><span>Motion & VFX</span></div>
+                    <div class="skill-tools">After Effects, Kinetic Typography, Compositing</div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header"><span>Art Direction</span></div>
+                    <div class="skill-tools">Photoshop, Illustrator, Brand Identity, Layout Design</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ====== PORTFOLIO ====== -->
-    <section class="section" id="portfolio">
-        <div class="section-label reveal">Selected Work</div>
-        <div class="section-title reveal">FEATURED<br><span class="outline">PROJECTS</span></div>
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="reveal">
+            <a href="mailto:emmanignite@gmail.com" class="contact-title">START A<br>PROJECT</a>
+        </div>
+        <div class="contact-links reveal">
+            <a href="mailto:emmanignite@gmail.com" class="btn-outline">Email Studio</a>
+            <a href="https://drive.google.com/drive/u/1/folders/1gvRNrVgDMX5TmhCLMa4n809fgGb077l-" target="_blank" class="btn-outline">Video Archive</a>
+            <a href="https://drive.google.com/drive/folders/1LDfdUOtE6TAwq5FK-qYyU86ArclzggF5?usp=drive_link" target="_blank" class="btn-outline">Design Archive</a>
+        </div>
+    </section>
 
-        <!-- Video Editing -->
-        <div class="cat-header reveal">
-            <div class="cat-icon"><i class="fas fa-video"></i></div>
-            <h3>VIDEO EDITING</h3>
-            <div class="cat-line"></div>
-        </div>
-        <div class="work-grid">
-            <div class="work-card reveal d1">
-                <div class="work-card-media">
-                    <iframe src="https://drive.google.com/file/d/1DoEBhQeQ-BWg3Dfcpah0tJi_HW6XFLxH/preview" allow="autoplay"></iframe>
-                    <div class="work-card-overlay"></div>
-                    <div class="work-card-index">01</div>
-                </div>
-                <div class="work-card-info">
-                    <h4>Social Hook Edit</h4>
-                    <p>Fast-paced reel optimized for TikTok &amp; Instagram.</p>
-                    <div class="work-tags"><span class="work-tag">Premiere Pro</span><span class="work-tag">Short-form</span></div>
-                </div>
-            </div>
-            <div class="work-card reveal d2">
-                <div class="work-card-media">
-                    <iframe src="https://drive.google.com/file/d/1u4KHLD5HyQNFBHZQNzGIiPuS4rylc8IV/preview"></iframe>
-                    <div class="work-card-overlay"></div>
-                    <div class="work-card-index">02</div>
-                </div>
-                <div class="work-card-info">
-                    <h4>YouTube Storytelling</h4>
-                    <p>Retention-focused editing with cinematic flow.</p>
-                    <div class="work-tags"><span class="work-tag">After Effects</span><span class="work-tag">Storytelling</span></div>
-                </div>
-            </div>
-            <div class="work-card reveal d3">
-                <div class="work-card-media">
-                    <iframe src="https://drive.google.com/file/d/1PDSd5TR_QYd0nc8B_t6hrbdL8NLVsIlS/preview"></iframe>
-                    <div class="work-card-overlay"></div>
-                    <div class="work-card-index">03</div>
-                </div>
-                <div class="work-card-info">
-                    <h4>Brand Promo Video</h4>
-                    <p>High-energy commercial with motion graphics.</p>
-                    <div class="work-tags"><span class="work-tag">Motion Graphics</span><span class="work-tag">Promo</span></div>
-                </div>
-            </div>
-            <div class="work-card reveal d1">
-                <div class="work-card-media">
-                    <iframe src="https://drive.google.com/file/d/1aRSwVC6wy_fFh8RxgjcA0b1r8iOvRwII/preview"></iframe>
-                    <div class="work-card-overlay"></div>
-                    <div class="work-card-index">04</div>
-                </div>
-                <div class="work-card-info">
-                    <h4>Creative Visual Edit</h4>
-                    <p>Rhythm-based transitions &amp; surreal VFX.</p>
-                    <div class="work-tags"><span class="work-tag">VFX</span><span class="work-tag">Creative</span></div>
-                </div>
-            </div>
-            <div class="work-card reveal d2">
-                <div class="work-card-media">
-                    <iframe src="https://drive.google.com/file/d/16-ACoD1OOd2XdGNdjbcbngRbjwbPvDJZ/preview"></iframe>
-                    <div class="work-card-overlay"></div>
-                    <div class="work-card-index">05</div>
-                </div>
-                <div class="work-card-info">
-                    <h4>Cinematic Montage</h4>
-                    <p>Emotional storytelling with dynamic pacing.</p>
-                    <div class="work-tags"><span class="work-tag">Cinematic</span><span class="work-tag">Montage</span></div>
-                </div>
-            </div>
-            <div class="work-card reveal d3">
-                <div class="work-card-media">
-                    <iframe src="https://drive.google.com/file/d/1iLQz4COWU8Q1yRMcMhTAwz1jlpGIe498/preview"></iframe>
-                    <div class="work-card-overlay"></div>
-                    <div class="work-card-index">06</div>
-                </div>
-                <div class="work-card-info">
-                    <h4>Product Showreel</h4>
-                    <p>Sleek transitions &amp; professional color grading.</p>
-                    <div class="work-tags"><span class="work-tag">Product Film</span><span class="work-tag">Commercial</span></div>
-                </div>
-            </div>
-            <div class="work-card reveal d1">
-                <div class="work-card-media">
-                    <iframe src="https://drive.google.com/file/d/1dkfD8JY5AwAR0lsFRd6iYly-7cAv_s5U/preview"></iframe>
-                    <div class="work-card-overlay"></div>
-                    <div class="work-card-index">07</div>
-                </div>
-                <div class="work-card-info">
-                    <h4>Music Video / Rhythm</h4>
-                    <p>Beat-synced visuals with glitch effects.</p>
-                    <div class="work-tags"><span class="work-tag">Music Edit</span><span class="work-tag">VFX</span></div>
-                </div>
-            </div>
-            <div class="work-card reveal d2">
-                <div class="work-card-media">
-                    <iframe src="https://drive.google.com/file/d/1B-Rrf_Xcu2eb9dUX8dYkIdH2EAH6TBjf/preview"></iframe>
-                    <div class="work-card-overlay"></div>
-                    <div class="work-card-index">08</div>
-                </div>
-                <div class="work-card-info">
-                    <h4>Social Media Ad Set</h4>
-                    <p>High-retention ad edit with motion typography.</p>
-                    <div class="work-tags"><span class="work-tag">Facebook Ads</span><span class="work-tag">Retention</span></div>
-                </div>
-            </div>
-            <div class="work-card reveal d3">
-                <div class="work-card-media">
-                    <iframe src="https://drive.google.com/file/d/1PuTO-CeBcgcG1oU4jGwlDNBl-t5bbJRP/preview"></iframe>
-                    <div class="work-card-overlay"></div>
-                    <div class="work-card-index">09</div>
-                </div>
-                <div class="work-card-info">
-                    <h4>Short Documentary</h4>
-                    <p>Immersive audio design &amp; emotional arc.</p>
-                    <div class="work-tags"><span class="work-tag">Documentary</span><span class="work-tag">Story Driven</span></div>
-                </div>
-            </div>
-        </div>
+    <!-- Footer -->
+    <footer>
+        <div>© 2025 Emmanuel Cacho. All Rights Reserved.</div>
+        <div>Based in the Philippines — Working Globally.</div>
+    </footer>
 
-        <!-- AI Videos -->
-        <div class="cat-header reveal">
-            <div class="cat-icon"><i class="fas fa-robot"></i></div>
-            <h3>AI VIDEOS</h3>
-            <div class="cat-line"></div>
-        </div>
+    <!-- JavaScript -->
+    <script>
+        {
+            // Custom Cursor
+            const dot = document.getElementById('cursorDot');
+            const interactables = document.querySelectorAll('a, button, .work-card, .ticker');
 
-        <div class="work-grid">
-
-            <div class="work-card reveal d1">
-                <div class="work-card-media">
-                    <iframe src="https://drive.google.com/file/d/1bCdkBkmaEFEPemiGVRJRGbBFBtqw2jJV/preview" allow="autoplay"></iframe>
-                    <div class="work-card-overlay"></div>
-                    <div class="work-card-index">01</div>
-                </div>
-                <div class="work-card-info">
-                    <h4>AI Commercial</h4>
-                    <p>AI-generated cinematic advertising content.</p>
-                    <div class="work-tags">
-                        <span class="work-tag">AI</span>
-                        <span class="work-tag">Commercial</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="work-card reveal d2">
-                <div class="work-card-media">
-                    <iframe src="https://drive.google.com/file/d/1v5LuC985jrt2fG05JP3JhPf19UlnN8NJ/preview" allow="autoplay"></iframe>
-                    <div class="work-card-overlay"></div>
-                    <div class="work-card-index">02</div>
-                </div>
-                <div class="work-card-info">
-                    <h4>AI Product Video</h4>
-                    <p>AI-powered product showcase with realistic visuals.</p>
-                    <div class="work-tags">
-                        <span class="work-tag">AI</span>
-                        <span class="work-tag">Product</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="work-card reveal d3">
-                <div class="work-card-media">
-                    <iframe src="https://drive.google.com/file/d/1y4WRa5hiXmTQm5wb9QurOuGJjBa29IdS/preview" allow="autoplay"></iframe>
-                    <div class="work-card-overlay"></div>
-                    <div class="work-card-index">03</div>
-                </div>
-                <div class="work-card-info">
-                    <h4>AI Marketing Video</h4>
-                    <p>Realistic AI-generated promotional video for brands.</p>
-                    <div class="work-tags">
-                        <span class="work-tag">AI</span>
-                        <span class="work-tag">Marketing</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- AI Video 04 -->
-<div class="work-card reveal d4">
-    <div class="work-card-media">
-        <iframe
-            src="https://drive.google.com/file/d/1hYTtmwU4Nsiks7rblkV47mloZseHEgnK/preview"
-            allow="autoplay">
-        </iframe>
-        <div class="work-card-overlay"></div>
-        <div class="work-card-index">04</div>
-    </div>
-
-    <div class="work-card-info">
-        <h4>AI Creative Showcase</h4>
-        <p>AI-generated visuals featuring cinematic storytelling, realistic animation, and modern advertising aesthetics.</p>
-
-        <div class="work-tags">
-            <span class="work-tag">AI</span>
-            <span class="work-tag">Creative</span>
-            <span class="work-tag">Cinematic</span>
-        </div>
-    </div>
-</div>
-
-        </div>
-        <!-- ===================== UGC VIDEOS ===================== -->
-        <div class="cat-header reveal">
-            <div class="cat-icon">
-                <i class="fas fa-user-circle"></i>
-            </div>
-            <h3>UGC VIDEOS</h3>
-            <div class="cat-line"></div>
-        </div>
-
-        <div class="work-grid">
-
-            <!-- UGC Video 01 -->
-            <div class="work-card reveal d1">
-                <div class="work-card-media">
-                    <iframe
-                    src="https://drive.google.com/file/d/1K0-_hmS6bL6GH-RIRwCGa1D2NCC0lqio/preview"
-                allow="autoplay">
-            </iframe>
-            <div class="work-card-overlay"></div>
-            <div class="work-card-index">01</div>
-        </div>
-
-        <div class="work-card-info">
-            <h4>UGC Product Review</h4>
-            <p>Authentic user-generated content optimized for TikTok, Instagram Reels, and paid social ads.</p>
-
-            <div class="work-tags">
-                <span class="work-tag">UGC</span>
-                <span class="work-tag">Product Review</span>
-                <span class="work-tag">Short Form</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- UGC Video 02 -->
-    <div class="work-card reveal d2">
-        <div class="work-card-media">
-            <iframe
-            src="https://drive.google.com/file/d/1Rdw6Vxuepi7iUgpjj5HqTAnE4lmKXpuX/preview"
-        allow="autoplay">
-    </iframe>
-    <div class="work-card-overlay"></div>
-    <div class="work-card-index">02</div>
-</div>
-
-<div class="work-card-info">
-    <h4>UGC Lifestyle Ad</h4>
-    <p>High-converting lifestyle video created with a natural, engaging, and authentic UGC style.</p>
-
-    <div class="work-tags">
-        <span class="work-tag">UGC</span>
-        <span class="work-tag">Lifestyle</span>
-        <span class="work-tag">Advertising</span>
-    </div>
-</div>
-</div>
-
-</div>
-
-<!-- Graphic Design -->
-<div class="cat-header reveal">
-    <div class="cat-icon"><i class="fas fa-pen-nib"></i></div>
-    <h3>GRAPHIC DESIGN</h3>
-    <div class="cat-line"></div>
-</div>
-<div class="work-grid">
-    <div class="work-card reveal d1">
-        <div class="work-card-media">
-            <img src="https://drive.google.com/thumbnail?id=1bXxpjA84lxj-Jf1xk-NMD1K9yxYdnmz-&sz=w800" alt="Brand Identity" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Brand+Identity'">
-            <div class="work-card-overlay"></div>
-            <div class="work-card-index">01</div>
-        </div>
-        <div class="work-card-info">
-            <h4>Brand Identity System</h4>
-            <div class="work-tags"><span class="work-tag">Branding</span></div>
-            <a href="https://drive.google.com/file/d/1bXxpjA84lxj-Jf1xk-NMD1K9yxYdnmz-/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">Open full <i class="fas fa-arrow-right"></i></a>
-        </div>
-    </div>
-    <div class="work-card reveal d2">
-        <div class="work-card-media">
-            <img src="https://drive.google.com/thumbnail?id=15HT_fC4OR39Q-S6K27aAy1iomfd00nGo&sz=w800" alt="Social Pack" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Social+Pack'">
-            <div class="work-card-overlay"></div>
-            <div class="work-card-index">02</div>
-        </div>
-        <div class="work-card-info">
-            <h4>Social Media Graphics Pack</h4>
-            <div class="work-tags"><span class="work-tag">Social Media</span></div>
-            <a href="https://drive.google.com/file/d/15HT_fC4OR39Q-S6K27aAy1iomfd00nGo/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">Preview high-res <i class="fas fa-arrow-right"></i></a>
-        </div>
-    </div>
-    <div class="work-card reveal d3">
-        <div class="work-card-media">
-            <img src="https://drive.google.com/thumbnail?id=1TUPkeouiDH3QwQzfRK5Ioxk_XTyG6a5X&sz=w800" alt="Poster" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Event+Poster'">
-            <div class="work-card-overlay"></div>
-            <div class="work-card-index">03</div>
-        </div>
-        <div class="work-card-info">
-            <h4>Event Poster &amp; Flyer</h4>
-            <div class="work-tags"><span class="work-tag">Print Design</span></div>
-            <a href="https://drive.google.com/file/d/1TUPkeouiDH3QwQzfRK5Ioxk_XTyG6a5X/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">View poster <i class="fas fa-arrow-right"></i></a>
-        </div>
-    </div>
-    <div class="work-card reveal d1">
-        <div class="work-card-media">
-            <img src="https://drive.google.com/thumbnail?id=11GARLM8u5MCI9vWv3YXhpfL_WvzMjVqK&sz=w800" alt="Stationery" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Stationery'">
-            <div class="work-card-overlay"></div>
-            <div class="work-card-index">04</div>
-        </div>
-        <div class="work-card-info">
-            <h4>Corporate Stationery</h4>
-            <div class="work-tags"><span class="work-tag">Corporate ID</span></div>
-            <a href="https://drive.google.com/file/d/11GARLM8u5MCI9vWv3YXhpfL_WvzMjVqK/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">Open design <i class="fas fa-arrow-right"></i></a>
-        </div>
-    </div>
-    <div class="work-card reveal d2">
-        <div class="work-card-media">
-            <img src="https://drive.google.com/thumbnail?id=11Ms5yhZTyaZR6j8oF4QND5RlDV2OG57_&sz=w800" alt="Illustration" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Illustration'">
-            <div class="work-card-overlay"></div>
-            <div class="work-card-index">05</div>
-        </div>
-        <div class="work-card-info">
-            <h4>Character Illustration</h4>
-            <div class="work-tags"><span class="work-tag">Illustration</span></div>
-            <a href="https://drive.google.com/file/d/11Ms5yhZTyaZR6j8oF4QND5RlDV2OG57_/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">Full resolution <i class="fas fa-arrow-right"></i></a>
-        </div>
-    </div>
-    <div class="work-card reveal d3">
-        <div class="work-card-media">
-            <img src="https://drive.google.com/thumbnail?id=1GXqpUHplLsxmER_OmefhuGU5OvuDlm9H&sz=w800" alt="Ads" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Digital+Ads'">
-            <div class="work-card-overlay"></div>
-            <div class="work-card-index">06</div>
-        </div>
-        <div class="work-card-info">
-            <h4>Digital Ads &amp; Banners</h4>
-            <div class="work-tags"><span class="work-tag">Ad Design</span></div>
-            <a href="https://drive.google.com/file/d/1GXqpUHplLsxmER_OmefhuGU5OvuDlm9H/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">Explore asset <i class="fas fa-arrow-right"></i></a>
-        </div>
-    </div>
-</div>
-
-
-<!-- Thumbnails -->
-<div class="cat-header reveal">
-    <div class="cat-icon"><i class="fas fa-image"></i></div>
-    <h3>THUMBNAIL &amp; COVER ART</h3>
-    <div class="cat-line"></div>
-</div>
-<div class="work-grid">
-    <div class="work-card reveal d1">
-        <div class="work-card-media">
-            <img src="https://drive.google.com/thumbnail?id=15OmmZJV6RHlnvLG5mTsULbrV5CcZc1Cg&sz=w800" alt="thumb1" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Thumbnail+01'">
-            <div class="work-card-overlay"></div>
-            <div class="work-card-index">01</div>
-        </div>
-        <div class="work-card-info">
-            <h4>Viral Thumbnail Concept</h4>
-            <div class="work-tags"><span class="work-tag">Thumbnail Art</span></div>
-            <a href="https://drive.google.com/file/d/15OmmZJV6RHlnvLG5mTsULbrV5CcZc1Cg/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">View Full <i class="fas fa-arrow-right"></i></a>
-        </div>
-    </div>
-    <div class="work-card reveal d2">
-        <div class="work-card-media">
-            <img src="https://drive.google.com/thumbnail?id=1e8RRvnFf3A4pfIyqTXMe1nmL8HgbgSl_&sz=w800" alt="thumb2" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Thumbnail+02'">
-            <div class="work-card-overlay"></div>
-            <div class="work-card-index">02</div>
-        </div>
-        <div class="work-card-info">
-            <h4>Gaming Thumbnail Master</h4>
-            <div class="work-tags"><span class="work-tag">Gaming</span></div>
-            <a href="https://drive.google.com/file/d/1e8RRvnFf3A4pfIyqTXMe1nmL8HgbgSl_/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">Open Asset <i class="fas fa-arrow-right"></i></a>
-        </div>
-    </div>
-    <div class="work-card reveal d3">
-        <div class="work-card-media">
-            <img src="https://drive.google.com/thumbnail?id=1eiVwAs3S_8pePiDAPPF1g3Z4dr4gC_hl&sz=w800" alt="thumb3" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Thumbnail+03'">
-            <div class="work-card-overlay"></div>
-            <div class="work-card-index">03</div>
-        </div>
-        <div class="work-card-info">
-            <h4>Tech Review Thumb</h4>
-            <div class="work-tags"><span class="work-tag">Tech</span></div>
-            <a href="https://drive.google.com/file/d/1eiVwAs3S_8pePiDAPPF1g3Z4dr4gC_hl/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">High-res <i class="fas fa-arrow-right"></i></a>
-        </div>
-    </div>
-    <div class="work-card reveal d1">
-        <div class="work-card-media">
-            <img src="https://drive.google.com/thumbnail?id=141csDpj5Rl_VS05aGHcKHyu9P3C4s9AT&sz=w800" alt="thumb4" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Thumbnail+04'">
-            <div class="work-card-overlay"></div>
-            <div class="work-card-index">04</div>
-        </div>
-        <div class="work-card-info">
-            <h4>Podcast / Interview Cover</h4>
-            <div class="work-tags"><span class="work-tag">Podcast</span></div>
-            <a href="https://drive.google.com/file/d/141csDpj5Rl_VS05aGHcKHyu9P3C4s9AT/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">Open file <i class="fas fa-arrow-right"></i></a>
-        </div>
-    </div>
-    <div class="work-card reveal d2">
-        <div class="work-card-media">
-            <img src="https://drive.google.com/thumbnail?id=1_TMnqCjbmwrLlik9LpHntjxvAVw7Cxa9&sz=w800" alt="thumb5" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Thumbnail+05'">
-            <div class="work-card-overlay"></div>
-            <div class="work-card-index">05</div>
-        </div>
-        <div class="work-card-info">
-            <h4>Educational Thumbnail</h4>
-            <div class="work-tags"><span class="work-tag">Education</span></div>
-            <a href="https://drive.google.com/file/d/1_TMnqCjbmwrLlik9LpHntjxvAVw7Cxa9/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">View design <i class="fas fa-arrow-right"></i></a>
-        </div>
-    </div>
-    <div class="work-card reveal d3">
-        <div class="work-card-media">
-            <img src="https://drive.google.com/thumbnail?id=1B9c3p51uMy8FYxglnHLT6ufGOl-0j24O&sz=w800" alt="thumb6" onerror="this.src='https://placehold.co/800x450/0a0a0f/ff2d95?text=Thumbnail+06'">
-            <div class="work-card-overlay"></div>
-            <div class="work-card-index">06</div>
-        </div>
-        <div class="work-card-info">
-            <h4>Story-Driven Thumbnail</h4>
-            <div class="work-tags"><span class="work-tag">Vlog</span></div>
-            <a href="https://drive.google.com/file/d/1B9c3p51uMy8FYxglnHLT6ufGOl-0j24O/view?usp=drive_link" target="_blank" class="folder-strip-link" style="margin-top:10px;display:inline-flex;">Full res <i class="fas fa-arrow-right"></i></a>
-        </div>
-    </div>
-</div>
-</section>
-
-
-
-<!-- ====== CONTACT ====== -->
-<section class="contact-section" id="contact">
-    <div class="section-label reveal" style="justify-content:center;">Get in touch</div>
-    <div class="section-title reveal" style="margin-bottom:6px;">LET'S<br><span class="outline">COLLABORATE</span></div>
-    <p class="contact-desc reveal">Got a project that needs a fresh pair of eyes and skilled hands? Let's talk.</p>
-    <a href="mailto:emmanignite@gmail.com" class="contact-email reveal">emmanignite@gmail.com</a>
-    <div class="contact-links reveal">
-        <a href="https://drive.google.com/drive/u/1/folders/1gvRNrVgDMX5TmhCLMa4n809fgGb077l-" target="_blank" class="contact-link"><i class="fas fa-video"></i> Video Portfolio</a>
-        <a href="https://drive.google.com/drive/folders/1LDfdUOtE6TAwq5FK-qYyU86ArclzggF5?usp=drive_link" target="_blank" class="contact-link"><i class="fas fa-palette"></i> Design Archive</a>
-        <a href="mailto:emmanignite@gmail.com" class="contact-link"><i class="fas fa-envelope"></i> Email Me</a>
-    </div>
-</section>
-
-<!-- ====== FOOTER ====== -->
-<footer>
-    <p>© 2025 Emmanuel Cacho — Y2K · Video stories that convert</p>
-    <div class="badge-y2k"><i class="fas fa-bolt"></i> Available for Hire</div>
-</footer>
-
-<!-- ============================================================
-JAVASCRIPT
-============================================================ -->
-<script>
-    (function() {
-        'use strict';
-
-        // ---------- CURSOR ----------
-        const dot = document.getElementById('cursorDot');
-        const ring = document.getElementById('cursorRing');
-        let mx = 0,
-            my = 0;
-        let rx = 0,
-            ry = 0;
-        document.addEventListener('mousemove', function(e) {
-            mx = e.clientX;
-            my = e.clientY;
-            dot.style.left = mx + 'px';
-            dot.style.top = my + 'px';
-            const spot = document.getElementById('spotlight');
-            if (spot) {
-                spot.style.setProperty('--mx', mx + 'px');
-                spot.style.setProperty('--my', my + 'px');
-            }
-        });
-
-        function ringLoop() {
-            rx += (mx - rx) * 0.10;
-            ry += (my - ry) * 0.10;
-            ring.style.left = rx + 'px';
-            ring.style.top = ry + 'px';
-            requestAnimationFrame(ringLoop);
-        }
-        ringLoop();
-
-        document.querySelectorAll('a, button, .work-card, .tool-chip, .contact-link, .btn-primary, .btn-secondary, .nav-link')
-            .forEach(function(el) {
-                el.addEventListener('mouseenter', function() {
-                    dot.style.width = '14px';
-                    dot.style.height = '14px';
-                    dot.style.background = '#00f0ff';
-                    dot.style.boxShadow = '0 0 40px rgba(0,240,255,0.5), 0 0 80px rgba(0,240,255,0.2)';
-                    ring.classList.add('is-hover');
-                });
-                el.addEventListener('mouseleave', function() {
-                    dot.style.width = '10px';
-                    dot.style.height = '10px';
-                    dot.style.background = '#ff2d95';
-                    dot.style.boxShadow = '0 0 30px rgba(255,45,149,0.5), 0 0 60px rgba(255,45,149,0.2)';
-                    ring.classList.remove('is-hover');
-                });
+            document.addEventListener('mousemove', (e) => {
+                dot.style.left = `${e.clientX}px`;
+                dot.style.top = `${e.clientY}px`;
             });
 
-        // ---------- SMOOTH SCROLL ----------
-        document.querySelectorAll('a[href^="#"]').forEach(function(a) {
-            a.addEventListener('click', function(e) {
-                var target = document.querySelector(this.getAttribute('href'));
-                if (target) {
+            interactables.forEach(el => {
+                el.addEventListener('mouseenter', () => dot.classList.add('hover-active'));
+                el.addEventListener('mouseleave', () => dot.classList.remove('hover-active'));
+            });
+
+            // Smooth Scroll
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
                     e.preventDefault();
-                    window.scrollTo({ top: target.offsetTop - 70, behavior: 'smooth' });
-                }
-            });
-        });
-
-        // ---------- REVEAL (Skew) OBSERVER ----------
-        var revealObserver = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.10, rootMargin: '0px 0px -20px 0px' });
-
-        document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(function(el) {
-            revealObserver.observe(el);
-        });
-
-        // ---------- SKILL BARS ----------
-        var skillObserver = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-                if (entry.isIntersecting) {
-                    entry.target.querySelectorAll('.skill-fill').forEach(function(fill) {
-                        var w = fill.getAttribute('data-width');
-                        if (w) fill.style.width = w + '%';
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
                     });
-                    skillObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.3 });
-        var skillContainer = document.querySelector('.skill-bars');
-        if (skillContainer) skillObserver.observe(skillContainer);
-
-        // ---------- DARK / LIGHT TOGGLE ----------
-        var toggle = document.getElementById('darkToggle');
-        if (toggle) {
-            toggle.addEventListener('click', function() {
-                document.body.classList.toggle('light');
-                var icon = this.querySelector('i');
-                if (document.body.classList.contains('light')) {
-                    icon.className = 'fas fa-moon';
-                } else {
-                    icon.className = 'fas fa-adjust';
-                }
-            });
-        }
-
-        // ---------- 3D TILT CARDS ----------
-        document.querySelectorAll('.work-card').forEach(function(card) {
-            card.addEventListener('mousemove', function(e) {
-                var rect = this.getBoundingClientRect();
-                var x = e.clientX - rect.left;
-                var y = e.clientY - rect.top;
-                var rx = -((y - rect.height / 2) / rect.height) * 12;
-                var ry = ((x - rect.width / 2) / rect.width) * 12;
-                this.style.transform =
-                    'perspective(1200px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) translateY(-8px) scale(1.01)';
-            });
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = '';
-            });
-        });
-
-        // ---------- PARALLAX HERO ----------
-        var ticking = false;
-        window.addEventListener('scroll', function() {
-            if (!ticking) {
-                requestAnimationFrame(function() {
-                    var sc = window.scrollY;
-                    var left = document.querySelector('.hero-left');
-                    var right = document.querySelector('.hero-right');
-                    if (left) left.style.transform = 'translateY(' + (sc * 0.08) + 'px)';
-                    if (right) right.style.transform = 'translateY(' + (sc * 0.05) + 'px)';
-                    ticking = false;
                 });
-                ticking = true;
-            }
-        });
-
-        // ---------- CHAR ANIMATION HERO ----------
-        var title = document.querySelector('.hero-title');
-        if (title) {
-            var text = title.textContent;
-            var chars = text.split('');
-            var html = '';
-            chars.forEach(function(ch) {
-                if (ch === ' ') {
-                    html += ' ';
-                } else {
-                    var delay = (Math.random() * 0.25 + 0.02).toFixed(2);
-                    html += '<span class="char" style="animation-delay:' + delay + 's">' + ch + '</span>';
-                }
             });
-            title.innerHTML = html;
-        }
 
-        // ---------- GLITCH TEXT INIT ----------
-        document.querySelectorAll('.glitch-text').forEach(function(el) {
-            el.setAttribute('data-text', el.textContent.trim());
-        });
+            // Scroll Reveal Observer
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-        // ---------- PARTICLES (Canvas) ----------
-        const canvas = document.getElementById('particles-canvas');
-        const ctx = canvas.getContext('2d');
-        let width, height;
-        let particles = [];
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        function resizeCanvas() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        class Particle {
-            constructor() { this.reset(); }
-            reset() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.size = Math.random() * 2.5 + 0.5;
-                this.speedX = (Math.random() - 0.5) * 0.3;
-                this.speedY = (Math.random() - 0.5) * 0.3;
-                this.opacity = Math.random() * 0.4 + 0.1;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x < 0 || this.x > width) this.reset();
-                if (this.y < 0 || this.y > height) this.reset();
-            }
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 45, 149, ${this.opacity})`;
-                ctx.fill();
-                ctx.shadowColor = 'rgba(255, 45, 149, 0.2)';
-                ctx.shadowBlur = 10;
-                ctx.fill();
-                ctx.shadowBlur = 0;
-            }
-        }
-
-        for (let i = 0; i < 180; i++) {
-            particles.push(new Particle());
-        }
-
-        function animateParticles() {
-            ctx.clearRect(0, 0, width, height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
+            // Theme Toggle
+            const themeBtn = document.getElementById('themeToggle');
+            themeBtn.addEventListener('click', () => {
+                document.body.classList.toggle('light-mode');
             });
-            requestAnimationFrame(animateParticles);
         }
-        animateParticles();
-
-        // ---------- MAGNETIC BUTTONS ----------
-        document.querySelectorAll('.btn-primary, .btn-secondary').forEach(btn => {
-            btn.addEventListener('mousemove', function(e) {
-                const rect = this.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                this.style.transform = `translate(${x * 0.08}px, ${y * 0.08}px)`;
-            });
-            btn.addEventListener('mouseleave', function() {
-                this.style.transform = '';
-            });
-        });
-
-        // ---------- NO LOADER: BODY ALREADY FADES IN VIA CSS ----------
-
-    })();
-</script>
+    </script>
 </body>
 </html>
