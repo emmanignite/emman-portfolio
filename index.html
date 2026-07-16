@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Emmanuel Cacho · Director & Editor</title>
-    
+
     <!-- Professional Typography: Outfit for headers, Inter for ultra-clean body copy -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;500;700;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    
+
     <style>
         /* ============================================================
            ROOT — CINEMATIC STUDIO THEME
@@ -18,14 +18,15 @@
             --bg-surface: #0a0a0a;
             --bg-elevated: #141414;
             --border-color: #222;
-            
+
             --text-primary: #ffffff;
             --text-secondary: #888888;
-            --accent: #E50914; /* Cinematic Red */
-            
+            --accent: #E50914;
+            /* Cinematic Red */
+
             --font-display: 'Outfit', sans-serif;
             --font-body: 'Inter', sans-serif;
-            
+
             --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
             --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
         }
@@ -44,17 +45,19 @@
         /* ============================================================
            RESET & BASE
            ============================================================ */
-        *, *::before, *::after {
+        *,
+        *::before,
+        *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         html {
             scroll-behavior: smooth;
             background: var(--bg-main);
         }
-        
+
         body {
             font-family: var(--font-body);
             background: var(--bg-main);
@@ -62,11 +65,13 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             transition: background 0.6s var(--ease-out-expo), color 0.6s var(--ease-out-expo);
-            cursor: none; /* Custom cursor */
+            cursor: none;
+            /* Custom cursor */
             line-height: 1.6;
         }
 
-        a, button {
+        a,
+        button {
             text-decoration: none;
             color: inherit;
             cursor: none;
@@ -75,7 +80,8 @@
             outline: none;
         }
 
-        img, iframe {
+        img,
+        iframe {
             display: block;
             width: 100%;
         }
@@ -92,7 +98,7 @@
             z-index: -1;
             background-size: 100px 100px;
             background-image: linear-gradient(to right, var(--border-color) 1px, transparent 1px),
-                              linear-gradient(to bottom, var(--border-color) 1px, transparent 1px);
+                linear-gradient(to bottom, var(--border-color) 1px, transparent 1px);
             opacity: 0.15;
             pointer-events: none;
         }
@@ -135,7 +141,7 @@
             mix-blend-mode: difference;
             color: #fff;
         }
-        
+
         .logo {
             font-family: var(--font-display);
             font-size: 1.5rem;
@@ -143,14 +149,16 @@
             letter-spacing: -0.02em;
             text-transform: uppercase;
         }
-        .logo span { color: var(--accent); }
+        .logo span {
+            color: var(--accent);
+        }
 
         .nav-links {
             display: flex;
             gap: 40px;
             align-items: center;
         }
-        
+
         .nav-link {
             font-family: var(--font-body);
             font-size: 0.75rem;
@@ -213,7 +221,7 @@
             line-height: 0.85;
             letter-spacing: -0.04em;
             text-transform: uppercase;
-            margin-left: -0.04em; 
+            margin-left: -0.04em;
         }
 
         .hero-title .outline {
@@ -245,7 +253,7 @@
             gap: 60px;
             text-align: right;
         }
-        
+
         .stat-num {
             font-family: var(--font-display);
             font-size: 2.5rem;
@@ -286,11 +294,17 @@
             align-items: center;
             gap: 40px;
         }
-        .ticker-item i { font-size: 0.8rem; }
-        
+        .ticker-item i {
+            font-size: 0.8rem;
+        }
+
         @keyframes tickerScroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
         }
 
         /* ============================================================
@@ -299,7 +313,7 @@
         .section {
             padding: 140px 60px;
         }
-        
+
         .section-header {
             display: flex;
             align-items: flex-end;
@@ -317,7 +331,7 @@
             text-transform: uppercase;
             letter-spacing: -0.02em;
         }
-        
+
         .section-subtitle {
             font-family: var(--font-body);
             font-size: 0.85rem;
@@ -372,18 +386,20 @@
             border: 1px solid var(--border-color);
         }
 
-        .work-media iframe, .work-media img {
+        /* --- COLOR VISIBLE: removed grayscale filter --- */
+        .work-media iframe,
+        .work-media img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: grayscale(100%) contrast(1.1);
+            filter: contrast(1.1);
             transition: filter 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo);
             border: none;
         }
 
         .work-card:hover .work-media iframe,
         .work-card:hover .work-media img {
-            filter: grayscale(0%) contrast(1);
+            filter: contrast(1.2);
             transform: scale(1.03);
         }
 
@@ -391,7 +407,7 @@
         .play-overlay {
             position: absolute;
             inset: 0;
-            background: rgba(0,0,0,0.4);
+            background: rgba(0, 0, 0, 0.4);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -465,7 +481,7 @@
             grid-template-columns: 1fr 1fr;
             gap: 100px;
         }
-        
+
         .about-text {
             font-size: 1.25rem;
             line-height: 1.8;
@@ -485,7 +501,7 @@
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 16px;
         }
-        
+
         .skill-header {
             display: flex;
             justify-content: space-between;
@@ -494,7 +510,7 @@
             font-weight: 600;
             text-transform: uppercase;
         }
-        
+
         .skill-tools {
             font-size: 0.8rem;
             color: var(--text-secondary);
@@ -520,7 +536,7 @@
             margin-bottom: 40px;
             transition: color 0.4s;
         }
-        
+
         .contact-title:hover {
             color: var(--accent);
         }
@@ -580,21 +596,60 @@
            RESPONSIVE
            ============================================================ */
         @media (max-width: 1024px) {
-            .about-grid { grid-template-columns: 1fr; gap: 60px; }
-            .hero-bottom { flex-direction: column; align-items: flex-start; gap: 40px; }
-            .hero-stats { justify-content: space-between; width: 100%; text-align: left; }
-            .work-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+            .hero-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 40px;
+            }
+            .hero-stats {
+                justify-content: space-between;
+                width: 100%;
+                text-align: left;
+            }
+            .work-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
         }
         @media (max-width: 768px) {
-            .navbar { padding: 20px; }
-            .nav-links { display: none; } 
-            .hero, .section { padding-left: 20px; padding-right: 20px; }
-            .hero-bottom { left: 20px; right: 20px; bottom: 40px; }
-            .section-header { flex-direction: column; align-items: flex-start; gap: 20px; }
-            .work-grid { grid-template-columns: 1fr; }
-            .contact-section { padding: 120px 20px; }
-            footer { flex-direction: column; gap: 20px; text-align: center; }
-            .hero-title { padding-top: 100px; }
+            .navbar {
+                padding: 20px;
+            }
+            .nav-links {
+                display: none;
+            }
+            .hero,
+            .section {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            .hero-bottom {
+                left: 20px;
+                right: 20px;
+                bottom: 40px;
+            }
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+            .work-grid {
+                grid-template-columns: 1fr;
+            }
+            .contact-section {
+                padding: 120px 20px;
+            }
+            footer {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            .hero-title {
+                padding-top: 100px;
+            }
         }
     </style>
 </head>
@@ -628,7 +683,7 @@
                 <span class="outline">CACHO</span>
             </h1>
         </div>
-        
+
         <div class="hero-bottom reveal visible" style="transition-delay: 0.2s;">
             <p class="hero-desc">
                 Crafting visual stories that cut through the noise. Specializing in high-retention editing, kinetic typography, and premium brand aesthetics.
@@ -677,11 +732,11 @@
         <div class="work-category">
             <h3 class="cat-title reveal">Video Editing</h3>
             <div class="work-grid">
-                
-                <!-- Project 01 -->
+
+                <!-- Project 01 — REPLACED -->
                 <div class="work-card reveal">
                     <div class="work-media">
-                        <iframe src="https://drive.google.com/file/d/1DoEBhQeQ-BWg3Dfcpah0tJi_HW6XFLxH/preview" allow="autoplay"></iframe>
+                        <iframe src="https://drive.google.com/file/d/1jETDIgMKGPGg7yeU7Srli_8592itmn0e/preview" allow="autoplay"></iframe>
                         <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
                     </div>
                     <div class="work-info">
@@ -693,10 +748,10 @@
                     </div>
                 </div>
 
-                <!-- Project 02 -->
+                <!-- Project 02 — REPLACED -->
                 <div class="work-card reveal">
                     <div class="work-media">
-                        <iframe src="https://drive.google.com/file/d/1u4KHLD5HyQNFBHZQNzGIiPuS4rylc8IV/preview" allow="autoplay"></iframe>
+                        <iframe src="https://drive.google.com/file/d/1pnkossPSGm9-rTGK1Mfu7ovXbkbkkje3/preview" allow="autoplay"></iframe>
                         <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
                     </div>
                     <div class="work-info">
@@ -852,7 +907,7 @@
         <div class="work-category">
             <h3 class="cat-title reveal">AI Videos</h3>
             <div class="work-grid">
-                
+
                 <!-- AI 01 -->
                 <div class="work-card reveal">
                     <div class="work-media">
@@ -922,7 +977,7 @@
         <div class="work-category">
             <h3 class="cat-title reveal">UGC Videos</h3>
             <div class="work-grid">
-                
+
                 <!-- UGC 01 -->
                 <div class="work-card reveal">
                     <div class="work-media">
@@ -957,12 +1012,12 @@
         </div>
 
         <!-- ==========================================
-             CATEGORY: GRAPHIC DESIGN (6 Items)
+             CATEGORY: GRAPHIC DESIGN (8 Items)
              ========================================== -->
         <div class="work-category">
             <h3 class="cat-title reveal">Graphic Design</h3>
             <div class="work-grid">
-                
+
                 <!-- Graphic 01 -->
                 <div class="work-card reveal">
                     <div class="work-media">
@@ -1053,6 +1108,36 @@
                     </div>
                 </div>
 
+                <!-- Graphic 07 — NEW -->
+                <div class="work-card reveal">
+                    <div class="work-media">
+                        <img src="https://drive.google.com/thumbnail?id=1RY6TaDKEBqA8-m-eIpfV4EIfl5RF2NqD&sz=w800" alt="Extended Brand Assets" onerror="this.src='https://placehold.co/800x450/111/333?text=Design+Asset+07'">
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-title">Extended Brand Assets</div>
+                            <div class="work-tags">Branding · Visual</div>
+                            <a href="https://drive.google.com/file/d/1RY6TaDKEBqA8-m-eIpfV4EIfl5RF2NqD/view?usp=drive_link" target="_blank" class="work-link">Open Full <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="work-index">07</div>
+                    </div>
+                </div>
+
+                <!-- Graphic 08 — NEW -->
+                <div class="work-card reveal">
+                    <div class="work-media">
+                        <img src="https://drive.google.com/thumbnail?id=1Hanov56VVjeerCp8nq3zZqPhWuVsybFf&sz=w800" alt="Dynamic Visual Identity" onerror="this.src='https://placehold.co/800x450/111/333?text=Design+Asset+08'">
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-title">Dynamic Visual Identity</div>
+                            <div class="work-tags">Identity · Collateral</div>
+                            <a href="https://drive.google.com/file/d/1Hanov56VVjeerCp8nq3zZqPhWuVsybFf/view?usp=drive_link" target="_blank" class="work-link">Open Full <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="work-index">08</div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -1062,7 +1147,7 @@
         <div class="work-category">
             <h3 class="cat-title reveal">Thumbnail & Cover Art</h3>
             <div class="work-grid">
-                
+
                 <!-- Thumb 01 -->
                 <div class="work-card reveal">
                     <div class="work-media">
@@ -1163,15 +1248,15 @@
             <h2 class="section-title">The<br>Director</h2>
             <div class="section-subtitle">Profile</div>
         </div>
-        
+
         <div class="about-grid">
             <div class="about-text reveal">
                 <p>I operate at the intersection of rhythm, visual psychology, and bold aesthetics. With a background heavily rooted in modern digital culture, I build narratives that don't just look cinematic—they perform.</p>
                 <br>
                 <p>From <strong>high-converting commercial cuts</strong> to <strong>immersive documentary storytelling</strong>, my approach is structurally aggressive and meticulously polished. Every frame is intentional. Every cut has a purpose.</p>
             </div>
-            
-            
+
+
         </div>
     </section>
 
@@ -1182,7 +1267,7 @@
         </div>
         <div class="contact-links reveal">
             <a href="mailto:emmanignite@gmail.com" class="btn-outline">Email Studio</a>
-          
+
         </div>
     </section>
 
@@ -1211,7 +1296,7 @@
 
             // Smooth Scroll
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
+                anchor.addEventListener('click', function(e) {
                     e.preventDefault();
                     document.querySelector(this.getAttribute('href')).scrollIntoView({
                         behavior: 'smooth'
