@@ -5,41 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Emmanuel Cacho · Director & Editor</title>
 
-    <!-- Professional Typography: Outfit for headers, Inter for ultra-clean body copy -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;500;700;900&display=swap" rel="stylesheet" />
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;500;700;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
     <style>
         /* ============================================================
-           ROOT — CINEMATIC STUDIO THEME
+           ROOT — CINEMATIC STUDIO THEME v2.0
            ============================================================ */
         :root {
             --bg-main: #030303;
             --bg-surface: #0a0a0a;
             --bg-elevated: #141414;
             --border-color: #222;
-
             --text-primary: #ffffff;
             --text-secondary: #888888;
             --accent: #E50914;
-            /* Cinematic Red */
-
+            --accent-glow: rgba(229, 9, 20, 0.3);
             --font-display: 'Outfit', sans-serif;
             --font-body: 'Inter', sans-serif;
-
             --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
             --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+            --glass-bg: rgba(255, 255, 255, 0.04);
+            --glass-border: rgba(255, 255, 255, 0.06);
         }
 
-        /* Light Mode - High Contrast Brutalist */
         body.light-mode {
-            --bg-main: #ffffff;
-            --bg-surface: #f4f4f5;
+            --bg-main: #f8f8f8;
+            --bg-surface: #efefef;
             --bg-elevated: #e4e4e7;
-            --border-color: #d4d4d8;
-            --text-primary: #000000;
+            --border-color: #d0d0d4;
+            --text-primary: #0a0a0a;
             --text-secondary: #555555;
             --accent: #D32F2F;
+            --accent-glow: rgba(211, 47, 47, 0.2);
+            --glass-bg: rgba(0, 0, 0, 0.04);
+            --glass-border: rgba(0, 0, 0, 0.06);
         }
 
         /* ============================================================
@@ -66,7 +67,6 @@
             -webkit-font-smoothing: antialiased;
             transition: background 0.6s var(--ease-out-expo), color 0.6s var(--ease-out-expo);
             cursor: none;
-            /* Custom cursor */
             line-height: 1.6;
         }
 
@@ -91,82 +91,163 @@
             color: #fff;
         }
 
-        /* Background Grid Pattern */
+        /* ============================================================
+           BACKGROUND — DYNAMIC GRID + GRADIENT ORB
+           ============================================================ */
         .bg-grid {
             position: fixed;
             inset: 0;
             z-index: -1;
-            background-size: 100px 100px;
-            background-image: linear-gradient(to right, var(--border-color) 1px, transparent 1px),
+            background-size: 80px 80px;
+            background-image:
+                linear-gradient(to right, var(--border-color) 1px, transparent 1px),
                 linear-gradient(to bottom, var(--border-color) 1px, transparent 1px);
-            opacity: 0.15;
+            opacity: 0.08;
             pointer-events: none;
         }
 
+        .bg-orb {
+            position: fixed;
+            top: -30%;
+            right: -20%;
+            width: 80vmax;
+            height: 80vmax;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: -1;
+            filter: blur(80px);
+            animation: orbFloat 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes orbFloat {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            50% {
+                transform: translate(-5%, 8%) scale(1.1);
+            }
+            100% {
+                transform: translate(8%, -5%) scale(0.9);
+            }
+        }
+
         /* ============================================================
-           CUSTOM CURSOR
+           CUSTOM CURSOR — ENHANCED
            ============================================================ */
         .cursor-dot {
             position: fixed;
             top: 0;
             left: 0;
-            width: 12px;
-            height: 12px;
-            background: #fff;
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
             border-radius: 50%;
             pointer-events: none;
             z-index: 10000;
             transform: translate(-50%, -50%);
-            mix-blend-mode: difference;
-            transition: width 0.3s var(--ease-out-expo), height 0.3s var(--ease-out-expo);
+            transition: width 0.4s var(--ease-out-expo), height 0.4s var(--ease-out-expo),
+                background 0.4s var(--ease-out-expo), box-shadow 0.4s var(--ease-out-expo);
             will-change: transform, width, height;
+            box-shadow: 0 0 20px var(--accent-glow);
         }
         .cursor-dot.hover-active {
-            width: 60px;
-            height: 60px;
+            width: 64px;
+            height: 64px;
+            background: transparent;
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 40px var(--accent-glow);
+        }
+        .cursor-dot.hover-active::after {
+            content: '';
+            position: absolute;
+            inset: 4px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         /* ============================================================
-           NAVIGATION
+           NAVIGATION — GLASS-MORPHISM
            ============================================================ */
         .navbar {
             position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 24px 60px;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 40px);
+            max-width: 1400px;
+            padding: 16px 32px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            mix-blend-mode: difference;
-            color: #fff;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px) saturate(1.2);
+            -webkit-backdrop-filter: blur(20px) saturate(1.2);
+            border: 1px solid var(--glass-border);
+            border-radius: 100px;
+            transition: all 0.4s var(--ease-out-expo);
+        }
+
+        .navbar.scrolled {
+            top: 12px;
+            background: rgba(3, 3, 3, 0.85);
+            backdrop-filter: blur(30px) saturate(1.4);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+        body.light-mode .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.85);
         }
 
         .logo {
             font-family: var(--font-display);
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 900;
             letter-spacing: -0.02em;
             text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
         .logo span {
             color: var(--accent);
         }
+        .logo .logo-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            margin-left: 4px;
+            animation: pulseDot 2s ease-in-out infinite;
+        }
+        @keyframes pulseDot {
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.4;
+                transform: scale(0.6);
+            }
+        }
 
         .nav-links {
             display: flex;
-            gap: 40px;
+            gap: 32px;
             align-items: center;
         }
 
         .nav-link {
             font-family: var(--font-body);
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 600;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
             position: relative;
-            overflow: hidden;
+            padding: 4px 0;
+            transition: color 0.3s;
         }
         .nav-link::after {
             content: '';
@@ -174,64 +255,177 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 1px;
-            background: #fff;
-            transform: translateX(-100%);
+            height: 1.5px;
+            background: var(--accent);
+            transform: scaleX(0);
             transition: transform 0.4s var(--ease-out-expo);
         }
         .nav-link:hover::after {
-            transform: translateX(0);
+            transform: scaleX(1);
+        }
+        .nav-link:hover {
+            color: var(--accent);
+        }
+
+        #themeToggle {
+            font-size: 0.85rem;
+            padding: 6px 12px;
+            border-radius: 100px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        #themeToggle:hover {
+            border-color: var(--accent);
+            color: var(--accent);
         }
 
         /* ============================================================
-           HERO SECTION
+           HERO — CINEMATIC WITH GLITCH
            ============================================================ */
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 0 60px;
+            padding: 120px 60px 80px;
             position: relative;
+            overflow: hidden;
         }
 
         .hero-label {
             font-family: var(--font-body);
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             font-weight: 600;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.25em;
             text-transform: uppercase;
             color: var(--accent);
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
         }
         .hero-label::before {
             content: '';
-            width: 40px;
+            width: 50px;
             height: 2px;
             background: var(--accent);
         }
 
         .hero-title {
             font-family: var(--font-display);
-            font-size: clamp(4rem, 10vw, 10rem);
+            font-size: clamp(4.5rem, 12vw, 12rem);
             font-weight: 900;
             line-height: 0.85;
             letter-spacing: -0.04em;
             text-transform: uppercase;
             margin-left: -0.04em;
+            position: relative;
+        }
+
+        .hero-title .line {
+            display: block;
+            position: relative;
         }
 
         .hero-title .outline {
             -webkit-text-stroke: 2px var(--text-primary);
             color: transparent;
+            position: relative;
+        }
+
+        /* Glitch effect on hover */
+        .hero-title .glitch-holder {
+            position: relative;
+            display: inline-block;
+        }
+        .hero-title .glitch-holder:hover .glitch-layer {
+            opacity: 1;
+            transform: translate(0);
+        }
+
+        .hero-title .glitch-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            -webkit-text-stroke: 2px var(--accent);
+            color: transparent;
+            opacity: 0;
+            transform: translate(4px, 2px);
+            transition: opacity 0.2s, transform 0.2s;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .hero-title .glitch-layer:nth-child(2) {
+            -webkit-text-stroke: 2px #00f0ff;
+            transform: translate(-4px, -2px);
+            transition-delay: 0.05s;
+        }
+
+        .hero-sub {
+            margin-top: 28px;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 500px;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+        }
+
+        .hero-cta {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .btn-primary {
+            padding: 16px 40px;
+            background: var(--accent);
+            color: #fff;
+            border-radius: 100px;
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.4s var(--ease-out-expo);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px var(--accent-glow);
+        }
+
+        .btn-secondary {
+            padding: 16px 40px;
+            border: 1px solid var(--border-color);
+            border-radius: 100px;
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.4s var(--ease-out-expo);
+            color: var(--text-primary);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .btn-secondary:hover {
+            border-color: var(--text-primary);
+            background: var(--text-primary);
+            color: var(--bg-main);
         }
 
         .hero-bottom {
             position: absolute;
-            bottom: 60px;
+            bottom: 50px;
             left: 60px;
             right: 60px;
             display: flex;
@@ -239,13 +433,6 @@
             align-items: flex-end;
             border-top: 1px solid var(--border-color);
             padding-top: 24px;
-        }
-
-        .hero-desc {
-            max-width: 400px;
-            font-size: 1rem;
-            color: var(--text-secondary);
-            font-weight: 400;
         }
 
         .hero-stats {
@@ -256,46 +443,84 @@
 
         .stat-num {
             font-family: var(--font-display);
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 700;
             color: var(--text-primary);
             line-height: 1;
         }
         .stat-label {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.12em;
             color: var(--text-secondary);
-            margin-top: 8px;
+            margin-top: 6px;
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-size: 0.55rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            animation: bounceDown 2.4s ease-in-out infinite;
+        }
+        .scroll-indicator .line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--text-secondary), transparent);
+        }
+        @keyframes bounceDown {
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+            50% {
+                transform: translateX(-50%) translateY(8px);
+                opacity: 0.5;
+            }
         }
 
         /* ============================================================
-           MARQUEE TICKER
+           MARQUEE TICKER — ENHANCED
            ============================================================ */
         .ticker {
             background: var(--accent);
             color: #fff;
-            padding: 20px 0;
+            padding: 18px 0;
             overflow: hidden;
             display: flex;
             white-space: nowrap;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 4px 40px rgba(229, 9, 20, 0.2);
         }
         .ticker-inner {
             display: flex;
-            animation: tickerScroll 20s linear infinite;
+            animation: tickerScroll 28s linear infinite;
         }
         .ticker-item {
             font-family: var(--font-display);
-            font-size: 2rem;
+            font-size: 1.6rem;
             font-weight: 900;
             text-transform: uppercase;
-            padding: 0 40px;
+            padding: 0 36px;
             display: flex;
             align-items: center;
-            gap: 40px;
+            gap: 36px;
+            letter-spacing: 0.04em;
         }
         .ticker-item i {
-            font-size: 0.8rem;
+            font-size: 0.6rem;
+            opacity: 0.6;
         }
 
         @keyframes tickerScroll {
@@ -308,52 +533,57 @@
         }
 
         /* ============================================================
-           SECTIONS & LAYOUT
+           SECTIONS
            ============================================================ */
         .section {
-            padding: 140px 60px;
+            padding: 120px 60px 80px;
+            max-width: 1440px;
+            margin: 0 auto;
         }
 
         .section-header {
             display: flex;
             align-items: flex-end;
             justify-content: space-between;
-            margin-bottom: 80px;
-            padding-bottom: 40px;
+            margin-bottom: 64px;
+            padding-bottom: 32px;
             border-bottom: 1px solid var(--border-color);
         }
 
         .section-title {
             font-family: var(--font-display);
-            font-size: clamp(3rem, 6vw, 6rem);
+            font-size: clamp(2.8rem, 5vw, 5rem);
             font-weight: 900;
-            line-height: 0.9;
+            line-height: 0.92;
             text-transform: uppercase;
             letter-spacing: -0.02em;
+        }
+        .section-title .highlight {
+            color: var(--accent);
         }
 
         .section-subtitle {
             font-family: var(--font-body);
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.18em;
             color: var(--accent);
             font-weight: 600;
         }
 
         /* ============================================================
-           PORTFOLIO GRID
+           WORK CATEGORY
            ============================================================ */
         .work-category {
-            margin-bottom: 120px;
+            margin-bottom: 100px;
         }
 
         .cat-title {
             font-family: var(--font-display);
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 700;
             text-transform: uppercase;
-            margin-bottom: 40px;
+            margin-bottom: 36px;
             display: flex;
             align-items: center;
             gap: 20px;
@@ -364,167 +594,267 @@
             height: 1px;
             background: var(--border-color);
         }
+        .cat-title .cat-count {
+            font-size: 0.7rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+            letter-spacing: 0.1em;
+        }
 
         .work-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
             gap: 40px;
         }
 
+        /* ============================================================
+           WORK CARD — 3D TILT + GLASS OVERLAY
+           ============================================================ */
         .work-card {
             position: relative;
             display: flex;
             flex-direction: column;
             gap: 16px;
+            transition: transform 0.4s var(--ease-out-expo);
+            transform-style: preserve-3d;
+            perspective: 800px;
         }
 
-        .work-media {
+        .work-card-inner {
             position: relative;
             aspect-ratio: 16/9;
             background: var(--bg-surface);
             overflow: hidden;
             border: 1px solid var(--border-color);
+            border-radius: 12px;
+            transition: all 0.5s var(--ease-out-expo);
+            transform-style: preserve-3d;
         }
 
-        /* --- COLOR VISIBLE: removed grayscale filter --- */
-        .work-media iframe,
-        .work-media img {
+        .work-card:hover .work-card-inner {
+            border-color: var(--accent);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px var(--accent-glow);
+        }
+        body.light-mode .work-card:hover .work-card-inner {
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12), 0 0 40px var(--accent-glow);
+        }
+
+        .work-card-inner iframe,
+        .work-card-inner img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: contrast(1.1);
-            transition: filter 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo);
+            transition: transform 0.7s var(--ease-out-expo), filter 0.7s var(--ease-out-expo);
             border: none;
+            display: block;
         }
 
-        .work-card:hover .work-media iframe,
-        .work-card:hover .work-media img {
-            filter: contrast(1.2);
-            transform: scale(1.03);
+        .work-card:hover .work-card-inner iframe,
+        .work-card:hover .work-card-inner img {
+            transform: scale(1.04);
+            filter: brightness(1.08) contrast(1.05);
         }
 
-        /* Play Overlay for Videos */
+        /* Gradient overlay on hover */
+        .work-card-inner::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, 0.6) 100%);
+            opacity: 0;
+            transition: opacity 0.5s var(--ease-out-expo);
+            pointer-events: none;
+            z-index: 1;
+        }
+        .work-card:hover .work-card-inner::after {
+            opacity: 1;
+        }
+
+        /* Play Overlay */
         .play-overlay {
             position: absolute;
             inset: 0;
-            background: rgba(0, 0, 0, 0.4);
             display: flex;
             align-items: center;
             justify-content: center;
             pointer-events: none;
-            transition: opacity 0.4s;
             z-index: 2;
+            opacity: 0;
+            transition: opacity 0.5s var(--ease-out-expo);
         }
         .work-card:hover .play-overlay {
-            opacity: 0;
+            opacity: 1;
         }
+
         .play-btn {
-            width: 60px;
-            height: 60px;
+            width: 56px;
+            height: 56px;
             background: var(--accent);
             color: #fff;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
+            transform: scale(0.8);
+            transition: transform 0.5s var(--ease-out-expo);
+            box-shadow: 0 0 40px var(--accent-glow);
+        }
+        .work-card:hover .play-btn {
+            transform: scale(1);
         }
 
         .work-info {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
+            padding: 0 4px;
         }
 
         .work-title {
             font-family: var(--font-display);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 700;
             text-transform: uppercase;
+            letter-spacing: -0.01em;
         }
 
         .work-tags {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             color: var(--text-secondary);
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            margin-top: 4px;
+            margin-top: 2px;
         }
 
         .work-index {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
+            font-family: var(--font-body);
+            font-size: 0.7rem;
             color: var(--border-color);
             font-weight: 600;
+            letter-spacing: 0.05em;
         }
 
         .work-link {
             display: inline-block;
-            margin-top: 10px;
-            font-size: 0.75rem;
+            margin-top: 8px;
+            font-size: 0.65rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             color: var(--accent);
             border-bottom: 1px solid transparent;
-            transition: border-color 0.3s;
+            transition: border-color 0.3s, transform 0.3s;
         }
         .work-link:hover {
             border-bottom-color: var(--accent);
+            transform: translateX(4px);
+        }
+        .work-link i {
+            font-size: 0.55rem;
         }
 
         /* ============================================================
-           ABOUT SECTION
+           ABOUT — ENHANCED WITH SKILL BARS
            ============================================================ */
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 100px;
+            gap: 80px;
+            align-items: start;
         }
 
         .about-text {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             line-height: 1.8;
             color: var(--text-secondary);
         }
         .about-text strong {
             color: var(--text-primary);
         }
+        .about-text .big-quote {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.3;
+            margin-bottom: 20px;
+            font-family: var(--font-display);
+        }
 
         .skills-container {
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 28px;
         }
 
         .skill-item {
             border-bottom: 1px solid var(--border-color);
-            padding-bottom: 16px;
+            padding-bottom: 18px;
         }
 
         .skill-header {
             display: flex;
             justify-content: space-between;
             font-family: var(--font-display);
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: 600;
             text-transform: uppercase;
+            letter-spacing: 0.02em;
+            margin-bottom: 8px;
+        }
+        .skill-header .skill-pct {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .skill-bar {
+            width: 100%;
+            height: 3px;
+            background: var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .skill-bar .fill {
+            height: 100%;
+            background: var(--accent);
+            border-radius: 4px;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 1s var(--ease-out-expo);
+        }
+        .skill-bar .fill.visible {
+            transform: scaleX(1);
         }
 
         .skill-tools {
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             color: var(--text-secondary);
-            margin-top: 8px;
+            margin-top: 6px;
+            letter-spacing: 0.03em;
         }
 
         /* ============================================================
-           CONTACT SECTION
+           CONTACT — DRAMATIC
            ============================================================ */
         .contact-section {
-            padding: 200px 60px;
+            padding: 160px 60px;
             text-align: center;
             background: var(--bg-surface);
             border-top: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100vmax;
+            height: 100vmax;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            pointer-events: none;
+            opacity: 0.3;
         }
 
         .contact-title {
@@ -533,35 +863,49 @@
             font-weight: 900;
             line-height: 1;
             text-transform: uppercase;
-            margin-bottom: 40px;
+            margin-bottom: 32px;
             transition: color 0.4s;
+            position: relative;
+            display: inline-block;
         }
-
         .contact-title:hover {
             color: var(--accent);
+        }
+        .contact-title .arrow {
+            display: inline-block;
+            transition: transform 0.4s var(--ease-out-expo);
+        }
+        .contact-title:hover .arrow {
+            transform: translateX(12px) rotate(-12deg);
         }
 
         .contact-links {
             display: flex;
             justify-content: center;
-            gap: 40px;
+            gap: 24px;
             flex-wrap: wrap;
+            position: relative;
         }
 
         .btn-outline {
             padding: 16px 40px;
             border: 1px solid var(--border-color);
+            border-radius: 100px;
             font-family: var(--font-body);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             transition: all 0.4s var(--ease-out-expo);
             color: var(--text-primary);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
         }
         .btn-outline:hover {
             background: var(--text-primary);
             color: var(--bg-main);
+            border-color: var(--text-primary);
         }
 
         /* ============================================================
@@ -573,121 +917,237 @@
             justify-content: space-between;
             align-items: center;
             border-top: 1px solid var(--border-color);
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             color: var(--text-secondary);
+            max-width: 1440px;
+            margin: 0 auto;
         }
 
         /* ============================================================
-           ANIMATIONS & UTILITIES
+           REVEAL ANIMATIONS
            ============================================================ */
         .reveal {
             opacity: 0;
-            transform: translateY(60px);
-            transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+            transform: translateY(50px);
+            transition: opacity 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo);
         }
         .reveal.visible {
             opacity: 1;
             transform: translateY(0);
+        }
+        .reveal-delay-1 {
+            transition-delay: 0.1s;
+        }
+        .reveal-delay-2 {
+            transition-delay: 0.2s;
+        }
+        .reveal-delay-3 {
+            transition-delay: 0.3s;
+        }
+        .reveal-delay-4 {
+            transition-delay: 0.4s;
         }
 
         /* ============================================================
            RESPONSIVE
            ============================================================ */
         @media (max-width: 1024px) {
-            .about-grid {
-                grid-template-columns: 1fr;
-                gap: 60px;
+            .hero {
+                padding: 100px 40px 60px;
             }
             .hero-bottom {
+                left: 40px;
+                right: 40px;
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 40px;
+                gap: 30px;
             }
             .hero-stats {
-                justify-content: space-between;
                 width: 100%;
+                justify-content: space-between;
                 text-align: left;
+            }
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
             }
             .work-grid {
                 grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             }
-        }
-        @media (max-width: 768px) {
-            .navbar {
-                padding: 20px;
+            .section {
+                padding: 80px 40px 60px;
             }
-            .nav-links {
+            .contact-section {
+                padding: 120px 40px;
+            }
+            .scroll-indicator {
                 display: none;
             }
-            .hero,
-            .section {
-                padding-left: 20px;
-                padding-right: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 12px 20px;
+                top: 12px;
+                width: calc(100% - 24px);
+                border-radius: 60px;
+            }
+            .nav-links {
+                gap: 16px;
+            }
+            .nav-link {
+                font-size: 0.6rem;
+            }
+            #themeToggle span {
+                display: none;
+            }
+
+            .hero {
+                padding: 120px 20px 60px;
+                min-height: 90vh;
+            }
+            .hero-title {
+                font-size: clamp(3.2rem, 14vw, 5.5rem);
             }
             .hero-bottom {
                 left: 20px;
                 right: 20px;
-                bottom: 40px;
+                bottom: 30px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 24px;
+            }
+            .hero-stats {
+                gap: 32px;
+            }
+            .hero-cta {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .btn-primary,
+            .btn-secondary {
+                justify-content: center;
+            }
+
+            .section {
+                padding: 60px 20px 40px;
             }
             .section-header {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 20px;
+                gap: 16px;
+                margin-bottom: 40px;
             }
             .work-grid {
                 grid-template-columns: 1fr;
+                gap: 28px;
+            }
+            .work-category {
+                margin-bottom: 60px;
+            }
+            .cat-title {
+                font-size: 1.4rem;
             }
             .contact-section {
-                padding: 120px 20px;
+                padding: 80px 20px;
             }
             footer {
                 flex-direction: column;
-                gap: 20px;
+                gap: 16px;
                 text-align: center;
+                padding: 30px 20px;
             }
+            .cursor-dot {
+                display: none;
+            }
+            body {
+                cursor: auto;
+            }
+            a,
+            button {
+                cursor: pointer;
+            }
+            .ticker-item {
+                font-size: 1.2rem;
+                padding: 0 20px;
+                gap: 20px;
+            }
+            .bg-orb {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
             .hero-title {
-                padding-top: 100px;
+                font-size: clamp(2.6rem, 12vw, 4rem);
+            }
+            .hero-label {
+                font-size: 0.6rem;
+            }
+            .stat-num {
+                font-size: 1.6rem;
+            }
+            .work-title {
+                font-size: 0.95rem;
+            }
+            .contact-title {
+                font-size: clamp(2.2rem, 10vw, 4rem);
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Background -->
+    <!-- Background Layers -->
     <div class="bg-grid"></div>
+    <div class="bg-orb"></div>
 
-    <!-- Cursor -->
+    <!-- Custom Cursor -->
     <div class="cursor-dot" id="cursorDot"></div>
 
-    <!-- Navigation -->
-    <nav class="navbar">
+    <!-- ============================================================
+    NAVIGATION
+    ============================================================ -->
+    <nav class="navbar" id="navbar">
         <div class="logo">
-            EC<span>.</span>
+            EC<span>.</span><span class="logo-dot"></span>
         </div>
         <div class="nav-links">
             <a href="#work" class="nav-link">Work</a>
             <a href="#about" class="nav-link">About</a>
-            <button id="themeToggle" class="nav-link" style="background:none;border:none;">Theme</button>
+            <button id="themeToggle" class="nav-link" style="background:none;border:none;display:flex;align-items:center;gap:6px;">
+                <i class="fas fa-moon"></i> <span>Theme</span>
+            </button>
             <a href="#contact" class="nav-link">Contact</a>
         </div>
     </nav>
 
-    <!-- Hero -->
+    <!-- ============================================================
+    HERO
+    ============================================================ -->
     <section class="hero" id="home">
         <div class="hero-content reveal visible">
-            <div class="hero-label">Director & Editor</div>
+            <div class="hero-label">Director &amp; Editor</div>
             <h1 class="hero-title">
-                EMMANUEL<br>
-                <span class="outline">CACHO</span>
+                <span class="line">
+                    EMMANUEL
+                </span>
+                <span class="line glitch-holder">
+                    <span class="outline">CACHO</span>
+                    <span class="glitch-layer">CACHO</span>
+                    <span class="glitch-layer">CACHO</span>
+                </span>
             </h1>
+            <p class="hero-sub">Crafting visual stories that cut through the noise — high-retention editing, kinetic typography, and premium brand aesthetics.</p>
+            <div class="hero-cta">
+                <a href="#work" class="btn-primary">View Portfolio <i class="fas fa-arrow-right"></i></a>
+                <a href="#contact" class="btn-secondary">Let's Talk <i class="fas fa-arrow-right"></i></a>
+            </div>
         </div>
 
-        <div class="hero-bottom reveal visible" style="transition-delay: 0.2s;">
-            <p class="hero-desc">
-                Crafting visual stories that cut through the noise. Specializing in high-retention editing, kinetic typography, and premium brand aesthetics.
-            </p>
+        <div class="hero-bottom reveal visible" style="transition-delay:0.2s;">
             <div class="hero-stats">
                 <div class="stat">
                     <div class="stat-num">3+</div>
@@ -697,11 +1157,22 @@
                     <div class="stat-num">50+</div>
                     <div class="stat-label">Projects</div>
                 </div>
+                <div class="stat">
+                    <div class="stat-num">100+</div>
+                    <div class="stat-label">Happy Clients</div>
+                </div>
             </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="line"></div>
         </div>
     </section>
 
-    <!-- Ticker -->
+    <!-- ============================================================
+    TICKER
+    ============================================================ -->
     <div class="ticker">
         <div class="ticker-inner">
             <div class="ticker-item">Video Editing <i class="fas fa-asterisk"></i></div>
@@ -710,77 +1181,88 @@
             <div class="ticker-item">Brand Identity <i class="fas fa-asterisk"></i></div>
             <div class="ticker-item">Thumbnail Art <i class="fas fa-asterisk"></i></div>
             <div class="ticker-item">Creative Direction <i class="fas fa-asterisk"></i></div>
+            <div class="ticker-item">AI Film <i class="fas fa-asterisk"></i></div>
+            <div class="ticker-item">UGC <i class="fas fa-asterisk"></i></div>
             <div class="ticker-item">Video Editing <i class="fas fa-asterisk"></i></div>
             <div class="ticker-item">Motion Graphics <i class="fas fa-asterisk"></i></div>
             <div class="ticker-item">Color Grading <i class="fas fa-asterisk"></i></div>
             <div class="ticker-item">Brand Identity <i class="fas fa-asterisk"></i></div>
             <div class="ticker-item">Thumbnail Art <i class="fas fa-asterisk"></i></div>
             <div class="ticker-item">Creative Direction <i class="fas fa-asterisk"></i></div>
+            <div class="ticker-item">AI Film <i class="fas fa-asterisk"></i></div>
+            <div class="ticker-item">UGC <i class="fas fa-asterisk"></i></div>
         </div>
     </div>
 
-    <!-- Portfolio Section -->
+    <!-- ============================================================
+    PORTFOLIO
+    ============================================================ -->
     <section class="section" id="work">
         <div class="section-header reveal">
-            <h2 class="section-title">Selected<br>Works</h2>
-            <div class="section-subtitle">Archive 2023–2025</div>
+            <h2 class="section-title">Selected <span class="highlight">Works</span></h2>
+            <div class="section-subtitle">Archive 2023 – 2025</div>
         </div>
 
         <!-- ==========================================
-             CATEGORY: VIDEO EDITING (11 Items)
+             VIDEO EDITING (13 Items — added 2 new)
              ========================================== -->
         <div class="work-category">
-            <h3 class="cat-title reveal">Video Editing</h3>
+            <h3 class="cat-title reveal">
+                Video Editing
+                <span class="cat-count">(13)</span>
+            </h3>
             <div class="work-grid">
 
-                <!-- Project 01 — REPLACED -->
-                <div class="work-card reveal">
-                    <div class="work-media">
-                        <iframe src="https://drive.google.com/file/d/1jETDIgMKGPGg7yeU7Srli_8592itmn0e/preview" allow="autoplay"></iframe>
+                <!-- 01 — EXISTING -->
+                
+                
+
+                   <div class="work-card reveal">
+                    <div class="work-card-inner">
+                        <iframe src="https://drive.google.com/file/d/1Cll1qeKJ9RLrgYlbLZRqFFOo7V9Rxm7r/preview" allow="autoplay"></iframe>
                         <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
                     </div>
                     <div class="work-info">
                         <div>
-                            <div class="work-title">Social Hook Edit</div>
-                            <div class="work-tags">Premiere Pro · Short-form</div>
+                            <div class="work-title">Cinematic Narrative Edit</div>
+                            <div class="work-tags">Storytelling · Cinematic</div>
                         </div>
                         <div class="work-index">01</div>
                     </div>
                 </div>
+                
 
-                <!-- Project 02 — REPLACED -->
+                <!-- 02 — EXISTING -->
                 <div class="work-card reveal">
-                    <div class="work-media">
+                    <div class="work-card-inner">
                         <iframe src="https://drive.google.com/file/d/1pnkossPSGm9-rTGK1Mfu7ovXbkbkkje3/preview" allow="autoplay"></iframe>
                         <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
                     </div>
                     <div class="work-info">
                         <div>
                             <div class="work-title">YouTube Storytelling</div>
-                            <div class="work-tags">After Effects · Narrative</div>
                         </div>
                         <div class="work-index">02</div>
                     </div>
                 </div>
 
-                <!-- Project 03 -->
+                <!-- 03 — EXISTING -->
                 <div class="work-card reveal">
-                    <div class="work-media">
+                    <div class="work-card-inner">
                         <iframe src="https://drive.google.com/file/d/1PDSd5TR_QYd0nc8B_t6hrbdL8NLVsIlS/preview" allow="autoplay"></iframe>
                         <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
                     </div>
                     <div class="work-info">
                         <div>
                             <div class="work-title">Brand Promo Video</div>
-                            <div class="work-tags">Motion Graphics · Promo</div>
                         </div>
                         <div class="work-index">03</div>
                     </div>
                 </div>
 
-                <!-- Project 04 -->
+                <!-- 04 — EXISTING -->
                 <div class="work-card reveal">
-                    <div class="work-media">
+                    <div class="work-card-inner">
                         <iframe src="https://drive.google.com/file/d/1aRSwVC6wy_fFh8RxgjcA0b1r8iOvRwII/preview" allow="autoplay"></iframe>
                         <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
                     </div>
@@ -793,9 +1275,9 @@
                     </div>
                 </div>
 
-                <!-- Project 05 -->
+                <!-- 05 — EXISTING -->
                 <div class="work-card reveal">
-                    <div class="work-media">
+                    <div class="work-card-inner">
                         <iframe src="https://drive.google.com/file/d/16-ACoD1OOd2XdGNdjbcbngRbjwbPvDJZ/preview" allow="autoplay"></iframe>
                         <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
                     </div>
@@ -808,9 +1290,9 @@
                     </div>
                 </div>
 
-                <!-- Project 06 -->
+                <!-- 06 — EXISTING -->
                 <div class="work-card reveal">
-                    <div class="work-media">
+                    <div class="work-card-inner">
                         <iframe src="https://drive.google.com/file/d/1iLQz4COWU8Q1yRMcMhTAwz1jlpGIe498/preview" allow="autoplay"></iframe>
                         <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
                     </div>
@@ -823,9 +1305,9 @@
                     </div>
                 </div>
 
-                <!-- Project 07 -->
+                <!-- 07 — EXISTING -->
                 <div class="work-card reveal">
-                    <div class="work-media">
+                    <div class="work-card-inner">
                         <iframe src="https://drive.google.com/file/d/1dkfD8JY5AwAR0lsFRd6iYly-7cAv_s5U/preview" allow="autoplay"></iframe>
                         <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
                     </div>
@@ -838,9 +1320,9 @@
                     </div>
                 </div>
 
-                <!-- Project 08 -->
+                <!-- 08 — EXISTING -->
                 <div class="work-card reveal">
-                    <div class="work-media">
+                    <div class="work-card-inner">
                         <iframe src="https://drive.google.com/file/d/1B-Rrf_Xcu2eb9dUX8dYkIdH2EAH6TBjf/preview" allow="autoplay"></iframe>
                         <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
                     </div>
@@ -853,9 +1335,9 @@
                     </div>
                 </div>
 
-                <!-- Project 09 -->
+                <!-- 09 — EXISTING -->
                 <div class="work-card reveal">
-                    <div class="work-media">
+                    <div class="work-card-inner">
                         <iframe src="https://drive.google.com/file/d/1PuTO-CeBcgcG1oU4jGwlDNBl-t5bbJRP/preview" allow="autoplay"></iframe>
                         <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
                     </div>
@@ -868,9 +1350,9 @@
                     </div>
                 </div>
 
-                <!-- Project 10 -->
+                <!-- 10 — EXISTING -->
                 <div class="work-card reveal">
-                    <div class="work-media">
+                    <div class="work-card-inner">
                         <iframe src="https://drive.google.com/file/d/1p7AA-NGdckjSEKX15D1lyd7bLULkkfBK/preview" allow="autoplay"></iframe>
                         <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
                     </div>
@@ -883,9 +1365,9 @@
                     </div>
                 </div>
 
-                <!-- Project 11 -->
+                <!-- 11 — EXISTING -->
                 <div class="work-card reveal">
-                    <div class="work-media">
+                    <div class="work-card-inner">
                         <iframe src="https://drive.google.com/file/d/1B4nD6DZtR4D7j00Vw5RUsah-eHVEjAYb/preview" allow="autoplay"></iframe>
                         <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
                     </div>
@@ -898,19 +1380,51 @@
                     </div>
                 </div>
 
+               <div class="work-card reveal">
+                    <div class="work-card-inner">
+                        <iframe src="https://drive.google.com/file/d/1jETDIgMKGPGg7yeU7Srli_8592itmn0e/preview" allow="autoplay"></iframe>
+                        <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-title">Social Hook Edit</div>
+                            
+                        </div>
+                        <div class="work-index">12</div>
+                    </div>
+                </div>
+
+                
+                <!-- 13 — NEW: Video from 1PwgkDxfciow8eaX4UZFwyefjy_V_n5Zb -->
+                <div class="work-card reveal">
+                    <div class="work-card-inner">
+                        <iframe src="https://drive.google.com/file/d/1PwgkDxfciow8eaX4UZFwyefjy_V_n5Zb/preview" allow="autoplay"></iframe>
+                        <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
+                    </div>
+                    <div class="work-info">
+                        <div>
+                            <div class="work-title">Visual Symphony Edit</div>
+                            <div class="work-tags">Motion · Visual · Dynamic</div>
+                        </div>
+                        <div class="work-index">13</div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
         <!-- ==========================================
-             CATEGORY: AI VIDEOS (4 Items)
+             AI VIDEOS (4 Items)
              ========================================== -->
         <div class="work-category">
-            <h3 class="cat-title reveal">AI Videos</h3>
+            <h3 class="cat-title reveal">
+                AI Videos
+                <span class="cat-count">(4)</span>
+            </h3>
             <div class="work-grid">
 
-                <!-- AI 01 -->
                 <div class="work-card reveal">
-                    <div class="work-media">
+                    <div class="work-card-inner">
                         <iframe src="https://drive.google.com/file/d/1bCdkBkmaEFEPemiGVRJRGbBFBtqw2jJV/preview" allow="autoplay"></iframe>
                         <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
                     </div>
@@ -923,9 +1437,8 @@
                     </div>
                 </div>
 
-                <!-- AI 02 -->
                 <div class="work-card reveal">
-                    <div class="work-media">
+                    <div class="work-card-inner">
                         <iframe src="https://drive.google.com/file/d/1v5LuC985jrt2fG05JP3JhPf19UlnN8NJ/preview" allow="autoplay"></iframe>
                         <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
                     </div>
@@ -938,9 +1451,8 @@
                     </div>
                 </div>
 
-                <!-- AI 03 -->
                 <div class="work-card reveal">
-                    <div class="work-media">
+                    <div class="work-card-inner">
                         <iframe src="https://drive.google.com/file/d/1y4WRa5hiXmTQm5wb9QurOuGJjBa29IdS/preview" allow="autoplay"></iframe>
                         <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
                     </div>
@@ -953,9 +1465,8 @@
                     </div>
                 </div>
 
-                <!-- AI 04 -->
                 <div class="work-card reveal">
-                    <div class="work-media">
+                    <div class="work-card-inner">
                         <iframe src="https://drive.google.com/file/d/1hYTtmwU4Nsiks7rblkV47mloZseHEgnK/preview" allow="autoplay"></iframe>
                         <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
                     </div>
@@ -972,15 +1483,17 @@
         </div>
 
         <!-- ==========================================
-             CATEGORY: UGC VIDEOS (2 Items)
+             UGC VIDEOS (2 Items)
              ========================================== -->
         <div class="work-category">
-            <h3 class="cat-title reveal">UGC Videos</h3>
+            <h3 class="cat-title reveal">
+                UGC Videos
+                <span class="cat-count">(2)</span>
+            </h3>
             <div class="work-grid">
 
-                <!-- UGC 01 -->
                 <div class="work-card reveal">
-                    <div class="work-media">
+                    <div class="work-card-inner">
                         <iframe src="https://drive.google.com/file/d/1K0-_hmS6bL6GH-RIRwCGa1D2NCC0lqio/preview" allow="autoplay"></iframe>
                         <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
                     </div>
@@ -993,9 +1506,8 @@
                     </div>
                 </div>
 
-                <!-- UGC 02 -->
                 <div class="work-card reveal">
-                    <div class="work-media">
+                    <div class="work-card-inner">
                         <iframe src="https://drive.google.com/file/d/1Rdw6Vxuepi7iUgpjj5HqTAnE4lmKXpuX/preview" allow="autoplay"></iframe>
                         <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
                     </div>
@@ -1012,15 +1524,17 @@
         </div>
 
         <!-- ==========================================
-             CATEGORY: GRAPHIC DESIGN (8 Items)
+             GRAPHIC DESIGN (8 Items)
              ========================================== -->
         <div class="work-category">
-            <h3 class="cat-title reveal">Graphic Design</h3>
+            <h3 class="cat-title reveal">
+                Graphic Design
+                <span class="cat-count">(8)</span>
+            </h3>
             <div class="work-grid">
 
-                <!-- Graphic 01 -->
                 <div class="work-card reveal">
-                    <div class="work-media">
+                    <div class="work-card-inner">
                         <img src="https://drive.google.com/thumbnail?id=1bXxpjA84lxj-Jf1xk-NMD1K9yxYdnmz-&sz=w800" alt="Brand Identity System" onerror="this.src='https://placehold.co/800x450/111/333?text=Brand+Identity'">
                     </div>
                     <div class="work-info">
@@ -1033,10 +1547,9 @@
                     </div>
                 </div>
 
-                <!-- Graphic 02 -->
                 <div class="work-card reveal">
-                    <div class="work-media">
-                        <img src="https://drive.google.com/thumbnail?id=15HT_fC4OR39Q-S6K27aAy1iomfd00nGo&sz=w800" alt="Social Media Graphics Pack" onerror="this.src='https://placehold.co/800x450/111/333?text=Social+Pack'">
+                    <div class="work-card-inner">
+                        <img src="https://drive.google.com/thumbnail?id=15HT_fC4OR39Q-S6K27aAy1iomfd00nGo&sz=w800" alt="Social Media Graphics" onerror="this.src='https://placehold.co/800x450/111/333?text=Social+Pack'">
                     </div>
                     <div class="work-info">
                         <div>
@@ -1048,14 +1561,13 @@
                     </div>
                 </div>
 
-                <!-- Graphic 03 -->
                 <div class="work-card reveal">
-                    <div class="work-media">
-                        <img src="https://drive.google.com/thumbnail?id=1TUPkeouiDH3QwQzfRK5Ioxk_XTyG6a5X&sz=w800" alt="Event Poster & Flyer" onerror="this.src='https://placehold.co/800x450/111/333?text=Event+Poster'">
+                    <div class="work-card-inner">
+                        <img src="https://drive.google.com/thumbnail?id=1TUPkeouiDH3QwQzfRK5Ioxk_XTyG6a5X&sz=w800" alt="Event Poster" onerror="this.src='https://placehold.co/800x450/111/333?text=Event+Poster'">
                     </div>
                     <div class="work-info">
                         <div>
-                            <div class="work-title">Event Poster & Flyer</div>
+                            <div class="work-title">Event Poster &amp; Flyer</div>
                             <div class="work-tags">Print Design</div>
                             <a href="https://drive.google.com/file/d/1TUPkeouiDH3QwQzfRK5Ioxk_XTyG6a5X/view?usp=drive_link" target="_blank" class="work-link">View Poster <i class="fas fa-arrow-right"></i></a>
                         </div>
@@ -1063,9 +1575,8 @@
                     </div>
                 </div>
 
-                <!-- Graphic 04 -->
                 <div class="work-card reveal">
-                    <div class="work-media">
+                    <div class="work-card-inner">
                         <img src="https://drive.google.com/thumbnail?id=11GARLM8u5MCI9vWv3YXhpfL_WvzMjVqK&sz=w800" alt="Corporate Stationery" onerror="this.src='https://placehold.co/800x450/111/333?text=Stationery'">
                     </div>
                     <div class="work-info">
@@ -1078,9 +1589,8 @@
                     </div>
                 </div>
 
-                <!-- Graphic 05 -->
                 <div class="work-card reveal">
-                    <div class="work-media">
+                    <div class="work-card-inner">
                         <img src="https://drive.google.com/thumbnail?id=11Ms5yhZTyaZR6j8oF4QND5RlDV2OG57_&sz=w800" alt="Character Illustration" onerror="this.src='https://placehold.co/800x450/111/333?text=Illustration'">
                     </div>
                     <div class="work-info">
@@ -1093,14 +1603,13 @@
                     </div>
                 </div>
 
-                <!-- Graphic 06 -->
                 <div class="work-card reveal">
-                    <div class="work-media">
-                        <img src="https://drive.google.com/thumbnail?id=1GXqpUHplLsxmER_OmefhuGU5OvuDlm9H&sz=w800" alt="Digital Ads & Banners" onerror="this.src='https://placehold.co/800x450/111/333?text=Digital+Ads'">
+                    <div class="work-card-inner">
+                        <img src="https://drive.google.com/thumbnail?id=1GXqpUHplLsxmER_OmefhuGU5OvuDlm9H&sz=w800" alt="Digital Ads" onerror="this.src='https://placehold.co/800x450/111/333?text=Digital+Ads'">
                     </div>
                     <div class="work-info">
                         <div>
-                            <div class="work-title">Digital Ads & Banners</div>
+                            <div class="work-title">Digital Ads &amp; Banners</div>
                             <div class="work-tags">Ad Design</div>
                             <a href="https://drive.google.com/file/d/1GXqpUHplLsxmER_OmefhuGU5OvuDlm9H/view?usp=drive_link" target="_blank" class="work-link">Explore Asset <i class="fas fa-arrow-right"></i></a>
                         </div>
@@ -1108,9 +1617,8 @@
                     </div>
                 </div>
 
-                <!-- Graphic 07 — NEW -->
                 <div class="work-card reveal">
-                    <div class="work-media">
+                    <div class="work-card-inner">
                         <img src="https://drive.google.com/thumbnail?id=1RY6TaDKEBqA8-m-eIpfV4EIfl5RF2NqD&sz=w800" alt="Extended Brand Assets" onerror="this.src='https://placehold.co/800x450/111/333?text=Design+Asset+07'">
                     </div>
                     <div class="work-info">
@@ -1123,9 +1631,8 @@
                     </div>
                 </div>
 
-                <!-- Graphic 08 — NEW -->
                 <div class="work-card reveal">
-                    <div class="work-media">
+                    <div class="work-card-inner">
                         <img src="https://drive.google.com/thumbnail?id=1Hanov56VVjeerCp8nq3zZqPhWuVsybFf&sz=w800" alt="Dynamic Visual Identity" onerror="this.src='https://placehold.co/800x450/111/333?text=Design+Asset+08'">
                     </div>
                     <div class="work-info">
@@ -1142,16 +1649,18 @@
         </div>
 
         <!-- ==========================================
-             CATEGORY: THUMBNAIL & COVER ART (6 Items)
+             THUMBNAIL & COVER ART (6 Items)
              ========================================== -->
         <div class="work-category">
-            <h3 class="cat-title reveal">Thumbnail & Cover Art</h3>
+            <h3 class="cat-title reveal">
+                Thumbnail &amp; Cover Art
+                <span class="cat-count">(6)</span>
+            </h3>
             <div class="work-grid">
 
-                <!-- Thumb 01 -->
                 <div class="work-card reveal">
-                    <div class="work-media">
-                        <img src="https://drive.google.com/thumbnail?id=15OmmZJV6RHlnvLG5mTsULbrV5CcZc1Cg&sz=w800" alt="Viral Thumbnail Concept" onerror="this.src='https://placehold.co/800x450/111/333?text=Thumbnail+01'">
+                    <div class="work-card-inner">
+                        <img src="https://drive.google.com/thumbnail?id=15OmmZJV6RHlnvLG5mTsULbrV5CcZc1Cg&sz=w800" alt="Viral Thumbnail" onerror="this.src='https://placehold.co/800x450/111/333?text=Thumbnail+01'">
                     </div>
                     <div class="work-info">
                         <div>
@@ -1163,10 +1672,9 @@
                     </div>
                 </div>
 
-                <!-- Thumb 02 -->
                 <div class="work-card reveal">
-                    <div class="work-media">
-                        <img src="https://drive.google.com/thumbnail?id=1e8RRvnFf3A4pfIyqTXMe1nmL8HgbgSl_&sz=w800" alt="Gaming Thumbnail Master" onerror="this.src='https://placehold.co/800x450/111/333?text=Thumbnail+02'">
+                    <div class="work-card-inner">
+                        <img src="https://drive.google.com/thumbnail?id=1e8RRvnFf3A4pfIyqTXMe1nmL8HgbgSl_&sz=w800" alt="Gaming Thumbnail" onerror="this.src='https://placehold.co/800x450/111/333?text=Thumbnail+02'">
                     </div>
                     <div class="work-info">
                         <div>
@@ -1178,10 +1686,9 @@
                     </div>
                 </div>
 
-                <!-- Thumb 03 -->
                 <div class="work-card reveal">
-                    <div class="work-media">
-                        <img src="https://drive.google.com/thumbnail?id=1eiVwAs3S_8pePiDAPPF1g3Z4dr4gC_hl&sz=w800" alt="Tech Review Thumb" onerror="this.src='https://placehold.co/800x450/111/333?text=Thumbnail+03'">
+                    <div class="work-card-inner">
+                        <img src="https://drive.google.com/thumbnail?id=1eiVwAs3S_8pePiDAPPF1g3Z4dr4gC_hl&sz=w800" alt="Tech Thumbnail" onerror="this.src='https://placehold.co/800x450/111/333?text=Thumbnail+03'">
                     </div>
                     <div class="work-info">
                         <div>
@@ -1193,10 +1700,9 @@
                     </div>
                 </div>
 
-                <!-- Thumb 04 -->
                 <div class="work-card reveal">
-                    <div class="work-media">
-                        <img src="https://drive.google.com/thumbnail?id=141csDpj5Rl_VS05aGHcKHyu9P3C4s9AT&sz=w800" alt="Podcast / Interview Cover" onerror="this.src='https://placehold.co/800x450/111/333?text=Thumbnail+04'">
+                    <div class="work-card-inner">
+                        <img src="https://drive.google.com/thumbnail?id=141csDpj5Rl_VS05aGHcKHyu9P3C4s9AT&sz=w800" alt="Podcast Cover" onerror="this.src='https://placehold.co/800x450/111/333?text=Thumbnail+04'">
                     </div>
                     <div class="work-info">
                         <div>
@@ -1208,9 +1714,8 @@
                     </div>
                 </div>
 
-                <!-- Thumb 05 -->
                 <div class="work-card reveal">
-                    <div class="work-media">
+                    <div class="work-card-inner">
                         <img src="https://drive.google.com/thumbnail?id=1_TMnqCjbmwrLlik9LpHntjxvAVw7Cxa9&sz=w800" alt="Educational Thumbnail" onerror="this.src='https://placehold.co/800x450/111/333?text=Thumbnail+05'">
                     </div>
                     <div class="work-info">
@@ -1223,10 +1728,9 @@
                     </div>
                 </div>
 
-                <!-- Thumb 06 -->
                 <div class="work-card reveal">
-                    <div class="work-media">
-                        <img src="https://drive.google.com/thumbnail?id=1B9c3p51uMy8FYxglnHLT6ufGOl-0j24O&sz=w800" alt="Story-Driven Thumbnail" onerror="this.src='https://placehold.co/800x450/111/333?text=Thumbnail+06'">
+                    <div class="work-card-inner">
+                        <img src="https://drive.google.com/thumbnail?id=1B9c3p51uMy8FYxglnHLT6ufGOl-0j24O&sz=w800" alt="Story Thumbnail" onerror="this.src='https://placehold.co/800x450/111/333?text=Thumbnail+06'">
                     </div>
                     <div class="work-info">
                         <div>
@@ -1242,47 +1746,99 @@
         </div>
     </section>
 
-    <!-- About Section -->
-    <section class="section" id="about">
-        <div class="section-header reveal">
-            <h2 class="section-title">The<br>Director</h2>
-            <div class="section-subtitle">Profile</div>
+    <!-- ============================================================
+    ABOUT
+    ============================================================ -->
+   <section class="section" id="about">
+    <div class="section-header reveal">
+        <h2 class="section-title">About <span class="highlight">Me</span></h2>
+        <div class="section-subtitle">Video Editor</div>
+    </div>
+
+    <div class="about-grid">
+        <div class="about-text reveal">
+            <div class="big-quote">"I turn raw footage into compelling stories."</div>
+            <p>I'm Emmanuel — an IT graduate who fell in love with the art of editing. Over the past <strong>3 years</strong>, I've crafted everything from social hooks to cinematic narratives, always with a focus on rhythm, emotion, and audience retention.</p>
+            <br>
+            <p>My technical background gives me an edge in workflow efficiency, while my creative eye ensures every frame serves the story. Whether it's a fast-paced commercial or a docu-style piece, I bring a meticulous, detail-driven approach to every project.</p>
+            <br>
+            <p>I work exclusively with <strong>CapCut</strong> — leveraging its powerful tools to deliver polished, professional results without overcomplicating the process. Simplicity, speed, and impact define my style.</p>
         </div>
 
-        <div class="about-grid">
-            <div class="about-text reveal">
-                <p>I operate at the intersection of rhythm, visual psychology, and bold aesthetics. With a background heavily rooted in modern digital culture, I build narratives that don't just look cinematic—they perform.</p>
-                <br>
-                <p>From <strong>high-converting commercial cuts</strong> to <strong>immersive documentary storytelling</strong>, my approach is structurally aggressive and meticulously polished. Every frame is intentional. Every cut has a purpose.</p>
+        <div class="skills-container reveal">
+            <div class="skill-item">
+                <div class="skill-header">
+                    <span>Video Editing</span>
+                    <span class="skill-pct">95%</span>
+                </div>
+                <div class="skill-bar"><div class="fill" data-width="95"></div></div>
             </div>
-
-
+            <div class="skill-item">
+                <div class="skill-header">
+                    <span>Color Grading</span>
+                    <span class="skill-pct">85%</span>
+                </div>
+                <div class="skill-bar"><div class="fill" data-width="85"></div></div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-header">
+                    <span>Motion Graphics</span>
+                    <span class="skill-pct">80%</span>
+                </div>
+                <div class="skill-bar"><div class="fill" data-width="80"></div></div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-header">
+                    <span>Sound Design</span>
+                    <span class="skill-pct">70%</span>
+                </div>
+                <div class="skill-bar"><div class="fill" data-width="70"></div></div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-header">
+                    <span>Storytelling</span>
+                    <span class="skill-pct">90%</span>
+                </div>
+                <div class="skill-bar"><div class="fill" data-width="90"></div></div>
+            </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Contact Section -->
+    <!-- ============================================================
+    CONTACT
+    ============================================================ -->
     <section class="contact-section" id="contact">
         <div class="reveal">
-            <a href="mailto:emmanignite@gmail.com" class="contact-title">START A<br>PROJECT</a>
+            <a href="mailto:emmanignite@gmail.com" class="contact-title">
+                START A<br>PROJECT
+                <span class="arrow"><i class="fas fa-arrow-right"></i></span>
+            </a>
         </div>
         <div class="contact-links reveal">
-            <a href="mailto:emmanignite@gmail.com" class="btn-outline">Email Studio</a>
-
+            <a href="mailto:emmanignite@gmail.com" class="btn-outline"><i class="fas fa-envelope"></i> Email Studio</a>
+            <a href="#" class="btn-outline"><i class="fab fa-vimeo"></i> Vimeo</a>
+            <a href="#" class="btn-outline"><i class="fab fa-youtube"></i> YouTube</a>
+            <a href="#" class="btn-outline"><i class="fab fa-instagram"></i> Instagram</a>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- ============================================================
+    FOOTER
+    ============================================================ -->
     <footer>
-        <div>© 2025 Emmanuel Cacho. All Rights Reserved.</div>
+        <div>&copy; 2025 Emmanuel Cacho. All Rights Reserved.</div>
         <div>Based in the Philippines — Working Globally.</div>
     </footer>
 
-    <!-- JavaScript -->
+    <!-- ============================================================
+    JAVASCRIPT
+    ============================================================ -->
     <script>
         {
-            // Custom Cursor
+            // --- CUSTOM CURSOR ---
             const dot = document.getElementById('cursorDot');
-            const interactables = document.querySelectorAll('a, button, .work-card, .ticker');
+            const interactables = document.querySelectorAll('a, button, .work-card, .ticker, .work-card-inner');
 
             document.addEventListener('mousemove', (e) => {
                 dot.style.left = `${e.clientX}px`;
@@ -1294,34 +1850,88 @@
                 el.addEventListener('mouseleave', () => dot.classList.remove('hover-active'));
             });
 
-            // Smooth Scroll
+            // Hide cursor on touch devices
+            if ('ontouchstart' in window) {
+                dot.style.display = 'none';
+            }
+
+            // --- NAVBAR SCROLL EFFECT ---
+            const navbar = document.getElementById('navbar');
+            let lastScroll = 0;
+            window.addEventListener('scroll', () => {
+                const currentScroll = window.pageYOffset;
+                if (currentScroll > 80) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+                lastScroll = currentScroll;
+            });
+
+            // --- SMOOTH SCROLL ---
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
                 });
             });
 
-            // Scroll Reveal Observer
-            const observer = new IntersectionObserver((entries, obs) => {
+            // --- SCROLL REVEAL OBSERVER ---
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                        obs.unobserve(entry.target);
+
+                        // Trigger skill bar fills if inside skills container
+                        const bars = entry.target.querySelectorAll('.skill-bar .fill');
+                        bars.forEach(bar => {
+                            setTimeout(() => {
+                                bar.classList.add('visible');
+                            }, 200);
+                        });
                     }
                 });
-            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+            }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
 
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-            // Theme Toggle
+            // Also directly observe skill items for bar animation
+            document.querySelectorAll('.skill-item').forEach(el => observer.observe(el));
+
+            // --- THEME TOGGLE ---
             const themeBtn = document.getElementById('themeToggle');
+            const themeIcon = themeBtn.querySelector('i');
             themeBtn.addEventListener('click', () => {
                 document.body.classList.toggle('light-mode');
+                const isLight = document.body.classList.contains('light-mode');
+                themeIcon.className = isLight ? 'fas fa-sun' : 'fas fa-moon';
             });
+
+            // --- 3D TILT ON CARDS (desktop only) ---
+            if (window.innerWidth > 768) {
+                document.querySelectorAll('.work-card').forEach(card => {
+                    const inner = card.querySelector('.work-card-inner');
+                    card.addEventListener('mousemove', (e) => {
+                        const rect = card.getBoundingClientRect();
+                        const x = (e.clientX - rect.left) / rect.width - 0.5;
+                        const y = (e.clientY - rect.top) / rect.height - 0.5;
+                        inner.style.transform =
+                            `perspective(800px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg)`;
+                    });
+                    card.addEventListener('mouseleave', () => {
+                        inner.style.transform = 'perspective(800px) rotateY(0deg) rotateX(0deg)';
+                    });
+                });
+            }
+
+            // --- LOG ---
+            console.log('🔥 Emmanuel Cacho — Director & Editor');
+            console.log('📬 emmanignite@gmail.com');
         }
     </script>
+
 </body>
 </html>
